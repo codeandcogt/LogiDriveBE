@@ -1,0 +1,6 @@
+@LogiDriveBE_HostAddress = http://localhost:5084
+
+GET {{LogiDriveBE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
