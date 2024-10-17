@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LogiDriveBE\\",
+  "WorkspaceRootPath": "C:\\Users\\08may\\Downloads\\proyecto U Base de datos\\LogiDriveBE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\proyecto\\logidrivebe\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\08may\\downloads\\proyecto u base de datos\\logidrivebe\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
@@ -14,29 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "LogiDriveBE.csproj",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+              "DocumentMoniker": "C:\\Users\\08may\\Downloads\\proyecto U Base de datos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
               "RelativeDocumentMoniker": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+              "ToolTip": "C:\\Users\\08may\\Downloads\\proyecto U Base de datos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
               "RelativeToolTip": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-10-06T19:29:24.287Z",
               "EditorCaption": ""
