@@ -1,12 +1,7 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LogiDriveBE\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\proyecto\\logidrivebe\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    }
-  ],
+  "WorkspaceRootPath": "C:\\Users\\rjean\\source\\repos\\LogiDriveBE\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -29,17 +24,8 @@
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LogiDriveBE",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
-              "RelativeDocumentMoniker": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
-              "RelativeToolTip": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-06T19:29:24.287Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }
