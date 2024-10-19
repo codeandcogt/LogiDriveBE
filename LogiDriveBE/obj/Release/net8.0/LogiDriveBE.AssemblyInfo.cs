@@ -13,7 +13,7 @@ using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("88bdf143-a3b7-442d-9ffc-54545467db55")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogiDriveBE")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ab9d8c18c523237c8130b0b74ce9d3536addced")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogiDriveBE")]

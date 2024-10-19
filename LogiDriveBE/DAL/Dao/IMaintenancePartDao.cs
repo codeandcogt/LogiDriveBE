@@ -1,0 +1,16 @@
+﻿using LogiDriveBE.DAL.Models;
+using LogiDriveBE.UTILS;
+
+namespace LogiDriveBE.DAL.Dao
+{
+    public interface IMaintenancePartDao
+    {
+        Task<OperationResponse<MaintenancePart>> CreateMaintenancePartAsync(MaintenancePart maintenance);
+        Task<OperationResponse<MaintenancePart>> GetMaintenancePartAsync(string id);
+        Task<OperationResponse<IEnumerable<MaintenancePart>>> GetAllMaintenancePartAsync();
+        Task<OperationResponse<MaintenancePart>> UpdateMaintenancePartAsync(MaintenancePart maintenance);
+        Task<OperationResponse<bool>> DeleteMaintenancePartAsync(int id);
+
+
+    }
+}
