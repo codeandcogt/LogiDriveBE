@@ -54,6 +54,7 @@ builder.Services.AddScoped<ICollaboratorBao, CollaboratorBaoService>();
 builder.Services.AddScoped<IAppUserBao, AppUserBaoService>();
 builder.Services.AddScoped<IRoleBao, RoleBaoService>();
 builder.Services.AddScoped<IPermissionBao, PermissionBaoService>();
+builder.Services.AddScoped<IMaintenancePartBao, >
 
 
 // Add services to the container.
