@@ -4360,19 +4360,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\geras\\.nuget\\packages\\": {}
+    "C:\\Users\\08may\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDBE\\LogiDriveBE\\LogiDriveBE.csproj",
+      "projectUniqueName": "C:\\Users\\08may\\Downloads\\proyecto U Base de datos\\Nueva carpeta (2)\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
       "projectName": "LogiDriveBE",
-      "projectPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDBE\\LogiDriveBE\\LogiDriveBE.csproj",
-      "packagesPath": "C:\\Users\\geras\\.nuget\\packages\\",
-      "outputPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDBE\\LogiDriveBE\\obj\\",
+      "projectPath": "C:\\Users\\08may\\Downloads\\proyecto U Base de datos\\Nueva carpeta (2)\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+      "packagesPath": "C:\\Users\\08may\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\08may\\Downloads\\proyecto U Base de datos\\Nueva carpeta (2)\\LogiDriveBE\\LogiDriveBE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\geras\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\08may\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4380,7 +4380,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4458,7 +4457,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
