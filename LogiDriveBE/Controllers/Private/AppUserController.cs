@@ -59,7 +59,7 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("updateUserCollaborator{id}")]
         public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUser(int id, [FromBody] AppUser appUser)
         {
             if (id != appUser.IdAppUser)
@@ -77,5 +77,33 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _appUserBao.DeleteAppUserAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUserWithCollaborator(int id, [FromBody] AppUserCollaboratorDto dto)
+        {
+            var appUser = new AppUser
+            {
+                IdAppUser = id, 
+                Name = dto.Name,
+                Email = dto.Email,
+                Password = dto.Password,
+                Status = true
+            };
+
+            var collaborator = new Collaborator
+            {
+                Name = dto.CollaboratorName,
+                LastName = dto.CollaboratorLastName,
+                Position = dto.Position,
+                Phone = dto.Phone,
+                Email = dto.Email,
+                Status = true,
+                IdArea = dto.IdArea
+            };
+
+            var response = await _appUserBao.UpdateAppUserWithCollaboratorAsync(appUser, collaborator, dto.IdRole);
+            return StatusCode(response.Code, response);
+        }
+
     }
 }
