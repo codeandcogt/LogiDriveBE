@@ -1,1 +1,16 @@
 .vs/ 
+/.vs/LogiDriveBE/DesignTimeBuild/.dtbcache.v2
+/.vs/LogiDriveBE/v17/.suo
+/LogiDriveBE/bin/Release/net8.0/LogiDriveBE.dll
+/LogiDriveBE/bin/Release/net8.0/LogiDriveBE.exe
+/LogiDriveBE/bin/Release/net8.0/LogiDriveBE.pdb
+/.vs/LogiDriveBE/v17/DocumentLayout.backup.json
+/.vs/LogiDriveBE/v17/DocumentLayout.json
+/LogiDriveBE/obj/Release/net8.0/ref/LogiDriveBE.dll
+/LogiDriveBE/obj/Release/net8.0/refint/LogiDriveBE.dll
+/.vs/LogiDriveBE/CopilotIndices/0.2.1653.9816/CodeChunks.db-wal
+/.vs/LogiDriveBE/CopilotIndices/0.2.1653.9816/SemanticSymbols.db-wal
+/LogiDriveBE/obj/LogiDriveBE.csproj.nuget.dgspec.json
+/LogiDriveBE/obj/project.assets.json
+/LogiDriveBE/obj/LogiDriveBE.csproj.nuget.g.props
+/LogiDriveBE/obj/project.nuget.cache
