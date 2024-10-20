@@ -19,10 +19,24 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPost]
-        public async Task<ActionResult<OperationResponse<Role>>> CreateRole([FromBody] Role role)
+        public async Task<ActionResult<OperationResponse<Role>>> CreateRole([FromBody] CreateRoleDto createRoleDto)
         {
-            var response = await _roleBao.CreateRoleAsync(role);
-            return StatusCode(response.Code, response);
+            try
+            {
+                var role = new Role
+                {
+                    Name = createRoleDto.Name,
+                    Description = createRoleDto.Description,
+                    Status = true
+                };
+
+                var response = await _roleBao.CreateRoleAsync(role);
+                return StatusCode(response.Code, response);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new OperationResponse<Role>(500, e.Message));
+            }
         }
 
         [HttpGet("{id}")]
