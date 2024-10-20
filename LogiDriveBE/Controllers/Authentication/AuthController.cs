@@ -1,4 +1,5 @@
 ﻿using LogiDriveBE.AUTH.Aao;
+using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +17,16 @@ namespace LogiDriveBE.Controllers.Authentication
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<ActionResult<OperationResponse<string>>> Login([FromBody] LoginModel model)
         {
-            var token = await _authService.AuthenticateAsync(model.Email, model.Password);
+            var response = await _authService.AuthenticateAsync(model.Email, model.Password);
 
-            if (string.IsNullOrEmpty(token))
+            if (response.Code != 200)
             {
-                return Unauthorized();
+                return StatusCode(response.Code, response);
             }
 
-            return Ok(new { token });
+            return Ok(response);
         }
     }
 

@@ -77,5 +77,43 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _appUserDao.DeleteAppUserAsync(id);
         }
+
+        public async Task<OperationResponse<AppUser>> UpdateAppUserWithCollaboratorAsync(AppUser appUser, Collaborator collaborator, int roleId)
+        {
+            // Verificar si el rol es válido
+            var roleResponse = await _roleDao.GetRoleByIdAsync(roleId);
+            if (roleResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(400, "Invalid Role ID");
+            }
+
+            // Actualizar el rol en el usuario
+            appUser.IdRole = roleId;
+
+            // Si la contraseña no está vacía, encriptarla
+            if (!string.IsNullOrEmpty(appUser.Password))
+            {
+                appUser.Password = BCrypt.Net.BCrypt.HashPassword(appUser.Password);
+            }
+
+            // Intentar actualizar el usuario
+            var userResponse = await _appUserDao.UpdateAppUserAsync(appUser);
+            if (userResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(500, "Failed to update user");
+            }
+
+            // Actualizar la información del colaborador, si está asociada al usuario
+            collaborator.IdUser = userResponse.Data.IdAppUser;
+            var collaboratorResponse = await _collaboratorDao.UpdateCollaboratorAsync(collaborator);
+
+            if (collaboratorResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(500, "Failed to update collaborator");
+            }
+
+            return new OperationResponse<AppUser>(200, "User and collaborator updated successfully", userResponse.Data);
+        }
+
     }
 }
