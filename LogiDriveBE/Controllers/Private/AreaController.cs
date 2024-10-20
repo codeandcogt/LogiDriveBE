@@ -1,5 +1,7 @@
-﻿using LogiDriveBE.BAL.Bao;
+﻿using Azure.Core;
+using LogiDriveBE.BAL.Bao;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +20,16 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPost]
-        public async Task<ActionResult<OperationResponse<Area>>> CreateArea([FromBody] Area area)
+        public async Task<ActionResult<OperationResponse<Area>>> CreateArea([FromBody] CreateAreaDto createAreaDto)
         {
+            var area = new Area
+            {
+                Name = createAreaDto.Name,
+                Description = createAreaDto.Description,
+                Status = true,
+                CreationDate = DateTime.UtcNow
+            };
+
             var response = await _areaBao.CreateAreaAsync(area);
             return StatusCode(response.Code, response);
         }
@@ -39,14 +49,23 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<OperationResponse<Area>>> UpdateArea(int id, [FromBody] Area area)
+        public async Task<ActionResult<OperationResponse<Area>>> UpdateArea(int id, [FromBody] UpdateAreaDto updateAreaDto)
         {
-            if (id != area.IdArea)
+            var existingAreaResponse = await _areaBao.GetAreaByIdAsync(id);
+            if (existingAreaResponse.Code != 200)
             {
-                return BadRequest(new OperationResponse<Area>(400, "ID mismatch"));
+                return StatusCode(existingAreaResponse.Code, existingAreaResponse);
             }
 
-            var response = await _areaBao.UpdateAreaAsync(area);
+            var existingArea = existingAreaResponse.Data;
+
+            // Mapear los valores de la solicitud a la entidad existente
+            existingArea.Name = updateAreaDto.Name;
+            existingArea.Description = updateAreaDto.Description;
+            existingArea.Status = updateAreaDto.Status; 
+
+            // Llamar al servicio para actualizar el área
+            var response = await _areaBao.UpdateAreaAsync(existingArea);
             return StatusCode(response.Code, response);
         }
 

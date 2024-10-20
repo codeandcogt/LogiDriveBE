@@ -1,5 +1,6 @@
 ﻿using LogiDriveBE.BAL.Bao;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,26 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPost]
-        public async Task<ActionResult<OperationResponse<Permission>>> CreatePermission([FromBody] Permission permission)
+        public async Task<ActionResult<OperationResponse<Permission>>> CreatePermission([FromBody] CreatePermissionDto createPermissionDto)
         {
+            try
+            {
+                var permission = new Permission
+                {
+                    Name = createPermissionDto.Name,
+                    Description = createPermissionDto.Description,
+                    Status = true,
+                    CreationDate = DateTime.UtcNow
+                };
+
             var response = await _permissionBao.CreatePermissionAsync(permission);
             return StatusCode(response.Code, response);
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new OperationResponse<Permission>(500, e.Message));
+            }
         }
 
         [HttpGet("{id}")]
