@@ -1,3 +1,5 @@
-.vs/ 
-/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.AssemblyInfo.cs
-/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.AssemblyInfoInputs.cache
+################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+*.vsidx
