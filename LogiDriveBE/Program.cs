@@ -47,6 +47,7 @@ builder.Services.AddScoped<ICollaboratorDao, CollaboratorDaoService>();
 builder.Services.AddScoped<IAppUserDao, AppUserDaoService>();
 builder.Services.AddScoped<IRoleDao, RoleDaoService>();
 builder.Services.AddScoped<IPermissionDao, PermissionDaoService>();
+builder.Services.AddScoped<IVehicleDao, VehicleDaoService>();
 
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
@@ -54,6 +55,7 @@ builder.Services.AddScoped<ICollaboratorBao, CollaboratorBaoService>();
 builder.Services.AddScoped<IAppUserBao, AppUserBaoService>();
 builder.Services.AddScoped<IRoleBao, RoleBaoService>();
 builder.Services.AddScoped<IPermissionBao, PermissionBaoService>();
+builder.Services.AddScoped<IVehicleBao, VehicleBaoService>();
 
 
 // Add services to the container.
