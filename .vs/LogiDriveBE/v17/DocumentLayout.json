@@ -1,81 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\",
+  "WorkspaceRootPath": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\asofi\\source\\repos\\logidrivebe\\logidrivebe\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\controllers\\private\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\controllers\\private\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\dto\\createroledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\createroledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\dto\\roledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\roledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\controllers\\private\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\controllers\\private\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\dto\\createpermissiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\createpermissiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\controllers\\private\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\controllers\\private\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\dto\\updateareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\updateareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\dto\\createareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\createareadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\bal\\services\\areabaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\services\\areabaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\bal\\bao\\iareabao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\bao\\iareabao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\services\\areadaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\services\\areadaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\dao\\iareadao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\dao\\iareadao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\dal\\models\\logreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\logreservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\utils\\operationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\utils\\operationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\nueva carpeta\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\asofi\\source\\repos\\logidrivebe\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
@@ -85,252 +17,64 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 216,
+          "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RoleController.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Controllers\\Private\\RoleController.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\RoleController.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Controllers\\Private\\RoleController.cs",
-              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\RoleController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAuwCIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:09:49.556Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateRoleDto.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\CreateRoleDto.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\CreateRoleDto.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\CreateRoleDto.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\CreateRoleDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:09:42.196Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RoleDto.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\RoleDto.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\RoleDto.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\RoleDto.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\RoleDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:09:23.556Z",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Dockerfile",
+              "RelativeDocumentMoniker": "LogiDriveBE\\Dockerfile",
+              "ToolTip": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Dockerfile",
+              "RelativeToolTip": "LogiDriveBE\\Dockerfile",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-18T23:16:42.746Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Role.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\Role.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\Role.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\Role.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\Role.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:09:02.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PermissionController.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Controllers\\Private\\PermissionController.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\PermissionController.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Controllers\\Private\\PermissionController.cs",
-              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\PermissionController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAYwCMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:07:51.767Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CreatePermissionDto.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\CreatePermissionDto.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\CreatePermissionDto.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\CreatePermissionDto.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\CreatePermissionDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:07:42.214Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Permission.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\Permission.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\Permission.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\Permission.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\Permission.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T10:07:14.549Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UpdateAreaDto.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\UpdateAreaDto.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\UpdateAreaDto.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\UpdateAreaDto.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\UpdateAreaDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:52:34.931Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CreateAreaDto.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\CreateAreaDto.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\CreateAreaDto.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\DTO\\CreateAreaDto.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\CreateAreaDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:46:50.28Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AreaController.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAA3wEkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:40:04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AreaBaoService.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\BAL\\Services\\AreaBaoService.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Services\\AreaBaoService.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\BAL\\Services\\AreaBaoService.cs",
-              "RelativeToolTip": "LogiDriveBE\\BAL\\Services\\AreaBaoService.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAA1wCsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:39:34.892Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IAreaBao.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "RelativeToolTip": "LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:39:03.576Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "IAreaDao.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:38:22.768Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Area.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\Area.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\Area.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\Area.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\Area.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:38:01.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "LogReservation.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\LogReservation.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\LogReservation.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Models\\LogReservation.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\LogReservation.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T04:26:02.232Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Program.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\Program.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\Program.cs",
-              "RelativeToolTip": "LogiDriveBE\\Program.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAAFQAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T15:04:54.746Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AreaDaoService.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Services\\AreaDaoService.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Services\\AreaDaoService.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\DAL\\Services\\AreaDaoService.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Services\\AreaDaoService.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAowGAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T15:02:29.092Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "OperationResponse.cs",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "RelativeToolTip": "LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T14:57:22.286Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
               "Title": "LogiDriveBE.csproj",
-              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\LogiDriveBE.csproj",
+              "DocumentMoniker": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
               "RelativeDocumentMoniker": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Nueva carpeta\\LogiDriveBE\\LogiDriveBE.csproj",
+              "ToolTip": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
               "RelativeToolTip": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAOAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-06T19:29:24.287Z"
+              "WhenOpened": "2024-10-06T19:29:24.287Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 182,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }
