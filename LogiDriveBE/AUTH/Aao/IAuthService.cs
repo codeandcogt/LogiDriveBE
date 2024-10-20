@@ -1,7 +1,9 @@
-﻿namespace LogiDriveBE.AUTH.Aao
+﻿using LogiDriveBE.UTILS;
+
+namespace LogiDriveBE.AUTH.Aao
 {
     public interface IAuthService
     {
-        Task<string> AuthenticateAsync(string email, string password);
+        Task<OperationResponse<string>> AuthenticateAsync(string email, string password);
     }
 }
