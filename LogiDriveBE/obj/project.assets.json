@@ -4360,23 +4360,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rjean\\.nuget\\packages\\": {},
+    "C:\\Users\\asofi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rjean\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+      "projectUniqueName": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
       "projectName": "LogiDriveBE",
-      "projectPath": "C:\\Users\\rjean\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
-      "packagesPath": "C:\\Users\\rjean\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rjean\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\obj\\",
+      "projectPath": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+      "packagesPath": "C:\\Users\\asofi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\rjean\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\asofi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
