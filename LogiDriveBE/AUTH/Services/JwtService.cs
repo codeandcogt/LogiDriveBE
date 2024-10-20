@@ -22,7 +22,8 @@ namespace LogiDriveBE.AUTH.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.IdAppUser.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.IdRoleNavigation.Name),
             };
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));

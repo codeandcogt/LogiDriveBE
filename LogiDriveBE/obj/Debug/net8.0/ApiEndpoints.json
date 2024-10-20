@@ -137,8 +137,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "area",
-        "Type": "LogiDriveBE.DAL.Models.Area",
+        "Name": "createAreaDto",
+        "Type": "LogiDriveBE.DAL.Models.DTO.CreateAreaDto",
         "IsRequired": true
       }
     ],
@@ -214,8 +214,8 @@
         "IsRequired": true
       },
       {
-        "Name": "area",
-        "Type": "LogiDriveBE.DAL.Models.Area",
+        "Name": "updateAreaDto",
+        "Type": "LogiDriveBE.DAL.Models.DTO.UpdateAreaDto",
         "IsRequired": true
       }
     ],
@@ -540,8 +540,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "permission",
-        "Type": "LogiDriveBE.DAL.Models.Permission",
+        "Name": "createPermissionDto",
+        "Type": "LogiDriveBE.DAL.Models.DTO.CreatePermissionDto",
         "IsRequired": true
       }
     ],
@@ -669,8 +669,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "role",
-        "Type": "LogiDriveBE.DAL.Models.Role",
+        "Name": "createRoleDto",
+        "Type": "LogiDriveBE.DAL.Models.DTO.CreateRoleDto",
         "IsRequired": true
       }
     ],

@@ -1,17 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\",
+  "WorkspaceRootPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDBE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\.vs\\LogiDriveBE\\v17\\DocumentLayout.backup.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.vs\\LogiDriveBE\\v17\\DocumentLayout.backup.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\.vs\\LogiDriveBE\\v17\\DocumentLayout.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.vs\\LogiDriveBE\\v17\\DocumentLayout.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\asofi\\source\\repos\\logidrivebe\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|d:\\universidad\\semestre 6\\basesdedatosi\\proyecto\\ldbe\\logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\logidrivebe.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
@@ -21,17 +13,9 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 216,
-          "SelectedChildIndex": 5,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -47,51 +31,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DocumentLayout.backup.json",
-              "DocumentMoniker": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\.vs\\LogiDriveBE\\v17\\DocumentLayout.backup.json",
-              "RelativeDocumentMoniker": ".vs\\LogiDriveBE\\v17\\DocumentLayout.backup.json",
-              "ToolTip": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\.vs\\LogiDriveBE\\v17\\DocumentLayout.backup.json",
-              "RelativeToolTip": ".vs\\LogiDriveBE\\v17\\DocumentLayout.backup.json",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-20T18:49:28.672Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DocumentLayout.json",
-              "DocumentMoniker": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\.vs\\LogiDriveBE\\v17\\DocumentLayout.json",
-              "RelativeDocumentMoniker": ".vs\\LogiDriveBE\\v17\\DocumentLayout.json",
-              "ToolTip": "C:\\Users\\asofi\\source\\repos\\LogiDriveBE\\.vs\\LogiDriveBE\\v17\\DocumentLayout.json",
-              "RelativeToolTip": ".vs\\LogiDriveBE\\v17\\DocumentLayout.json",
-              "ViewState": "AQIAAJMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-20T18:49:05.242Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "LogiDriveBE.csproj",
-              "DocumentMoniker": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+              "DocumentMoniker": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDBE\\LogiDriveBE\\LogiDriveBE.csproj",
               "RelativeDocumentMoniker": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ToolTip": "C:\\Users\\asofi\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
+              "ToolTip": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDBE\\LogiDriveBE\\LogiDriveBE.csproj",
               "RelativeToolTip": "LogiDriveBE\\LogiDriveBE.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-10-06T19:29:24.287Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 182,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }
