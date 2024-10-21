@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogiDriveBE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1f27ef560760d68c5b3c8d99fc688532817d13d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29f7579bd3f268f399afe82f3973078ff4f8cd8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogiDriveBE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogiDriveBE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
