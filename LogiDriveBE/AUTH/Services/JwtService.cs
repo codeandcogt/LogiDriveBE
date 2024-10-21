@@ -23,11 +23,9 @@ namespace LogiDriveBE.AUTH.Services
                 new Claim(ClaimTypes.NameIdentifier, user.IdAppUser.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.IdRoleNavigation.Name),
             };
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-            claims.AddRange(permissions.Select(permission => new Claim("Permission", permission)));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
