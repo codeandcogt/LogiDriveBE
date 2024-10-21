@@ -47,8 +47,13 @@ builder.Services.AddScoped<ICollaboratorDao, CollaboratorDaoService>();
 builder.Services.AddScoped<IAppUserDao, AppUserDaoService>();
 builder.Services.AddScoped<IRoleDao, RoleDaoService>();
 builder.Services.AddScoped<IPermissionDao, PermissionDaoService>();
-builder.Services.AddScoped<IVehicleDao, VehicleDaoService>();
-builder.Services.AddScoped<IPartVehicleDao, PartVehicleDaoService>();
+builder.Services.AddScoped<IDepartmentDao, DepartmentDaoService>();
+builder.Services.AddScoped<ITownDao, TownDaoService>();
+builder.Services.AddScoped<ILogProcessDao, LogProcessDaoService>();
+builder.Services.AddScoped<ILogReservationDao, LogReservationDaoService>();
+builder.Services.AddScoped<IVehicleAssignmentDao, VehicleAssignmentDaoService>();
+builder.Services.AddScoped<IMaintenancePartDao, MaintenancePartDaoService>();
+builder.Services.AddScoped<IServiceDao, ServiceDaoService>();
 
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
@@ -56,16 +61,21 @@ builder.Services.AddScoped<ICollaboratorBao, CollaboratorBaoService>();
 builder.Services.AddScoped<IAppUserBao, AppUserBaoService>();
 builder.Services.AddScoped<IRoleBao, RoleBaoService>();
 builder.Services.AddScoped<IPermissionBao, PermissionBaoService>();
-builder.Services.AddScoped<IVehicleBao, VehicleBaoService>();
-builder.Services.AddScoped<IPartVehicleBao, PartVehicleBaoService>();
+builder.Services.AddScoped<IDepartmentBao, DepartmentBaoService>();
+builder.Services.AddScoped<ITownBao, TownBaoService>();
+builder.Services.AddScoped<ILogProcessBao, LogProcessBaoService>();
+builder.Services.AddScoped<ILogReservationBao, LogReservationBaoService>();
+builder.Services.AddScoped<IVehicleAssignmentBao, VehicleAssignmentBaoService>();
+builder.Services.AddScoped<IMaintenancePartBao, MaintenancePartBaoService>();
+builder.Services.AddScoped<IServiceBao, ServiceBaoService>();
 
 
 // Add services to the container.
 builder.Services.AddControllers();
-    //.AddJsonOptions(options =>
-    //{
-    //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-    //});
+//.AddJsonOptions(options =>
+//{
+//    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+//});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
