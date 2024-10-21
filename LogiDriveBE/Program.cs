@@ -10,7 +10,7 @@ using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Services;
 using LogiDriveBE.BAL.Services;
 using LogiDriveBE.BAL.Bao;
-using System.Text.Json.Serialization; // Asegúrate de que este using apunte al namespace correcto de tu DbContext
+using System.Text.Json.Serialization; // AsegÃºrate de que este using apunte al namespace correcto de tu DbContext
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,16 +72,16 @@ builder.Services.AddScoped<IServiceBao,  ServiceBaoService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
-    //.AddJsonOptions(options =>
-    //{
-    //    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-    //});
+//.AddJsonOptions(options =>
+//{
+//    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+//});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Añade esta línea para configurar el DbContext
+// AÃ±ade esta lÃ­nea para configurar el DbContext
 builder.Services.AddDbContext<LogiDriveDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
