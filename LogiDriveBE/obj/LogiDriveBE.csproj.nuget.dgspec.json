@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jhoan\\OneDrive\\logiDrive\\LogiDriveBE\\LogiDriveBE.csproj": {}
+    "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDB\\LogiDriveBE\\LogiDriveBE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jhoan\\OneDrive\\logiDrive\\LogiDriveBE\\LogiDriveBE.csproj": {
+    "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDB\\LogiDriveBE\\LogiDriveBE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jhoan\\OneDrive\\logiDrive\\LogiDriveBE\\LogiDriveBE.csproj",
+        "projectUniqueName": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDB\\LogiDriveBE\\LogiDriveBE.csproj",
         "projectName": "LogiDriveBE",
-        "projectPath": "C:\\Users\\jhoan\\OneDrive\\logiDrive\\LogiDriveBE\\LogiDriveBE.csproj",
-        "packagesPath": "C:\\Users\\jhoan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jhoan\\OneDrive\\logiDrive\\LogiDriveBE\\obj\\",
+        "projectPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDB\\LogiDriveBE\\LogiDriveBE.csproj",
+        "packagesPath": "C:\\Users\\geras\\.nuget\\packages\\",
+        "outputPath": "D:\\Universidad\\Semestre 6\\BasesDeDatosI\\Proyecto\\LDB\\LogiDriveBE\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\jhoan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\geras\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -104,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
