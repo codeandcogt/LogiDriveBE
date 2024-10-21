@@ -18,7 +18,7 @@ namespace LogiDriveBE.BAL.Services
         {
             try
             {
-                // Add any business logic here
+               
                 return await _maintenancePartDao.CreateMaintenancePartAsync(maintenancePart);
             }
             catch (Exception ex)
@@ -27,7 +27,7 @@ namespace LogiDriveBE.BAL.Services
             }
         }
 
-        public async Task<OperationResponse<MaintenancePart>> GetMaintenancePartAsync(string id)
+        public async Task<OperationResponse<MaintenancePart>> GetMaintenancePartAsync(int id)
         {
             try
             {

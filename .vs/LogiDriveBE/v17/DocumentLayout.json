@@ -7,40 +7,60 @@
       "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\controllers\\private\\maintenancepartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\controllers\\private\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\controllers\\private\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\models\\dto\\maintenancepartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\maintenancepartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\models\\maintenancepart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\maintenancepart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\bao\\imaintenancepartbao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\bao\\imaintenancepartbao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\services\\maintenancepartdaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\services\\maintenancepartdaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\dao\\imaintenancepartdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\dao\\imaintenancepartdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\dao\\iareadao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\dao\\iareadao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\services\\maintenancepartbaoservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\services\\maintenancepartbaoservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\bao\\iareabao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\bao\\iareabao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\bao\\imaintenancepartbao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\bao\\imaintenancepartbao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\models\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\models\\maintenancepart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\maintenancepart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\controllers\\private\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\controllers\\private\\servicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\bao\\iservicebao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\bao\\iservicebao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\dao\\iservicedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\dao\\iservicedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\models\\dto\\servicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\dto\\servicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\services\\servicedaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\services\\servicedaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\services\\servicebaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\services\\servicebaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\dal\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\dal\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\utils\\operationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\utils\\operationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|c:\\users\\1225e\\source\\repos\\logidrivebe\\logidrivebe\\bal\\services\\appuserbaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0AE9565-52F3-4FA2-9B10-C68352C560F3}|LogiDriveBE\\LogiDriveBE.csproj|solutionrelative:logidrivebe\\bal\\services\\appuserbaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,34 +70,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 16,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MaintenancePartController.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
-              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABAAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T20:16:09.381Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AreaController.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\AreaController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T19:51:37.544Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -100,105 +94,198 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IMaintenancePartBao.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
-              "RelativeToolTip": "LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "DocumentIndex": 9,
+              "Title": "IServiceDao.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Dao\\IServiceDao.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Dao\\IServiceDao.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Dao\\IServiceDao.cs",
+              "RelativeToolTip": "LogiDriveBE\\DAL\\Dao\\IServiceDao.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAUwAkAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T19:50:58.264Z",
+              "WhenOpened": "2024-10-19T07:42:02.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IAreaBao.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
-              "RelativeToolTip": "LogiDriveBE\\BAL\\Bao\\IAreaBao.cs",
+              "DocumentIndex": 10,
+              "Title": "ServiceDto.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\DTO\\ServiceDto.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\ServiceDto.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\DTO\\ServiceDto.cs",
+              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\ServiceDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T05:03:12.206Z",
+              "WhenOpened": "2024-10-20T22:46:25.877Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IAreaDao.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Dao\\IAreaDao.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "DocumentIndex": 11,
+              "Title": "ServiceDaoService.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Services\\ServiceDaoService.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Services\\ServiceDaoService.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Services\\ServiceDaoService.cs",
+              "RelativeToolTip": "LogiDriveBE\\DAL\\Services\\ServiceDaoService.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwCQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T04:53:19.242Z",
+              "WhenOpened": "2024-10-20T23:00:59.762Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Area.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\Area.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\Area.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\Area.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\Area.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAYAAAA",
+              "DocumentIndex": 12,
+              "Title": "ServiceBaoService.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Services\\ServiceBaoService.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Services\\ServiceBaoService.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Services\\ServiceBaoService.cs",
+              "RelativeToolTip": "LogiDriveBE\\BAL\\Services\\ServiceBaoService.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAADwvx4AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T04:54:06.071Z",
+              "WhenOpened": "2024-10-20T21:24:10.144Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
+              "Title": "IServiceBao.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IServiceBao.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Bao\\IServiceBao.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IServiceBao.cs",
+              "RelativeToolTip": "LogiDriveBE\\BAL\\Bao\\IServiceBao.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T21:24:08.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Service.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\Service.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\Service.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\Service.cs",
+              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\Service.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T04:30:54.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "IMaintenancePartDao.cs",
               "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Dao\\IMaintenancePartDao.cs",
               "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Dao\\IMaintenancePartDao.cs",
               "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Dao\\IMaintenancePartDao.cs",
               "RelativeToolTip": "LogiDriveBE\\DAL\\Dao\\IMaintenancePartDao.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T05:46:58.757Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AppUserBaoService.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Services\\AppUserBaoService.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Services\\AppUserBaoService.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Services\\AppUserBaoService.cs",
+              "RelativeToolTip": "LogiDriveBE\\BAL\\Services\\AppUserBaoService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T04:35:14.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MaintenancePartBaoServices.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Services\\MaintenancePartBaoServices.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Services\\MaintenancePartBaoServices.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Services\\MaintenancePartBaoServices.cs",
+              "RelativeToolTip": "LogiDriveBE\\BAL\\Services\\MaintenancePartBaoServices.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAAACEAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T04:42:02.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "MaintenancePartDaoService.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Services\\MaintenancePartDaoService.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Services\\MaintenancePartDaoService.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Services\\MaintenancePartDaoService.cs",
+              "RelativeToolTip": "LogiDriveBE\\DAL\\Services\\MaintenancePartDaoService.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACQAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T04:31:53.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ServiceController.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\ServiceController.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\ServiceController.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\ServiceController.cs",
+              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\ServiceController.cs",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAAwGAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-20T22:21:26.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MaintenancePartController.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
+              "RelativeToolTip": "LogiDriveBE\\Controllers\\Private\\MaintenancePartController.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAA5wBYAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-18T20:16:09.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MaintenancePartDto.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\DTO\\MaintenancePartDto.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\DTO\\MaintenancePartDto.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\DTO\\MaintenancePartDto.cs*",
+              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\DTO\\MaintenancePartDto.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T03:58:10.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "MaintenancePart.cs",
               "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\MaintenancePart.cs",
               "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\MaintenancePart.cs",
               "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\MaintenancePart.cs",
               "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\MaintenancePart.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-18T04:30:45.952Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Service.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\Service.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\DAL\\Models\\Service.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\DAL\\Models\\Service.cs",
-              "RelativeToolTip": "LogiDriveBE\\DAL\\Models\\Service.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "IMaintenancePartBao.cs",
+              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
+              "RelativeDocumentMoniker": "LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
+              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
+              "RelativeToolTip": "LogiDriveBE\\BAL\\Bao\\IMaintenancePartBao.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T04:30:54.359Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OperationResponse.cs",
-              "DocumentMoniker": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "RelativeDocumentMoniker": "LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "ToolTip": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "RelativeToolTip": "LogiDriveBE\\UTILS\\OperationResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-18T04:27:55.134Z"
+              "WhenOpened": "2024-10-18T19:50:58.264Z",
+              "EditorCaption": ""
             }
           ]
         }

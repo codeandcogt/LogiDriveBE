@@ -11,7 +11,7 @@
         "projectName": "LogiDriveBE",
         "projectPath": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\LogiDriveBE.csproj",
         "packagesPath": "C:\\Users\\1225e\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\1225e\\Source\\Repos\\LogiDriveBE\\LogiDriveBE\\obj\\",
+        "outputPath": "C:\\Users\\1225e\\source\\repos\\LogiDriveBE\\LogiDriveBE\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

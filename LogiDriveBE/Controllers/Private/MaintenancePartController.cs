@@ -1,8 +1,10 @@
 ﻿using LogiDriveBE.BAL.Bao;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.Controllers.Private
 {
@@ -18,14 +20,21 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPost]
-        public async Task<ActionResult<OperationResponse<MaintenancePart>>> CreateMaintenancePart([FromBody] MaintenancePart maintenancePart)
+        public async Task<ActionResult<OperationResponse<MaintenancePart>>> CreateMaintenancePart([FromBody] MaintenancePartDto maintenancePartDto)
         {
+            var maintenancePart = new MaintenancePart
+            {
+                Comment = maintenancePartDto.Comment,
+                DateMaintenancePart = maintenancePartDto.DateMaintenancePart,
+                IdPartVehicle = maintenancePartDto.IdPartVehicle,
+                Status = maintenancePartDto.Status
+            };
             var response = await _maintenancePartBao.CreateMaintenancePartAsync(maintenancePart);
             return StatusCode(response.Code, response);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OperationResponse<MaintenancePart>>> GetMaintenancePart(string id)
+        public async Task<ActionResult<OperationResponse<MaintenancePart>>> GetMaintenancePart(int id)
         {
             var response = await _maintenancePartBao.GetMaintenancePartAsync(id);
             return StatusCode(response.Code, response);
@@ -39,13 +48,19 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<OperationResponse<MaintenancePart>>> UpdateMaintenancePart(int id, [FromBody] MaintenancePart maintenancePart)
+        public async Task<ActionResult<OperationResponse<MaintenancePart>>> UpdateMaintenancePart(int id, [FromBody] MaintenancePartDto updateMaintenancePartDto)
         {
-            if (id != maintenancePart.IdMaintenancePart)
+            var existingMaintenancePartResponse = await _maintenancePartBao.GetMaintenancePartAsync(id);
+            if (existingMaintenancePartResponse.Code != 200)    
             {
-                return BadRequest(new OperationResponse<MaintenancePart>(400, "ID mismatch"));
+                return StatusCode(existingMaintenancePartResponse.Code, existingMaintenancePartResponse);
             }
-            var response = await _maintenancePartBao.UpdateMaintenancePartAsync(maintenancePart);
+            var existingMaintenancePart = existingMaintenancePartResponse.Data;
+            existingMaintenancePart.Comment = updateMaintenancePartDto.Comment;
+            existingMaintenancePart.DateMaintenancePart = updateMaintenancePartDto.DateMaintenancePart;
+            existingMaintenancePart.IdPartVehicle = updateMaintenancePartDto.IdPartVehicle;
+            existingMaintenancePart.Status = updateMaintenancePartDto.Status;
+            var response = await _maintenancePartBao.UpdateMaintenancePartAsync(existingMaintenancePart);
             return StatusCode(response.Code, response);
         }
 

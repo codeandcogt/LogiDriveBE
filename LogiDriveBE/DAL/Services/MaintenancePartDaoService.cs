@@ -29,11 +29,11 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
-        public async Task<OperationResponse<MaintenancePart>> GetMaintenancePartAsync(string id)
+        public async Task<OperationResponse<MaintenancePart>> GetMaintenancePartAsync(int id)
         {
             try
             {
-                var maintenancePart = await _context.MaintenanceParts.FindAsync(int.Parse(id));
+                var maintenancePart = await _context.MaintenanceParts.FindAsync(id);
                 if (maintenancePart == null)
                 {
                     return new OperationResponse<MaintenancePart>(404, "Maintenance part not found");
