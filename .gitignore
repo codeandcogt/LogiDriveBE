@@ -1,5 +1,26 @@
-################################################################################
-# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
-################################################################################
 
-*.vsidx
+.vs/ 
+/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.AssemblyInfo.cs
+/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.AssemblyInfoInputs.cache
+/.vs/LogiDriveBE/v17/.suo
+/.vs/LogiDriveBE/v17/DocumentLayout.json
+/LogiDriveBE/bin/Release/net8.0/LogiDriveBE.dll
+/LogiDriveBE/bin/Release/net8.0/LogiDriveBE.exe
+/LogiDriveBE/bin/Release/net8.0/LogiDriveBE.pdb
+/LogiDriveBE/obj/Release/net8.0/PubTmp/Out/LogiDriveBE.dll
+/LogiDriveBE/obj/Release/net8.0/PubTmp/Out/LogiDriveBE.exe
+/LogiDriveBE/obj/Release/net8.0/PubTmp/Out/LogiDriveBE.pdb
+/LogiDriveBE/obj/Release/net8.0/ref/LogiDriveBE.dll
+/LogiDriveBE/obj/Release/net8.0/refint/LogiDriveBE.dll
+/LogiDriveBE/obj/Release/net8.0/apphost.exe
+/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.dll
+/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.pdb
+/LogiDriveBE/obj/Release/net8.0/LogiDriveBE.sourcelink.json
+/LogiDriveBE/Properties/PublishProfiles/LogiDriveBE20241017203704 - Web Deploy1.pubxml.user
+bin/
+obj/
+*.user
+*.suo
+packages/
+publish/
+*.log
