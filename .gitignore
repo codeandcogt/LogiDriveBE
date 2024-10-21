@@ -16,3 +16,10 @@
 /LogiDriveBE/obj/Release/net8.0/LogiDriveBE.pdb
 /LogiDriveBE/obj/Release/net8.0/LogiDriveBE.sourcelink.json
 /LogiDriveBE/Properties/PublishProfiles/LogiDriveBE20241017203704 - Web Deploy1.pubxml.user
+bin/
+obj/
+*.user
+*.suo
+packages/
+publish/
+*.log
