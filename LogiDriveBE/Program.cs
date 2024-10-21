@@ -54,6 +54,9 @@ builder.Services.AddScoped<ILogReservationDao, LogReservationDaoService>();
 builder.Services.AddScoped<IVehicleAssignmentDao, VehicleAssignmentDaoService>();
 builder.Services.AddScoped<IMaintenancePartDao, MaintenancePartDaoService>();
 builder.Services.AddScoped<IServiceDao, ServiceDaoService>();
+builder.Services.AddScoped<IVehicleDao, VehicleDaoService>();
+builder.Services.AddScoped<IPartVehicleDao, PartVehicleDaoService>();
+
 
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
@@ -68,6 +71,8 @@ builder.Services.AddScoped<ILogReservationBao, LogReservationBaoService>();
 builder.Services.AddScoped<IVehicleAssignmentBao, VehicleAssignmentBaoService>();
 builder.Services.AddScoped<IMaintenancePartBao, MaintenancePartBaoService>();
 builder.Services.AddScoped<IServiceBao,  ServiceBaoService>();
+builder.Services.AddScoped<IVehicleBao, VehicleBaoService>();
+builder.Services.AddScoped<IPartVehicleBao, PartVehicleBaoService>();
 
 
 // Add services to the container.
