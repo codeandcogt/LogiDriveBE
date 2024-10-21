@@ -22,4 +22,6 @@ public partial class Service
     public virtual TypeService? IdTypeServiceNavigation { get; set; }
 
     public virtual Vehicle? IdVehicleNavigation { get; set; }
+
+
 }
