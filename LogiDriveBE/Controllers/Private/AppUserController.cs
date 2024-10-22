@@ -59,7 +59,7 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
-        [HttpPut("updateUserCollaborator{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUser(int id, [FromBody] AppUser appUser)
         {
             if (id != appUser.IdAppUser)
@@ -78,7 +78,7 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("updateUserCollaborator{id}")]
         public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUserWithCollaborator(int id, [FromBody] AppUserCollaboratorDto dto)
         {
             var appUser = new AppUser
