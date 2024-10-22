@@ -10,5 +10,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<IEnumerable<Collaborator>>> GetAllCollaboratorsAsync();
         Task<OperationResponse<Collaborator>> UpdateCollaboratorAsync(Collaborator collaborator);
         Task<OperationResponse<bool>> DeleteCollaboratorAsync(int id);
+        Task<OperationResponse<bool>> DeleteCollaboratorStatusAsync(int id);
     }
 }

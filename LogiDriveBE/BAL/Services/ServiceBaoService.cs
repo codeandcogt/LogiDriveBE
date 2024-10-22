@@ -114,5 +114,10 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<bool>(500, $"Error in BAO while changing service status: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteServiceStatusAsync(int id)
+        {
+            return await _serviceDao.DeleteServiceStatusAsync(id);  
+        }
     }
 }

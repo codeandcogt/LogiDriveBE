@@ -38,5 +38,10 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _departmentDao.DeleteDepartmentAsync(id);
         }
+
+        public async Task<OperationResponse<bool>> DeleteDepartmentStatusAsync(int id)
+        {
+            return await _departmentDao.DeleteDepartamentStatusAsync(id);
+        }
     }
 }

@@ -115,5 +115,41 @@ namespace LogiDriveBE.BAL.Services
             return new OperationResponse<AppUser>(200, "User and collaborator updated successfully", userResponse.Data);
         }
 
+        public async Task<OperationResponse<bool>> DeleteUserAndCollaboratorStatusAsync(int userId)
+        {
+            // Paso 1: Verificar si el usuario existe
+            var userResponse = await _appUserDao.GetAppUserByIdAsync(userId);
+            if (userResponse.Code != 200)
+            {
+                return new OperationResponse<bool>(404, "User not found");
+            }
+
+            var appUser = userResponse.Data;
+
+            // Paso 2: Buscar el colaborador relacionado al usuario
+            var collaboratorResponse = await _collaboratorDao.GetCollaboratorByUserIdAsync(appUser.IdAppUser);
+            if (collaboratorResponse.Code != 200)
+            {
+                return new OperationResponse<bool>(404, "Collaborator not found for the given user");
+            }
+
+            var collaborator = collaboratorResponse.Data;
+
+            // Paso 3: Cambiar el estado de ambos a false
+            var userDeleteResponse = await _appUserDao.DeleteAppUserStatusAsync(appUser.IdAppUser);
+            if (userDeleteResponse.Code != 200)
+            {
+                return new OperationResponse<bool>(500, "Error deleting user status");
+            }
+
+            var collaboratorDeleteResponse = await _collaboratorDao.DeleteCollaboratorStatusAsync(collaborator.IdCollaborator);
+            if (collaboratorDeleteResponse.Code != 200)
+            {
+                return new OperationResponse<bool>(500, "Error deleting collaborator status");
+            }
+
+            return new OperationResponse<bool>(200, "User and collaborator status updated successfully", true);
+        }
+
     }
 }

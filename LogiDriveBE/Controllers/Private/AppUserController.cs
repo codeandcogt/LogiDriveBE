@@ -105,5 +105,13 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
+        [HttpDelete("deleteUserCollaborator/{userId}")]
+        public async Task<ActionResult<OperationResponse<bool>>> DeleteUserAndCollaboratorStatus(int userId)
+        {
+            var response = await _appUserBao.DeleteUserAndCollaboratorStatusAsync(userId);
+            return StatusCode(response.Code, response);
+        }
+
+
     }
 }

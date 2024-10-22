@@ -10,5 +10,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<IEnumerable<Department>>> GetAllDepartmentsAsync();
         Task<OperationResponse<Department>> UpdateDepartmentAsync(Department department);
         Task<OperationResponse<bool>> DeleteDepartmentAsync(int id);
+        Task<OperationResponse<bool>> DeleteDepartamentStatusAsync(int id);
     }
 }

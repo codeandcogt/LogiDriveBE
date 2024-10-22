@@ -11,5 +11,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<Vehicle>> UpdateVehicleAsync(Vehicle vehicle);
         Task<OperationResponse<bool>> UpdateVehicleStatusAsync(int id, string status); // Nuevo método
         Task<OperationResponse<bool>> DeleteVehicleAsync(int id);
+        Task<OperationResponse<bool>> DeleteVehicleStatusAsync(int id);
     }
 }

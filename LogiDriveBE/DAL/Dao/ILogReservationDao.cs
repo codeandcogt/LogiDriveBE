@@ -11,5 +11,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<LogReservationDto>> UpdateLogReservationAsync(LogReservationDto logReservationDto);
         Task<OperationResponse<bool>> DeleteLogReservationAsync(int id);
         Task<OperationResponse<bool>> UpdateStatusReservationAsync(int id, UpdateStatusReservationDto updateStatusReservationDto);
+        Task<OperationResponse<bool>> DeleteLogReservationStatusAsync(int id);
     }
 }

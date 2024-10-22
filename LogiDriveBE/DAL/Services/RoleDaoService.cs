@@ -130,5 +130,27 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<Role>(500, $"Error assigning permissions: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteRoleStatusAsync(int id)
+        {
+            try
+            {
+                var role = await _context.Roles.FindAsync(id);
+                if (role == null)
+                {
+                    return new OperationResponse<bool>(404, "Role not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                role.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Role logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting role: {ex.Message}");
+            }
+        }
     }
 }

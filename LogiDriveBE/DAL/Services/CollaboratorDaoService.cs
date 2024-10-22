@@ -109,6 +109,46 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting collaborator: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteCollaboratorStatusAsync(int id)
+        {
+            try
+            {
+                var collaborator = await _context.Collaborators.FindAsync(id);
+                if (collaborator == null)
+                {
+                    return new OperationResponse<bool>(404, "Collaborator not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                collaborator.Status = false;  
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Collaborator logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting Collaborator: {ex.Message}");
+            }
+        }
+
+        public async Task<OperationResponse<Collaborator>> GetCollaboratorByUserIdAsync(int userId)
+        {
+            try
+            {
+                var collaborator = await _context.Collaborators.FirstOrDefaultAsync(c => c.IdUser == userId);
+                if (collaborator == null)
+                {
+                    return new OperationResponse<Collaborator>(404, "Collaborator not found");
+                }
+                return new OperationResponse<Collaborator>(200, "Collaborator retrieved successfully", collaborator);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<Collaborator>(500, $"Error retrieving collaborator: {ex.Message}");
+            }
+        }
+
     }
 }
 

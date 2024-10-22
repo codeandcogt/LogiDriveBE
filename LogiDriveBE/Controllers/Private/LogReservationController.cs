@@ -57,5 +57,12 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _logReservationBao.UpdateStatusReservationAsync(id, updateStatusReservationDto);
             return StatusCode(response.Code, response);
         }
+
+        [HttpDelete("status/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> DeleteLogReservationStatus(int id)
+        {
+            var response = await _logReservationBao.DeleteLogReservationStatusAsync(id);
+            return StatusCode(response.Code, response);
+        }
     }
 }

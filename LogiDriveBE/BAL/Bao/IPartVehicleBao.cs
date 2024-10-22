@@ -10,5 +10,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<IEnumerable<PartVehicle>>> GetAllPartVehiclesAsync();
         Task<OperationResponse<PartVehicle>> UpdatePartVehicleAsync(PartVehicle partVehicle);
         Task<OperationResponse<bool>> DeletePartVehicleAsync(int id);
+        Task<OperationResponse<bool>> DeletePartVehicleStatusAsync(int id);
     }
 }

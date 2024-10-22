@@ -129,5 +129,26 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting town: {ex.Message}");
             }
         }
+        public async Task<OperationResponse<bool>> DeleteTownStatusAsync(int id)
+        {
+            try
+            {
+                var town = await _context.Towns.FindAsync(id);
+                if (town == null)
+                {
+                    return new OperationResponse<bool>(404, "Town not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                town.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Town logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting town: {ex.Message}");
+            }
+        }
     }
 }

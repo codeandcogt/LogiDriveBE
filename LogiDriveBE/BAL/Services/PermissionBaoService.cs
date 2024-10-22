@@ -40,5 +40,10 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _permissionDao.DeletePermissionAsync(id);
         }
+
+        public async Task<OperationResponse<bool>> DeletePermissionStatusAsync(int id)
+        {
+            return await _permissionDao.DeleteLogPermissionStatusAsync(id);
+        }
     }
 }

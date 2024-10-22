@@ -46,5 +46,10 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _collaboratorDao.DeleteCollaboratorAsync(id);
         }
+
+        public async Task<OperationResponse<bool>> DeleteCollaboratorStatusAsync(int id)
+        {
+            return await _collaboratorDao.DeleteCollaboratorStatusAsync(id);
+        }
     }
 }

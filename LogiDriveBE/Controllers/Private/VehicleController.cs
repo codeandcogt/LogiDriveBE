@@ -87,5 +87,12 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _vehicleBao.DeleteVehicleAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpDelete("Status/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> DeleteVehicleStatus(int id)
+        {
+            var response = await _vehicleBao.DeleteVehicleStatusAsync(id);
+            return StatusCode(response.Code, response);
+        }
     }
 }
