@@ -2,12 +2,14 @@
 using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.UTILS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentBao _departmentBao;
@@ -30,6 +32,8 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _departmentBao.GetDepartmentByIdAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        // agregar jwt abligatoria
 
         [HttpGet]
         public async Task<ActionResult<OperationResponse<IEnumerable<Department>>>> GetAllDepartments()

@@ -4,11 +4,13 @@ using LogiDriveBE.DAL.Models;
 using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class RoleController : ControllerBase
     {
         private readonly IRoleBao _roleBao;

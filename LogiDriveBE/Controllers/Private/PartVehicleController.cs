@@ -4,12 +4,14 @@ using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Mvc;
 using LogiDriveBE.BAL.Bao;
 using LogiDriveBE.DAL.Dao;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LogiDriveBE.Controllers.Private
 
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class PartVehicleController : ControllerBase
     {
         private readonly IPartVehicleBao _partVehicleBao;

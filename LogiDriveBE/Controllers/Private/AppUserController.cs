@@ -2,6 +2,7 @@
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AppUserController : ControllerBase
     {
         private readonly IAppUserBao _appUserBao;

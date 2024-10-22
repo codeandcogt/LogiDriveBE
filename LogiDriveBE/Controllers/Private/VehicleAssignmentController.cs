@@ -2,12 +2,14 @@
 using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class VehicleAssignmentController : ControllerBase
     {
         private readonly IVehicleAssignmentBao _vehicleAssignmentBao;
