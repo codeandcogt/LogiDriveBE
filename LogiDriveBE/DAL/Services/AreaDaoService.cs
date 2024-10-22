@@ -50,7 +50,10 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var areas = await _context.Areas.ToListAsync();
+                // Filtrar solo las áreas donde el status es true o 1
+                var areas = await _context.Areas
+                                          .Where(a => a.Status == true || a.Status == true)
+                                          .ToListAsync();
                 return new OperationResponse<IEnumerable<Area>>(200, "Areas retrieved successfully", areas);
             }
             catch (Exception ex)
@@ -58,6 +61,7 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<IEnumerable<Area>>(500, $"Error retrieving areas: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResponse<Area>> UpdateAreaAsync(Area area)
         {
