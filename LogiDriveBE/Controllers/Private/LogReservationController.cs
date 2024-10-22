@@ -1,12 +1,14 @@
 ﻿using LogiDriveBE.BAL.Bao;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class LogReservationController : ControllerBase
     {
         private readonly ILogReservationBao _logReservationBao;
