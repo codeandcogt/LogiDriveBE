@@ -1,4 +1,5 @@
 ﻿using LogiDriveBE.BAL.Bao;
+using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,13 @@ namespace LogiDriveBE.Controllers.Private
         public async Task<ActionResult<OperationResponse<bool>>> DeleteTown(int id)
         {
             var response = await _townBao.DeleteTownAsync(id);
+            return StatusCode(response.Code, response);
+        }
+
+        [HttpDelete("Status/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> UpdateStatusTown(int id)
+        {
+            var response = await _townBao.DeleteTownStatusAsync(id);
             return StatusCode(response.Code, response);
         }
     }

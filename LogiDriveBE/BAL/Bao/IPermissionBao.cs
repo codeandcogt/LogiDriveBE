@@ -1,5 +1,6 @@
 ﻿using LogiDriveBE.DAL.Models;
 using LogiDriveBE.UTILS;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.BAL.Bao
 {
@@ -10,5 +11,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<IEnumerable<Permission>>> GetAllPermissionsAsync();
         Task<OperationResponse<Permission>> UpdatePermissionAsync(Permission permission);
         Task<OperationResponse<bool>> DeletePermissionAsync(int id);
+        Task<OperationResponse<bool>> DeletePermissionStatusAsync(int id);
     }
 }

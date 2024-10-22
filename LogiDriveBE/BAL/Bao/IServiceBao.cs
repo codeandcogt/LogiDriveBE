@@ -13,6 +13,7 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<Service>> UpdateServiceAsync(Service service);
         Task<OperationResponse<bool>> DeleteServiceAsync(int idService);
         Task<OperationResponse<bool>> ChangeServiceStatusAsync(int idService, bool status);
+        Task<OperationResponse<bool>> DeleteServiceStatusAsync(int id);
 
     }
 }

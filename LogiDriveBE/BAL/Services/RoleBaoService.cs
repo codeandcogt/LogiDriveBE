@@ -46,6 +46,11 @@ namespace LogiDriveBE.BAL.Services
             // You can add additional business logic here if needed
             return await _roleDao.AssignPermissionsToRoleAsync(roleId, permissionIds);
         }
+
+        public async Task<OperationResponse<bool>> DeleteRoleStatusAsync(int id)
+        {
+            return await _roleDao.DeleteRoleStatusAsync(id);
+        }
     }
 }
 

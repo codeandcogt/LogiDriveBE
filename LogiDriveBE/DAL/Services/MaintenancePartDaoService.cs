@@ -93,5 +93,27 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting maintenance part: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteLogMaintenancePartStatusAsync(int id)
+        {
+            try
+            {
+                var maintenancePart = await _context.MaintenanceParts.FindAsync(id);
+                if (maintenancePart == null)
+                {
+                    return new OperationResponse<bool>(404, "MaintenancePart not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                maintenancePart.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "MaintenancePart logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting MaintenancePart: {ex.Message}");
+            }
+        }
     }
 }

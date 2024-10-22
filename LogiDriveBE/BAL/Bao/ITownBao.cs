@@ -10,5 +10,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<IEnumerable<TownDto>>> GetAllTownsAsync();
         Task<OperationResponse<TownDto>> UpdateTownAsync(TownDto townDto);
         Task<OperationResponse<bool>> DeleteTownAsync(int id);
+        Task<OperationResponse<bool>> DeleteTownStatusAsync(int id);
     }
 }

@@ -95,6 +95,28 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
+        public async Task<OperationResponse<bool>> DeleteLogPartVehicleStatusAsync(int id)
+        {
+            try
+            {
+                var partVehicle = await _context.PartVehicles.FindAsync(id);
+                if (partVehicle == null)
+                {
+                    return new OperationResponse<bool>(404, "PartVehicle not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                partVehicle.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "PartVehicle logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting partVehicle: {ex.Message}");
+            }
+        }
+
 
     }
 }

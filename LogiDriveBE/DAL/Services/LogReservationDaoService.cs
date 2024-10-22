@@ -180,6 +180,28 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error updating log reservation status: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteLogReservationStatusAsync(int id)
+        {
+            try
+            {
+                var reservation = await _context.LogReservations.FindAsync(id);
+                if (reservation == null)
+                {
+                    return new OperationResponse<bool>(404, "Reservation not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                reservation.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Reservation logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting Reservation: {ex.Message}");
+            }
+        }
     }
 }
 

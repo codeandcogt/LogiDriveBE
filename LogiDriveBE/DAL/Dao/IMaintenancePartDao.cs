@@ -10,6 +10,7 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<IEnumerable<MaintenancePart>>> GetAllMaintenancePartAsync();
         Task<OperationResponse<MaintenancePart>> UpdateMaintenancePartAsync(MaintenancePart maintenance);
         Task<OperationResponse<bool>> DeleteMaintenancePartAsync(int id);
+        Task<OperationResponse<bool>> DeleteLogMaintenancePartStatusAsync(int id);
 
     }
 }

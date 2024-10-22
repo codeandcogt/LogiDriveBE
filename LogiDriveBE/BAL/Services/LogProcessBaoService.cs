@@ -38,5 +38,6 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _logProcessDao.DeleteLogProcessAsync(id);
         }
+
     }
 }

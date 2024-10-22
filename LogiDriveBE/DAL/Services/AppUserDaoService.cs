@@ -126,5 +126,27 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting AppUser: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteAppUserStatusAsync(int id)
+        {
+            try
+            {
+                var appUser = await _context.AppUsers.FindAsync(id);
+                if (appUser == null)
+                {
+                    return new OperationResponse<bool>(404, "AppUser not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                appUser.Status = false;  // Marcamos el AppUser como inactiva
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "AppUser logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting AppUser: {ex.Message}");
+            }
+        }
     }
 }

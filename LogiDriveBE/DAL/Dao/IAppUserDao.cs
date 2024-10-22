@@ -11,5 +11,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<IEnumerable<AppUser>>> GetAllAppUsersAsync();
         Task<OperationResponse<AppUser>> UpdateAppUserAsync(AppUser appUser);
         Task<OperationResponse<bool>> DeleteAppUserAsync(int id);
+        Task<OperationResponse<bool>> DeleteAppUserStatusAsync(int id);
     }
 }

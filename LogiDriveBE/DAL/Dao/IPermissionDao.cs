@@ -10,5 +10,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<IEnumerable<Permission>>> GetAllPermissionsAsync();
         Task<OperationResponse<Permission>> UpdatePermissionAsync(Permission permission);
         Task<OperationResponse<bool>> DeletePermissionAsync(int id);
+        Task<OperationResponse<bool>> DeleteLogPermissionStatusAsync(int id);
     }
 }

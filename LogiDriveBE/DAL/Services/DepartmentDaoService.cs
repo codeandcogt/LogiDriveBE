@@ -94,5 +94,27 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting department: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteDepartamentStatusAsync(int id)
+        {
+            try
+            {
+                var departament = await _context.Departments.FindAsync(id);
+                if (departament == null)
+                {
+                    return new OperationResponse<bool>(404, "Departament not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                departament.Status = false;  
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Departament logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting departament: {ex.Message}");
+            }
+        }
     }
 }

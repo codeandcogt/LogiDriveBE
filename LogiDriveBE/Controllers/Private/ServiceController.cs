@@ -1,4 +1,5 @@
 ﻿using LogiDriveBE.BAL.Bao;
+using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
@@ -91,6 +92,13 @@ namespace LogiDriveBE.Controllers.Private
         public async Task<ActionResult<OperationResponse<bool>>> DeleteService(int id)
         {
             var response = await _serviceBao.DeleteServiceAsync(id);
+            return StatusCode(response.Code, response);
+        }
+
+        [HttpDelete("Status/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> DeleteServiceStatus(int id)
+        {
+            var response = await _serviceBao.DeleteServiceStatusAsync(id);
             return StatusCode(response.Code, response);
         }
     }

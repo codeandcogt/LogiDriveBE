@@ -147,5 +147,27 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting vehicle assignment: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteVehicleAssigmentStatusAsync(int id)
+        {
+            try
+            {
+                var vehicleAssigment = await _context.VehicleAssignments.FindAsync(id);
+                if (vehicleAssigment == null)
+                {
+                    return new OperationResponse<bool>(404, "VehicleAssigment not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                vehicleAssigment.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "VehicleAssigment logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting vehicleAssigment: {ex.Message}");
+            }
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<IEnumerable<PartVehicle>>> GetAllPartVehiclesAsync();
         Task<OperationResponse<PartVehicle>> UpdatePartVehicleAsync(PartVehicle partVehicle);
         Task<OperationResponse<bool>> DeletePartVehicleAsync(int id);
+        Task<OperationResponse<bool>> DeleteLogPartVehicleStatusAsync(int id);
     }
 }

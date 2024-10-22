@@ -11,5 +11,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<Role>> UpdateRoleAsync(Role role);
         Task<OperationResponse<bool>> DeleteRoleAsync(int id);
         Task<OperationResponse<Role>> AssignPermissionsToRoleAsync(int roleId, IEnumerable<int> permissionIds);
+        Task<OperationResponse<bool>> DeleteRoleStatusAsync(int id);
     }
 }

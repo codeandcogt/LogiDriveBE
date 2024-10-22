@@ -87,5 +87,10 @@ namespace LogiDriveBE.BAL.Services
 
             return response;
         }
+
+        public async Task<OperationResponse<bool>> DeleteLogReservationStatusAsync(int id)
+        {
+            return await _logReservationDao.DeleteLogReservationStatusAsync(id);
+        }
     }
 }

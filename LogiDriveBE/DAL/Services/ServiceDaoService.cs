@@ -147,5 +147,27 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error changing service status: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteServiceStatusAsync(int id)
+        {
+            try
+            {
+                var service = await _context.Services.FindAsync(id);
+                if (service == null)
+                {
+                    return new OperationResponse<bool>(404, "Service not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                service.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Service logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting service: {ex.Message}");
+            }
+        }
     }
 }

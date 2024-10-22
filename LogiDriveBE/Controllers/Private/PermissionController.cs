@@ -72,5 +72,12 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _permissionBao.DeletePermissionAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpDelete("Status/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> DeletePermissionStatus(int id)
+        {
+            var response = await _permissionBao.DeletePermissionStatusAsync(id);
+            return StatusCode(response.Code, response);
+        }
     }
 }

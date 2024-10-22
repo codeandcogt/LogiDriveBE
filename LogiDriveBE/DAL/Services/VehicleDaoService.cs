@@ -92,5 +92,27 @@ namespace LogiDriveBE.DAL.Dao
                 return new OperationResponse<bool>(500, $"Error deleting vehicle: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteVehicleStatusAsync(int id)
+        {
+            try
+            {
+                var vehicle = await _context.Vehicles.FindAsync(id);
+                if (vehicle == null)
+                {
+                    return new OperationResponse<bool>(404, "Vehicle not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                vehicle.Status = false;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Vehicle logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error eleting vehicle: {ex.Message}");
+            }
+        }
     }
 }
