@@ -82,7 +82,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var appUsers = await _context.AppUsers.ToListAsync();
+                var appUsers = await _context.AppUsers
+                                    .Where(a => a.Status == true || a.Status == true)
+                                    .ToListAsync();
                 return new OperationResponse<IEnumerable<AppUser>>(200, "AppUsers retrieved successfully", appUsers);
             }
             catch (Exception ex)

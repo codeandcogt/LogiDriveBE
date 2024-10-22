@@ -10,5 +10,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<IEnumerable<Area>>> GetAllAreasAsync();
         Task<OperationResponse<Area>> UpdateAreaAsync(Area area);
         Task<OperationResponse<bool>> DeleteAreaAsync(int id);
+        Task<OperationResponse<bool>> DeleteAreaStatusAsync(int id);
     }
 }

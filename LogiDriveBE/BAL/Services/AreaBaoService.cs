@@ -39,5 +39,11 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _areaDao.DeleteAreaAsync(id);
         }
+
+        public async Task<OperationResponse<bool>> DeleteAreaStatusAsync(int id)
+        {
+            return await _areaDao.DeleteAreaStatusAsync(id);
+        }
+
     }
 }

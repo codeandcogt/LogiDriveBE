@@ -75,5 +75,13 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _areaBao.DeleteAreaAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpDelete("Status/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> DeleteAreaStatus(int id)
+        {
+            var response = await _areaBao.DeleteAreaStatusAsync(id);
+            return StatusCode(response.Code, response);
+        }
+
     }
 }

@@ -96,5 +96,28 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting area: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> DeleteAreaStatusAsync(int id)
+        {
+            try
+            {
+                var area = await _context.Areas.FindAsync(id);
+                if (area == null)
+                {
+                    return new OperationResponse<bool>(404, "Area not found");
+                }
+
+                // Cambiar el estado en lugar de eliminar físicamente
+                area.Status = false;  // Marcamos el área como inactiva
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Area logically deleted (status set to false) successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error deleting area: {ex.Message}");
+            }
+        }
+
     }
 }
