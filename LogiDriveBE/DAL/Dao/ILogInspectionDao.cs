@@ -16,6 +16,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAsync(int vehicleAssignmentId, string inspectionType);
         Task<OperationResponse<bool>> UpdateLogInspectionPartsAsync(int idLogInspection, List<LogInspectionPart> parts);
 
-    }
+}
 
 }

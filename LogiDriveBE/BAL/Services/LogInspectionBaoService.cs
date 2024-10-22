@@ -115,7 +115,7 @@ namespace LogiDriveBE.BAL.Services
                     {
                         // Log error but continue
                         Console.WriteLine($"Warning: Error al actualizar partes: {partsResponse.Message}");
-                    }
+        }
 
                     // 5. Procesar partes defectuosas
                     foreach (var part in logInspectionDto.PartsInspected.Where(p => !p.Status))
@@ -141,7 +141,7 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<LogInspectionDto>(200, "Inspección creada exitosamente", resultDto);
             }
             catch (Exception ex)
-            {
+        {
                 return new OperationResponse<LogInspectionDto>(500,
                     $"Error creando la inspección: {ex.Message} - Inner: {ex.InnerException?.Message}");
             }

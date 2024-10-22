@@ -62,11 +62,11 @@ namespace LogiDriveBE.DAL.Services
                             Status = part.Status,
                             DateInspection = DateTime.Now,
                             Image = part.Image
-                        };
+                    };
 
                         await _context.LogInspectionParts.AddAsync(newPart);
                         await _context.SaveChangesAsync(); // Guardar cada parte individualmente
-                    }
+                }
                 }
 
                 await transaction.CommitAsync();
@@ -165,15 +165,15 @@ namespace LogiDriveBE.DAL.Services
 
 
         public async Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id)
-        {
-            var logInspection = await _context.LogInspections.FindAsync(id);
-            if (logInspection == null)
             {
+                var logInspection = await _context.LogInspections.FindAsync(id);
+                if (logInspection == null)
+                {
                 return new OperationResponse<bool>(404, "Inspección no encontrada");
-            }
+                }
 
             _context.LogInspections.Remove(logInspection);
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             return new OperationResponse<bool>(200, "Inspección eliminada exitosamente", true);
         }
 
