@@ -65,7 +65,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var collaborators = await _context.Collaborators.ToListAsync();
+                var collaborators = await _context.Collaborators
+                                                  .Where(a => a.Status == true || a.Status == true)
+                                                  .ToListAsync();
                 return new OperationResponse<IEnumerable<Collaborator>>(200, "Collaborators retrieved successfully", collaborators);
             }
             catch (Exception ex)

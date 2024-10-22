@@ -55,6 +55,7 @@ namespace LogiDriveBE.DAL.Services
             try
             {
                 var roles = await _context.Roles
+                    .Where(a => a.Status == true || a.Status == true)
                     .Include(r => r.IdPermissions)
                     .ToListAsync();
 

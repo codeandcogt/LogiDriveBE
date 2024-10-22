@@ -50,7 +50,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var maintenanceParts = await _context.MaintenanceParts.ToListAsync();
+                var maintenanceParts = await _context.MaintenanceParts
+                                                     .Where(a => a.Status == true || a.Status == true)
+                                                     .ToListAsync();
                 return new OperationResponse<IEnumerable<MaintenancePart>>(200, "Maintenance parts retrieved successfully", maintenanceParts);
             }
             catch (Exception ex)

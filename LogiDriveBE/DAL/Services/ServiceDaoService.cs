@@ -57,7 +57,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var services = await _context.Services.ToListAsync();
+                var services = await _context.Services
+                                             .Where(a => a.Status == true || a.Status == true)
+                                             .ToListAsync();
                 return new OperationResponse<IEnumerable<Service>>(200, "Services retrieved successfully", services);
             }
             catch (Exception ex)

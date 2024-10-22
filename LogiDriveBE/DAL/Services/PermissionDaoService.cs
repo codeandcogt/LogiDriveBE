@@ -50,7 +50,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var permissions = await _context.Permissions.ToListAsync();
+                var permissions = await _context.Permissions
+                                                .Where(a => a.Status == true || a.Status == true)
+                                                .ToListAsync();
                 return new OperationResponse<IEnumerable<Permission>>(200, "Permissions retrieved successfully", permissions);
             }
             catch (Exception ex)

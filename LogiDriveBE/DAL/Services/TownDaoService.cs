@@ -66,7 +66,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var towns = await _context.Towns.ToListAsync();
+                var towns = await _context.Towns
+                                          .Where(a => a.Status == true || a.Status == true)
+                                          .ToListAsync();
                 var townDtos = towns.Select(t => new TownDto
                 {
                     Name = t.Name,

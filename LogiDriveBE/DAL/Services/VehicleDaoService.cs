@@ -49,7 +49,9 @@ namespace LogiDriveBE.DAL.Dao
         {
             try
             {
-                var vehicles = await _context.Vehicles.ToListAsync();
+                var vehicles = await _context.Vehicles
+                                             .Where(a => a.Status == true || a.Status == true)
+                                             .ToListAsync();
                 return new OperationResponse<IEnumerable<Vehicle>>(200, "Vehicles retrieved successfully", vehicles);
             }
             catch (Exception ex)

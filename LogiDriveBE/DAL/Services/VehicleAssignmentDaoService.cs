@@ -76,7 +76,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var vehicleAssignments = await _context.VehicleAssignments.ToListAsync();
+                var vehicleAssignments = await _context.VehicleAssignments
+                                                       .Where(a => a.Status == true || a.Status == true)
+                                                       .ToListAsync();
                 var vehicleAssignmentDtos = vehicleAssignments.Select(v => new VehicleAssignmentDto
                 {
                     Comment = v.Comment,

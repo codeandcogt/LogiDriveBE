@@ -83,7 +83,9 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var logReservations = await _context.LogReservations.ToListAsync();
+                var logReservations = await _context.LogReservations
+                                                    .Where(a => a.Status == true || a.Status == true)
+                                                    .ToListAsync();
                 var logReservationDtos = logReservations.Select(lr => new LogReservationDto
                 {
                     IdCollaborator = lr.IdCollaborator,
