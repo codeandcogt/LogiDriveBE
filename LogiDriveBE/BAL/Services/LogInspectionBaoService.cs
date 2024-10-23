@@ -1,9 +1,8 @@
-﻿using LogiDriveBE.BAL.Bao;
-using LogiDriveBE.DAL.Dao;
+﻿using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
+using LogiDriveBE.DAL.Models; // Agregar la referencia a los modelos
 using LogiDriveBE.UTILS;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

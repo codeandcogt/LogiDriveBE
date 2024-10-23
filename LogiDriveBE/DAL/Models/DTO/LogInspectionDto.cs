@@ -16,3 +16,4 @@
         public LogProcessDto? LogProcess { get; set; }
     }
 }
+
