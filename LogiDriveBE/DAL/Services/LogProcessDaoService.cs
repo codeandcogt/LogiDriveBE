@@ -4,6 +4,10 @@ using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.DAL.Services
 {
@@ -78,7 +82,7 @@ namespace LogiDriveBE.DAL.Services
                     IdCollaborator = lp.IdCollaborator,
                     IdVehicleAssignment = lp.IdVehicleAssignment,
                     IdLogInspection = lp.IdLogInspection
-                });
+                }).ToList();
 
                 return new OperationResponse<IEnumerable<LogProcessDto>>(200, "Log processes retrieved successfully", logProcessDtos);
             }

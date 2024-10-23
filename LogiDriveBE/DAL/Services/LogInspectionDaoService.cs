@@ -183,5 +183,26 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting inspection: {ex.Message}");
             }
         }
+
+        // Method to get inspection by VehicleAssignment and inspection type
+        public async Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAndTypeAsync(int idVehicleAssignment, string typeInspection)
+        {
+            try
+            {
+                var logInspection = await _context.LogInspections
+                    .FirstOrDefaultAsync(i => i.IdVehicleAssignment == idVehicleAssignment && i.TypeInspection == typeInspection);
+
+                if (logInspection == null)
+                {
+                    return new OperationResponse<LogInspection>(404, "Inspection not found");
+                }
+
+                return new OperationResponse<LogInspection>(200, "Inspection retrieved successfully", logInspection);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<LogInspection>(500, $"Error retrieving inspection: {ex.Message}");
+            }
+        }
     }
 }

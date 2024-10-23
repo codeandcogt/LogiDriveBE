@@ -17,6 +17,13 @@ namespace LogiDriveBE.Controllers.Private
             _vehicleBao = vehicleBao;
         }
 
+        [HttpPatch("{id}/status")]
+        public async Task<ActionResult<OperationResponse<bool>>> UpdateVehicleStatus(int id, [FromBody] string status)
+        {
+            var response = await _vehicleBao.UpdateVehicleStatusAsync(id, status);
+            return StatusCode(response.Code, response);
+        }
+
         [HttpPost]
         public async Task<ActionResult<OperationResponse<Vehicle>>> CreateVehicle([FromBody] CreateVehicleDto createVehicleDto)
         {
@@ -30,8 +37,7 @@ namespace LogiDriveBE.Controllers.Private
                 Capacity = createVehicleDto.Capacity,
                 StatusVehicle = createVehicleDto.StatusVehicle,
                 Status = true,
-                CreationDate = DateTime.Now,
-
+                CreationDate = DateTime.Now
             };
             var response = await _vehicleBao.CreateVehicleAsync(vehicle);
             return StatusCode(response.Code, response);
@@ -54,9 +60,8 @@ namespace LogiDriveBE.Controllers.Private
         [HttpPut("{id}")]
         public async Task<ActionResult<OperationResponse<Vehicle>>> UpdateVehicle(int id, [FromBody] CreateVehicleDto createVehicleDto)
         {
-
             var existingVehicleReponse = await _vehicleBao.GetVehicleByIdAsync(id);
-            if (existingVehicleReponse.Code != 200) 
+            if (existingVehicleReponse.Code != 200)
             {
                 return StatusCode(existingVehicleReponse.Code, existingVehicleReponse);
             }
@@ -83,5 +88,4 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
     }
-
 }

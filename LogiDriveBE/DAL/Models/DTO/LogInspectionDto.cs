@@ -2,7 +2,9 @@
 {
     public class LogInspectionDto
     {
+        public int IdLogInspection { get; set; }  // Add this property
         public int IdCollaborator { get; set; }
+        public int IdLogReservation { get; set; }
         public int? IdVehicleAssignment { get; set; }
         public string Comment { get; set; } = null!;
         public string Odometer { get; set; } = null!;

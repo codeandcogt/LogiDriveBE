@@ -16,7 +16,6 @@ namespace LogiDriveBE.BAL.Services
 
         public async Task<OperationResponse<Vehicle>> CreateVehicleAsync(Vehicle vehicle)
         {
-           
             return await _vehicleDao.CreateVehicleAsync(vehicle);
         }
 
@@ -32,16 +31,17 @@ namespace LogiDriveBE.BAL.Services
 
         public async Task<OperationResponse<Vehicle>> UpdateVehicleAsync(Vehicle vehicle)
         {
-            
             return await _vehicleDao.UpdateVehicleAsync(vehicle);
+        }
+
+        public async Task<OperationResponse<bool>> UpdateVehicleStatusAsync(int id, string status)
+        {
+            return await _vehicleDao.UpdateVehicleStatusAsync(id, status);
         }
 
         public async Task<OperationResponse<bool>> DeleteVehicleAsync(int id)
         {
             return await _vehicleDao.DeleteVehicleAsync(id);
         }
-
-
     }
-
 }
