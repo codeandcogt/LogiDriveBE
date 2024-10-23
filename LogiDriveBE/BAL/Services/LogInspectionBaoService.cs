@@ -1,129 +1,155 @@
-﻿using LogiDriveBE.BAL.Bao;
-using LogiDriveBE.DAL.Dao;
+﻿using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models.DTO;
+using LogiDriveBE.DAL.Models; // Agregar la referencia a los modelos
 using LogiDriveBE.UTILS;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LogiDriveBE.DAL.Models;
+using System.Collections.Generic;
+using LogiDriveBE.BAL.Bao;
 
 namespace LogiDriveBE.BAL.Services
 {
     public class LogInspectionBaoService : ILogInspectionBao
     {
         private readonly ILogInspectionDao _logInspectionDao;
-        private readonly IVehicleBao _vehicleBao; // To update vehicle status
-        private readonly ILogProcessBao _logProcessBao; // To create LogProcess
-        private readonly IMaintenancePartBao _maintenancePartBao; // To send defective parts to maintenance
+        private readonly IVehicleBao _vehicleBao;
 
-        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, IVehicleBao vehicleBao, ILogProcessBao logProcessBao, IMaintenancePartBao maintenancePartBao)
+        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, IVehicleBao vehicleBao)
         {
             _logInspectionDao = logInspectionDao;
             _vehicleBao = vehicleBao;
-            _logProcessBao = logProcessBao;
-            _maintenancePartBao = maintenancePartBao;
         }
 
-        // Method to create an inspection and validate the flow
+        // Mapeo de LogInspectionDto a LogInspection
+        private LogInspection MapToLogInspection(LogInspectionDto dto)
+        {
+            return new LogInspection
+            {
+                IdLogInspection = dto.IdLogInspection,
+                IdCollaborator = dto.IdCollaborator,
+                IdVehicleAssignment = dto.IdVehicleAssignment,
+                Comment = dto.Comment,
+                Odometer = dto.Odometer,
+                Fuel = dto.Fuel,
+                TypeInspection = dto.TypeInspection,
+                Image = dto.Image,
+                Status = dto.Status,
+                CreationDate = dto.CreationDate,
+                LogInspectionParts = dto.PartsInspected.Select(part => new LogInspectionPart
+                {
+                    IdLogInspectionPart = part.IdLogInspectionPart,
+                    IdPartVehicle = part.IdPartVehicle,
+                    Comment = part.Comment,
+                    Status = part.Status,
+                    DateInspection = part.DateInspection,
+                    Image = part.Image
+                }).ToList()
+            };
+        }
+
+        // Mapeo de LogInspection a LogInspectionDto
+        private LogInspectionDto MapToLogInspectionDto(LogInspection entity)
+        {
+            return new LogInspectionDto
+            {
+                IdLogInspection = entity.IdLogInspection,
+                IdCollaborator = entity.IdCollaborator,
+                IdVehicleAssignment = entity.IdVehicleAssignment ?? 0,
+                Comment = entity.Comment,
+                Odometer = entity.Odometer,
+                Fuel = entity.Fuel,
+                TypeInspection = entity.TypeInspection,
+                Image = entity.Image ?? string.Empty,
+                Status = entity.Status,
+                CreationDate = entity.CreationDate,
+                PartsInspected = entity.LogInspectionParts.Select(part => new LogInspectionPartDto
+                {
+                    IdLogInspectionPart = part.IdLogInspectionPart,
+                    IdPartVehicle = part.IdPartVehicle,
+                    Comment = part.Comment,
+                    Status = part.Status,
+                    DateInspection = part.DateInspection,
+                    Image = part.Image ?? string.Empty
+                }).ToList()
+            };
+        }
+
         public async Task<OperationResponse<LogInspectionDto>> CreateLogInspectionAsync(LogInspectionDto logInspectionDto)
         {
-            // Check if it's a reception inspection
-            if (logInspectionDto.TypeInspection == "recepcion")
+            var logInspection = MapToLogInspection(logInspectionDto); // Convertir DTO a entidad
+
+            var response = await _logInspectionDao.CreateLogInspectionAsync(logInspection);
+
+            if (response.Code == 200)
             {
-                // Look for a previous delivery inspection for the same IdVehicleAssignment
-                var existingInspection = await _logInspectionDao.GetLogInspectionByVehicleAssignmentAndTypeAsync(
-                    logInspectionDto.IdVehicleAssignment.Value, "entrega");
-
-                if (existingInspection.Data == null)
+                // Lógica del odómetro: si el kilometraje supera los 25,000 km, cambiar el estado del vehículo a 'En servicio'
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
                 {
-                    // If there's no delivery inspection, return an error
-                    return new OperationResponse<LogInspectionDto>(400, "Cannot perform a reception inspection without a prior delivery.");
-                }
-            }
-
-            // Create the inspection
-            var response = await _logInspectionDao.CreateLogInspectionAsync(logInspectionDto);
-
-            if (response.Code == 200 && response.Data != null)
-            {
-                // Check if any part is defective
-                bool hasDefectiveParts = logInspectionDto.PartsInspected.Any(part => part.Status == false);
-
-                if (hasDefectiveParts)
-                {
-                    // Change vehicle status to "in service"
-                    await _vehicleBao.UpdateVehicleStatusAsync(response.Data.IdVehicleAssignment.Value, "en servicio");
-                }
-                else
-                {
-                    // Change vehicle status to "available"
-                    await _vehicleBao.UpdateVehicleStatusAsync(response.Data.IdVehicleAssignment.Value, "disponible");
-                }
-
-                // Verify odometer limit for service (25,000 km)
-                if (int.Parse(logInspectionDto.Odometer) >= 25000)
-                {
-                    // If the odometer exceeds the limit, change vehicle status to "in service"
-                    await _vehicleBao.UpdateVehicleStatusAsync(response.Data.IdVehicleAssignment.Value, "en servicio");
-                }
-
-                // Create a LogProcess to record the inspection
-                var logProcessDto = new LogProcessDto
-                {
-                    IdLogReservation = response.Data.IdLogReservation,
-                    Action = "CREATE_INSPECTION",
-                    IdCollaborator = logInspectionDto.IdCollaborator,
-                    IdVehicleAssignment = logInspectionDto.IdVehicleAssignment,
-                    IdLogInspection = response.Data.IdLogInspection
-                };
-
-                await _logProcessBao.CreateLogProcessAsync(logProcessDto);
-
-                // Send defective parts to maintenance
-                foreach (var partDto in logInspectionDto.PartsInspected)
-                {
-                    if (!partDto.Status) // If the part is defective
+                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                    if (vehicleResponse.Code != 200)
                     {
-                        var maintenancePart = new MaintenancePart
-                        {
-                            IdPartVehicle = partDto.IdPartVehicle,
-                            Comment = partDto.Comment,
-                            Status = false,
-                            DateMaintenancePart = DateTime.Now
-                        };
-
-                        await _maintenancePartBao.CreateMaintenancePartAsync(maintenancePart);
+                        return new OperationResponse<LogInspectionDto>(500, $"Error updating vehicle status: {vehicleResponse.Message}");
                     }
                 }
             }
 
-            return response;
-        }
-
-        public async Task<OperationResponse<LogInspectionDto>> GetLogInspectionByIdAsync(int id)
-        {
-            return await _logInspectionDao.GetLogInspectionByIdAsync(id);
+            return new OperationResponse<LogInspectionDto>(response.Code, response.Message, logInspectionDto);
         }
 
         public async Task<OperationResponse<IEnumerable<LogInspectionDto>>> GetAllLogInspectionsAsync()
         {
-            return await _logInspectionDao.GetAllLogInspectionsAsync();
+            var response = await _logInspectionDao.GetAllLogInspectionsAsync();
+
+            if (response.Code != 200)
+            {
+                return new OperationResponse<IEnumerable<LogInspectionDto>>(response.Code, response.Message);
+            }
+
+            // Mapeamos las entidades LogInspection a DTO
+            var inspectionDtos = response.Data.Select(MapToLogInspectionDto).ToList();
+
+            return new OperationResponse<IEnumerable<LogInspectionDto>>(200, "Inspections retrieved successfully", inspectionDtos);
+        }
+
+        public async Task<OperationResponse<LogInspectionDto>> GetLogInspectionByIdAsync(int id)
+        {
+            var response = await _logInspectionDao.GetLogInspectionByIdAsync(id);
+
+            if (response.Code != 200)
+            {
+                return new OperationResponse<LogInspectionDto>(response.Code, response.Message);
+            }
+
+            var inspectionDto = MapToLogInspectionDto(response.Data); // Convertir entidad a DTO
+
+            return new OperationResponse<LogInspectionDto>(200, "Inspection retrieved successfully", inspectionDto);
         }
 
         public async Task<OperationResponse<LogInspectionDto>> UpdateLogInspectionAsync(int id, LogInspectionDto logInspectionDto)
         {
-            return await _logInspectionDao.UpdateLogInspectionAsync(id, logInspectionDto);
+            var logInspection = MapToLogInspection(logInspectionDto); // Convertir DTO a entidad
+
+            var response = await _logInspectionDao.UpdateLogInspectionAsync(id, logInspection);
+
+            if (response.Code == 200)
+            {
+                // Lógica del odómetro en la actualización
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+                {
+                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                    if (vehicleResponse.Code != 200)
+                    {
+                        return new OperationResponse<LogInspectionDto>(500, $"Error updating vehicle status: {vehicleResponse.Message}");
+                    }
+                }
+            }
+
+            return new OperationResponse<LogInspectionDto>(response.Code, response.Message, logInspectionDto);
         }
 
         public async Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id)
         {
             return await _logInspectionDao.DeleteLogInspectionAsync(id);
-        }
-
-        // Method to get inspection by VehicleAssignment and inspection type
-        public async Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAndTypeAsync(int idVehicleAssignment, string typeInspection)
-        {
-            return await _logInspectionDao.GetLogInspectionByVehicleAssignmentAndTypeAsync(idVehicleAssignment, typeInspection);
         }
     }
 }

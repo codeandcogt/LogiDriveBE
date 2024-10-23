@@ -1,10 +1,10 @@
 ﻿using LogiDriveBE.DAL.Models;
-using LogiDriveBE.DAL.LogiDriveContext;
 using LogiDriveBE.UTILS;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using LogiDriveBE.DAL.Dao;
+using LogiDriveBE.DAL.LogiDriveContext;
 
 namespace LogiDriveBE.DAL.Services
 {
@@ -28,7 +28,9 @@ namespace LogiDriveBE.DAL.Services
         {
             var inspectionPart = await _context.LogInspectionParts.FindAsync(id);
             if (inspectionPart == null)
+            {
                 return new OperationResponse<LogInspectionPart>(404, "Inspection part not found");
+            }
 
             return new OperationResponse<LogInspectionPart>(200, "Inspection part retrieved successfully", inspectionPart);
         }
@@ -50,7 +52,9 @@ namespace LogiDriveBE.DAL.Services
         {
             var inspectionPart = await _context.LogInspectionParts.FindAsync(id);
             if (inspectionPart == null)
+            {
                 return new OperationResponse<bool>(404, "Inspection part not found");
+            }
 
             _context.LogInspectionParts.Remove(inspectionPart);
             await _context.SaveChangesAsync();

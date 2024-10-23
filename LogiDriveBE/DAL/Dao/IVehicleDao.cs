@@ -9,7 +9,7 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<Vehicle>> GetVehicleByIdAsync(int id);
         Task<OperationResponse<IEnumerable<Vehicle>>> GetAllVehiclesAsync();
         Task<OperationResponse<Vehicle>> UpdateVehicleAsync(Vehicle vehicle);
-        Task<OperationResponse<bool>> UpdateVehicleStatusAsync(int id, string status); // Nuevo método
+        Task<OperationResponse<bool>> UpdateVehicleStatusAsync(int id, string status); 
         Task<OperationResponse<bool>> DeleteVehicleAsync(int id);
     }
 }

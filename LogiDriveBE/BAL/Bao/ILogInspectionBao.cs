@@ -1,6 +1,7 @@
-﻿using LogiDriveBE.DAL.Models;
-using LogiDriveBE.DAL.Models.DTO;
+﻿using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.BAL.Bao
 {
@@ -11,6 +12,5 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<IEnumerable<LogInspectionDto>>> GetAllLogInspectionsAsync();
         Task<OperationResponse<LogInspectionDto>> UpdateLogInspectionAsync(int id, LogInspectionDto logInspectionDto);
         Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id);
-        Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAndTypeAsync(int idVehicleAssignment, string typeInspection);
     }
 }

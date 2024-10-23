@@ -2,8 +2,8 @@
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace LogiDriveBE.Controllers.Private
 {
@@ -12,16 +12,54 @@ namespace LogiDriveBE.Controllers.Private
     public class LogInspectionController : ControllerBase
     {
         private readonly ILogInspectionBao _logInspectionBao;
+        private readonly IVehicleBao _vehicleBao;
 
-        public LogInspectionController(ILogInspectionBao logInspectionBao)
+        public LogInspectionController(ILogInspectionBao logInspectionBao, IVehicleBao vehicleBao)
         {
             _logInspectionBao = logInspectionBao;
+            _vehicleBao = vehicleBao;
         }
 
         [HttpPost]
         public async Task<ActionResult<OperationResponse<LogInspectionDto>>> CreateLogInspection([FromBody] LogInspectionDto logInspectionDto)
         {
             var response = await _logInspectionBao.CreateLogInspectionAsync(logInspectionDto);
+
+            if (response.Code == 200)
+            {
+                // Lógica del odómetro: si el kilometraje supera los 25,000 km, cambiar el estado del vehículo a 'En servicio'
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+                {
+                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                    if (vehicleResponse.Code != 200)
+                    {
+                        return StatusCode(500, $"Error updating vehicle status: {vehicleResponse.Message}");
+                    }
+                }
+            }
+
+            return StatusCode(response.Code, response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<OperationResponse<LogInspectionDto>>> UpdateLogInspection(int id, [FromBody] LogInspectionDto logInspectionDto)
+        {
+            var response = await _logInspectionBao.UpdateLogInspectionAsync(id, logInspectionDto);
+
+            if (response.Code == 200)
+            {
+                // Lógica del odómetro en la actualización
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+                {
+                    // Usar IdVehicleAssignment para obtener el estado del vehículo asignado
+                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                    if (vehicleResponse.Code != 200)
+                    {
+                        return StatusCode(500, $"Error updating vehicle status: {vehicleResponse.Message}");
+                    }
+                }
+            }
+
             return StatusCode(response.Code, response);
         }
 
@@ -36,13 +74,6 @@ namespace LogiDriveBE.Controllers.Private
         public async Task<ActionResult<OperationResponse<IEnumerable<LogInspectionDto>>>> GetAllLogInspections()
         {
             var response = await _logInspectionBao.GetAllLogInspectionsAsync();
-            return StatusCode(response.Code, response);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<OperationResponse<LogInspectionDto>>> UpdateLogInspection(int id, [FromBody] LogInspectionDto logInspectionDto)
-        {
-            var response = await _logInspectionBao.UpdateLogInspectionAsync(id, logInspectionDto);
             return StatusCode(response.Code, response);
         }
 
