@@ -10,7 +10,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    
     public class AppUserController : ControllerBase
     {
         private readonly IAppUserBao _appUserBao;
@@ -114,6 +114,24 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
+        [HttpGet("userCollaborator")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<AppUserCollaboratorDto>>>> GetAllAppUserCollaborators()
+        {
+            var response = await _appUserBao.GetAllAppUserCollaboratorAsync();
+            return StatusCode(response.Code, response);
+        }
+
+        [HttpPut("update-password/{id}")]
+        public async Task<ActionResult<OperationResponse<bool>>> UpdatePassword(int id, [FromBody] string newPassword)
+        {
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                return BadRequest(new OperationResponse<bool>(400, "Password cannot be empty"));
+            }
+
+            var response = await _appUserBao.UpdatePasswordAsync(id, newPassword);
+            return StatusCode(response.Code, response);
+        }
 
     }
 }

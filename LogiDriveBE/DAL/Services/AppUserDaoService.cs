@@ -1,6 +1,7 @@
 ﻿using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.LogiDriveContext;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
 
@@ -93,6 +94,8 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
+        
+
         public async Task<OperationResponse<AppUser>> UpdateAppUserAsync(AppUser appUser)
         {
             try
@@ -148,5 +151,63 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting AppUser: {ex.Message}");
             }
         }
+
+        public async Task<IEnumerable<AppUserCollaboratorDto>> GetAllAppUserCollaboratorAsync()
+        {
+            try
+            {
+                var query = await (from user in _context.AppUsers
+                                   join collaborator in _context.Collaborators
+                                   on user.IdAppUser equals collaborator.IdUser
+                                   where user.Status == true && collaborator.Status == true
+                                   select new AppUserCollaboratorDto
+                                   {
+                                       AppUserId = user.IdAppUser,
+                                       Name = user.Name,
+                                       Email = user.Email,
+                                       Password = user.Password, // Opcional, dependiendo de tus requerimientos
+                                       CollaboratorName = collaborator.Name,
+                                       CollaboratorLastName = collaborator.LastName,
+                                       Position = collaborator.Position,
+                                       Phone = collaborator.Phone,
+                                       IdRole = user.IdRole,
+                                       IdArea = collaborator.IdArea
+                                   }).ToListAsync();
+
+                return query;
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que ocurra durante la consulta
+                Console.WriteLine($"Error: {ex.Message}");
+                return Enumerable.Empty<AppUserCollaboratorDto>(); // Retorna una lista vacía en caso de error
+            }
+        }
+
+        public async Task<OperationResponse<bool>> UpdatePasswordAsync(int id, string newPassword)
+        {
+            try
+            {
+                var appUser = await _context.AppUsers.FindAsync(id);
+                if (appUser == null)
+                {
+                    return new OperationResponse<bool>(404, "AppUser not found");
+                }
+
+                // Encriptar la nueva contraseña
+                appUser.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+                _context.Entry(appUser).Property(u => u.Password).IsModified = true;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Password updated successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error updating password: {ex.Message}");
+            }
+        }
+
+
     }
 }
