@@ -1,4 +1,5 @@
 ﻿using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 
 namespace LogiDriveBE.BAL.Bao
@@ -13,5 +14,7 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<AppUser>> UpdateAppUserAsync(AppUser appUser);
         Task<OperationResponse<bool>> DeleteAppUserAsync(int id);
         Task<OperationResponse<bool>> DeleteUserAndCollaboratorStatusAsync(int userId);
+        Task<OperationResponse<IEnumerable<AppUserCollaboratorDto>>> GetAllAppUserCollaboratorAsync();
+        Task<OperationResponse<bool>> UpdatePasswordAsync(int id, string newPassword);
     }
 }

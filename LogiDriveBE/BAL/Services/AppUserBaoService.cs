@@ -3,6 +3,7 @@ using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.UTILS;
 using BCrypt.Net;
+using LogiDriveBE.DAL.Models.DTO;
 
 namespace LogiDriveBE.BAL.Services
 {
@@ -150,6 +151,24 @@ namespace LogiDriveBE.BAL.Services
 
             return new OperationResponse<bool>(200, "User and collaborator status updated successfully", true);
         }
+
+        public async Task<OperationResponse<IEnumerable<AppUserCollaboratorDto>>> GetAllAppUserCollaboratorAsync()
+        {
+            var usersWithCollaborators = await _appUserDao.GetAllAppUserCollaboratorAsync();
+
+            if (usersWithCollaborators == null || !usersWithCollaborators.Any())
+            {
+                return new OperationResponse<IEnumerable<AppUserCollaboratorDto>>(404, "No users with collaborators found");
+            }
+
+            return new OperationResponse<IEnumerable<AppUserCollaboratorDto>>(200, "Users with collaborators retrieved successfully", usersWithCollaborators);
+        }
+
+        public async Task<OperationResponse<bool>> UpdatePasswordAsync(int id, string newPassword)
+        {
+            return await _appUserDao.UpdatePasswordAsync(id, newPassword);
+        }
+
 
     }
 }
