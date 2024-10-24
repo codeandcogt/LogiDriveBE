@@ -1,10 +1,10 @@
 ﻿using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.LogiDriveContext;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogiDriveBE.DAL.Services
@@ -18,64 +18,62 @@ namespace LogiDriveBE.DAL.Services
             _context = context;
         }
 
-        public async Task<OperationResponse<LogInspection>> CreateLogInspectionAsync(LogInspection inspection)
+        public async Task<OperationResponse<LogInspection>> CreateLogInspectionAsync(LogInspection logInspection)
         {
-            _context.LogInspections.Add(inspection);
-            await _context.SaveChangesAsync();
-            return new OperationResponse<LogInspection>(200, "Inspection created successfully", inspection);
+            try
+            {
+                _context.LogInspections.Add(logInspection);
+                await _context.SaveChangesAsync();
+                return new OperationResponse<LogInspection>(200, "Inspección creada exitosamente", logInspection);
+            }
+            catch (DbUpdateException ex)
+            {
+                return new OperationResponse<LogInspection>(500, $"Error creando la inspección: {ex.Message}");
+            }
         }
 
         public async Task<OperationResponse<LogInspection>> GetLogInspectionByIdAsync(int id)
         {
-            var inspection = await _context.LogInspections
-                .Include(i => i.LogInspectionParts)
-                .FirstOrDefaultAsync(i => i.IdLogInspection == id);
+            var logInspection = await _context.LogInspections.FindAsync(id);
+            if (logInspection == null)
+            {
+                return new OperationResponse<LogInspection>(404, "Inspección no encontrada");
+            }
 
-            if (inspection == null)
-                return new OperationResponse<LogInspection>(404, "Inspection not found");
-
-            return new OperationResponse<LogInspection>(200, "Inspection retrieved successfully", inspection);
+            return new OperationResponse<LogInspection>(200, "Inspección recuperada exitosamente", logInspection);
         }
 
         public async Task<OperationResponse<IEnumerable<LogInspection>>> GetAllLogInspectionsAsync()
         {
-            var inspections = await _context.LogInspections
-                .Include(i => i.LogInspectionParts)
-                .ToListAsync();
-
-            return new OperationResponse<IEnumerable<LogInspection>>(200, "Inspections retrieved successfully", inspections);
+            var inspections = await _context.LogInspections.ToListAsync();
+            return new OperationResponse<IEnumerable<LogInspection>>(200, "Inspecciones recuperadas exitosamente", inspections);
         }
 
         public async Task<OperationResponse<LogInspection>> UpdateLogInspectionAsync(int id, LogInspection logInspection)
         {
-            var inspection = await _context.LogInspections.FindAsync(id);
-            if (inspection == null)
-                return new OperationResponse<LogInspection>(404, "Inspection not found");
+            var existingInspection = await _context.LogInspections.FindAsync(id);
+            if (existingInspection == null)
+            {
+                return new OperationResponse<LogInspection>(404, "Inspección no encontrada");
+            }
 
-            // Actualizar los datos del objeto LogInspection
-            inspection.Comment = logInspection.Comment;
-            inspection.Odometer = logInspection.Odometer;
-            inspection.Fuel = logInspection.Fuel;
-            inspection.TypeInspection = logInspection.TypeInspection;
-            inspection.Status = logInspection.Status;
-            inspection.Image = logInspection.Image;
-
-            _context.Entry(inspection).State = EntityState.Modified;
+            _context.Entry(logInspection).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return new OperationResponse<LogInspection>(200, "Inspection updated successfully", inspection);
+            return new OperationResponse<LogInspection>(200, "Inspección actualizada exitosamente", logInspection);
         }
 
         public async Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id)
         {
-            var inspection = await _context.LogInspections.FindAsync(id);
-            if (inspection == null)
-                return new OperationResponse<bool>(404, "Inspection not found");
+            var logInspection = await _context.LogInspections.FindAsync(id);
+            if (logInspection == null)
+            {
+                return new OperationResponse<bool>(404, "Inspección no encontrada");
+            }
 
-            _context.LogInspections.Remove(inspection);
+            _context.LogInspections.Remove(logInspection);
             await _context.SaveChangesAsync();
-
-            return new OperationResponse<bool>(200, "Inspection deleted successfully", true);
+            return new OperationResponse<bool>(200, "Inspección eliminada exitosamente", true);
         }
     }
 }

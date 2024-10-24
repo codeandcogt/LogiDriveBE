@@ -13,6 +13,6 @@
         public bool Status { get; set; }
         public DateTime CreationDate { get; set; }
         public List<LogInspectionPartDto> PartsInspected { get; set; } = new List<LogInspectionPartDto>();
-        public LogProcessDto LogProcess { get; set; } // Relación con LogProcess
+        public LogProcessDto? LogProcess { get; set; }
     }
 }

@@ -12,46 +12,110 @@ namespace LogiDriveBE.BAL.Services
     public class LogInspectionBaoService : ILogInspectionBao
     {
         private readonly ILogInspectionDao _logInspectionDao;
-        private readonly IVehicleBao _vehicleBao;
-        private readonly ILogProcessBao _logProcessBao;
-        private readonly IMaintenancePartBao _maintenancePartBao;
+        private readonly ILogProcessDao _logProcessDao;
 
-        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, IVehicleBao vehicleBao, ILogProcessBao logProcessBao, IMaintenancePartBao maintenancePartBao)
+        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, ILogProcessDao logProcessDao)
         {
             _logInspectionDao = logInspectionDao;
-            _vehicleBao = vehicleBao;
-            _logProcessBao = logProcessBao;
-            _maintenancePartBao = maintenancePartBao;
+            _logProcessDao = logProcessDao;
         }
 
-        // Mapeo de LogInspectionDto a LogInspection
-        private LogInspection MapToLogInspection(LogInspectionDto dto)
+       
+        public async Task<OperationResponse<LogInspectionDto>> GetLogInspectionByIdAsync(int id)
         {
-            return new LogInspection
+            var inspectionResponse = await _logInspectionDao.GetLogInspectionByIdAsync(id);
+
+            if (inspectionResponse.Code != 200)
             {
-                IdLogInspection = dto.IdLogInspection,
-                IdCollaborator = dto.IdCollaborator,
-                IdVehicleAssignment = dto.IdVehicleAssignment,
-                Comment = dto.Comment,
-                Odometer = dto.Odometer,
-                Fuel = dto.Fuel,
-                TypeInspection = dto.TypeInspection,
-                Image = dto.Image,
-                Status = dto.Status,
-                CreationDate = dto.CreationDate,
-                LogInspectionParts = dto.PartsInspected.Select(part => new LogInspectionPart
+                return new OperationResponse<LogInspectionDto>(inspectionResponse.Code, inspectionResponse.Message);
+            }
+
+            // Mapear entidad a DTO
+            var logInspectionDto = MapToLogInspectionDto(inspectionResponse.Data);
+            return new OperationResponse<LogInspectionDto>(200, "Inspección obtenida exitosamente", logInspectionDto);
+        }
+        public async Task<OperationResponse<LogInspectionDto>> CreateLogInspectionAsync(LogInspectionDto logInspectionDto)
+        {
+            try
+            {
+                // Mapear de DTO a entidad
+                var logInspection = MapToLogInspection(logInspectionDto);
+                var inspectionResponse = await _logInspectionDao.CreateLogInspectionAsync(logInspection);
+
+                if (inspectionResponse.Code != 200)
                 {
-                    IdLogInspectionPart = part.IdLogInspectionPart,
-                    IdPartVehicle = part.IdPartVehicle,
-                    Comment = part.Comment,
-                    Status = part.Status,
-                    DateInspection = part.DateInspection,
-                    Image = part.Image
-                }).ToList()
-            };
+                    return new OperationResponse<LogInspectionDto>(inspectionResponse.Code, inspectionResponse.Message);
+                }
+
+                // Si LogProcess es null, lo creamos automáticamente
+                if (logInspectionDto.LogProcess == null)
+                {
+                    var logProcess = new LogProcess
+                    {
+                        Action = "Creación de Inspección",
+                        IdCollaborator = logInspectionDto.IdCollaborator,
+                        IdVehicleAssignment = logInspectionDto.IdVehicleAssignment,
+                        IdLogInspection = inspectionResponse.Data.IdLogInspection
+                    };
+
+                    var processResponse = await _logProcessDao.CreateLogProcessAsync(MapToLogProcessDto(logProcess));
+
+                    if (processResponse.Code != 200)
+                    {
+                        return new OperationResponse<LogInspectionDto>(processResponse.Code, processResponse.Message);
+                    }
+
+                    logInspectionDto.LogProcess = MapToLogProcessDto(logProcess);
+                }
+
+                // Mapear de entidad a DTO para la respuesta
+                var createdLogInspectionDto = MapToLogInspectionDto(inspectionResponse.Data);
+
+                return new OperationResponse<LogInspectionDto>(200, "LogInspection y LogProcess creados exitosamente", createdLogInspectionDto);
+            }
+            catch (System.Exception ex)
+            {
+                return new OperationResponse<LogInspectionDto>(500, $"Error creando la inspección: {ex.Message}");
+            }
         }
 
-        // Mapeo de LogInspection a LogInspectionDto
+        public async Task<OperationResponse<IEnumerable<LogInspectionDto>>> GetAllLogInspectionsAsync()
+        {
+            var inspectionsResponse = await _logInspectionDao.GetAllLogInspectionsAsync();
+
+            if (inspectionsResponse.Code != 200)
+            {
+                return new OperationResponse<IEnumerable<LogInspectionDto>>(inspectionsResponse.Code, inspectionsResponse.Message);
+            }
+
+            // Mapear cada entidad a DTO
+            var inspectionsDto = inspectionsResponse.Data.Select(MapToLogInspectionDto).ToList();
+
+            return new OperationResponse<IEnumerable<LogInspectionDto>>(200, "Inspecciones obtenidas exitosamente", inspectionsDto);
+        }
+
+        public async Task<OperationResponse<LogInspectionDto>> UpdateLogInspectionAsync(int id, LogInspectionDto logInspectionDto)
+        {
+            var logInspection = MapToLogInspection(logInspectionDto);
+            logInspection.IdLogInspection = id;
+
+            var updateResponse = await _logInspectionDao.UpdateLogInspectionAsync(id, logInspection);
+
+            if (updateResponse.Code != 200)
+            {
+                return new OperationResponse<LogInspectionDto>(updateResponse.Code, updateResponse.Message);
+            }
+
+            var updatedLogInspectionDto = MapToLogInspectionDto(updateResponse.Data);
+            return new OperationResponse<LogInspectionDto>(200, "Inspección actualizada exitosamente", updatedLogInspectionDto);
+        }
+
+        public async Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id)
+        {
+            return await _logInspectionDao.DeleteLogInspectionAsync(id);
+        }
+
+        // Mapeo de LogInspection entidad a DTO
         private LogInspectionDto MapToLogInspectionDto(LogInspection entity)
         {
             return new LogInspectionDto
@@ -63,114 +127,58 @@ namespace LogiDriveBE.BAL.Services
                 Odometer = entity.Odometer,
                 Fuel = entity.Fuel,
                 TypeInspection = entity.TypeInspection,
-                Image = entity.Image ?? string.Empty,
                 Status = entity.Status,
                 CreationDate = entity.CreationDate,
-                PartsInspected = entity.LogInspectionParts.Select(part => new LogInspectionPartDto
+                Image = entity.Image,
+                PartsInspected = entity.LogInspectionParts?.Select(p => new LogInspectionPartDto
                 {
-                    IdLogInspectionPart = part.IdLogInspectionPart,
-                    IdPartVehicle = part.IdPartVehicle,
-                    Comment = part.Comment,
-                    Status = part.Status,
-                    DateInspection = part.DateInspection,
-                    Image = part.Image ?? string.Empty
+                    IdPartVehicle = p.IdPartVehicle,
+                    Comment = p.Comment,
+                    Status = p.Status,
+                    Image = p.Image,
+                    DateInspection = p.DateInspection
+                }).ToList(),
+                // Agregar LogProcess si es necesario en la respuesta
+                LogProcess = new LogProcessDto()
+            };
+        }
+
+        // Mapeo de DTO a entidad LogInspection
+        private LogInspection MapToLogInspection(LogInspectionDto dto)
+        {
+            return new LogInspection
+            {
+                IdCollaborator = dto.IdCollaborator,
+                IdVehicleAssignment = dto.IdVehicleAssignment,
+                Comment = dto.Comment,
+                Odometer = dto.Odometer,
+                Fuel = dto.Fuel,
+                TypeInspection = dto.TypeInspection,
+                Status = dto.Status,
+                CreationDate = dto.CreationDate,
+                Image = dto.Image,
+                LogInspectionParts = dto.PartsInspected?.Select(p => new LogInspectionPart
+                {
+                    IdPartVehicle = p.IdPartVehicle,
+                    Comment = p.Comment,
+                    Status = p.Status,
+                    Image = p.Image,
+                    DateInspection = p.DateInspection
                 }).ToList()
             };
         }
 
-        public async Task<OperationResponse<LogInspectionDto>> CreateLogInspectionAsync(LogInspectionDto logInspectionDto)
+        // Mapeo de LogProcess a LogProcessDto
+        private LogProcessDto MapToLogProcessDto(LogProcess logProcess)
         {
-            // Crear el LogProcess antes de la inspección
-            var logProcessDto = new LogProcessDto
+            return new LogProcessDto
             {
-                IdLogReservation = logInspectionDto.IdVehicleAssignment, // Puedes ajustar según tu lógica
-                Action = "Inspection Created",
-                IdCollaborator = logInspectionDto.IdCollaborator,
-                IdVehicleAssignment = logInspectionDto.IdVehicleAssignment
+                IdLogReservation = logProcess.IdLogReservation,
+                Action = logProcess.Action,
+                IdCollaborator = logProcess.IdCollaborator,
+                IdVehicleAssignment = logProcess.IdVehicleAssignment,
+                IdLogInspection = logProcess.IdLogInspection
             };
-
-            // Crear el LogProcess
-            var logProcessResponse = await _logProcessBao.CreateLogProcessAsync(logProcessDto);
-            if (logProcessResponse.Code != 200)
-            {
-                return new OperationResponse<LogInspectionDto>(logProcessResponse.Code, logProcessResponse.Message);
-            }
-
-            // Usar el ID del LogProcess recién creado
-            logInspectionDto.LogProcess = new LogProcessDto
-            {
-                IdLogReservation = logProcessResponse.Data.IdLogReservation,
-                IdCollaborator = logProcessResponse.Data.IdCollaborator,
-                IdVehicleAssignment = logProcessResponse.Data.IdVehicleAssignment,
-                IdLogInspection = logProcessResponse.Data.IdLogInspection // Asocia el LogProcess con la inspección
-            };
-
-            // Ahora crear la inspección
-            var logInspection = MapToLogInspection(logInspectionDto); // Convertir DTO a entidad
-            var response = await _logInspectionDao.CreateLogInspectionAsync(logInspection);
-
-            if (response.Code == 200)
-            {
-                // Aquí puedes realizar otras operaciones adicionales, como actualizar el odómetro o cambiar estados
-            }
-
-            return new OperationResponse<LogInspectionDto>(response.Code, response.Message, logInspectionDto);
-        }
-
-        public async Task<OperationResponse<IEnumerable<LogInspectionDto>>> GetAllLogInspectionsAsync()
-        {
-            var response = await _logInspectionDao.GetAllLogInspectionsAsync();
-
-            if (response.Code != 200)
-            {
-                return new OperationResponse<IEnumerable<LogInspectionDto>>(response.Code, response.Message);
-            }
-
-            // Mapeamos las entidades LogInspection a DTO
-            var inspectionDtos = response.Data.Select(MapToLogInspectionDto).ToList();
-
-            return new OperationResponse<IEnumerable<LogInspectionDto>>(200, "Inspections retrieved successfully", inspectionDtos);
-        }
-
-        public async Task<OperationResponse<LogInspectionDto>> GetLogInspectionByIdAsync(int id)
-        {
-            var response = await _logInspectionDao.GetLogInspectionByIdAsync(id);
-
-            if (response.Code != 200)
-            {
-                return new OperationResponse<LogInspectionDto>(response.Code, response.Message);
-            }
-
-            var inspectionDto = MapToLogInspectionDto(response.Data); // Convertir entidad a DTO
-
-            return new OperationResponse<LogInspectionDto>(200, "Inspection retrieved successfully", inspectionDto);
-        }
-
-        public async Task<OperationResponse<LogInspectionDto>> UpdateLogInspectionAsync(int id, LogInspectionDto logInspectionDto)
-        {
-            var logInspection = MapToLogInspection(logInspectionDto); // Convertir DTO a entidad
-
-            var response = await _logInspectionDao.UpdateLogInspectionAsync(id, logInspection);
-
-            if (response.Code == 200)
-            {
-                // Lógica del odómetro en la actualización
-                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
-                {
-                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
-                    if (vehicleResponse.Code != 200)
-                    {
-                        return new OperationResponse<LogInspectionDto>(500, $"Error updating vehicle status: {vehicleResponse.Message}");
-                    }
-                }
-            }
-
-            return new OperationResponse<LogInspectionDto>(response.Code, response.Message, logInspectionDto);
-        }
-
-        public async Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id)
-        {
-            return await _logInspectionDao.DeleteLogInspectionAsync(id);
         }
     }
 }
