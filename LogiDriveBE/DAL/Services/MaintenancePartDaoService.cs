@@ -74,7 +74,25 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<MaintenancePart>(500, $"Error updating maintenance part: {ex.Message}");
             }
         }
+        public async Task<OperationResponse<bool>> SendToMaintenanceAsync(int idPartVehicle)
+        {
+            try
+            {
+                var maintenancePart = new MaintenancePart
+                {
+                    IdPartVehicle = idPartVehicle,
+                   
+                };
 
+                _context.MaintenanceParts.Add(maintenancePart);
+                await _context.SaveChangesAsync();
+                return new OperationResponse<bool>(200, "Part sent to maintenance successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error sending part to maintenance: {ex.Message}", false);
+            }
+        }
         public async Task<OperationResponse<bool>> DeleteMaintenancePartAsync(int id)
         {
             try

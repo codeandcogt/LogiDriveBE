@@ -1,11 +1,11 @@
-﻿using LogiDriveBE.DAL.Dao;
+﻿using LogiDriveBE.BAL.Bao;
+using LogiDriveBE.DAL.Dao;
+using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
-using LogiDriveBE.DAL.Models; // Agregar la referencia a los modelos
 using LogiDriveBE.UTILS;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using LogiDriveBE.BAL.Bao;
 
 namespace LogiDriveBE.BAL.Services
 {
@@ -13,11 +13,15 @@ namespace LogiDriveBE.BAL.Services
     {
         private readonly ILogInspectionDao _logInspectionDao;
         private readonly IVehicleBao _vehicleBao;
+        private readonly ILogProcessBao _logProcessBao;
+        private readonly IMaintenancePartBao _maintenancePartBao;
 
-        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, IVehicleBao vehicleBao)
+        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, IVehicleBao vehicleBao, ILogProcessBao logProcessBao, IMaintenancePartBao maintenancePartBao)
         {
             _logInspectionDao = logInspectionDao;
             _vehicleBao = vehicleBao;
+            _logProcessBao = logProcessBao;
+            _maintenancePartBao = maintenancePartBao;
         }
 
         // Mapeo de LogInspectionDto a LogInspection
@@ -76,21 +80,38 @@ namespace LogiDriveBE.BAL.Services
 
         public async Task<OperationResponse<LogInspectionDto>> CreateLogInspectionAsync(LogInspectionDto logInspectionDto)
         {
-            var logInspection = MapToLogInspection(logInspectionDto); // Convertir DTO a entidad
+            // Crear el LogProcess antes de la inspección
+            var logProcessDto = new LogProcessDto
+            {
+                IdLogReservation = logInspectionDto.IdVehicleAssignment, // Puedes ajustar según tu lógica
+                Action = "Inspection Created",
+                IdCollaborator = logInspectionDto.IdCollaborator,
+                IdVehicleAssignment = logInspectionDto.IdVehicleAssignment
+            };
 
+            // Crear el LogProcess
+            var logProcessResponse = await _logProcessBao.CreateLogProcessAsync(logProcessDto);
+            if (logProcessResponse.Code != 200)
+            {
+                return new OperationResponse<LogInspectionDto>(logProcessResponse.Code, logProcessResponse.Message);
+            }
+
+            // Usar el ID del LogProcess recién creado
+            logInspectionDto.LogProcess = new LogProcessDto
+            {
+                IdLogReservation = logProcessResponse.Data.IdLogReservation,
+                IdCollaborator = logProcessResponse.Data.IdCollaborator,
+                IdVehicleAssignment = logProcessResponse.Data.IdVehicleAssignment,
+                IdLogInspection = logProcessResponse.Data.IdLogInspection // Asocia el LogProcess con la inspección
+            };
+
+            // Ahora crear la inspección
+            var logInspection = MapToLogInspection(logInspectionDto); // Convertir DTO a entidad
             var response = await _logInspectionDao.CreateLogInspectionAsync(logInspection);
 
             if (response.Code == 200)
             {
-                // Lógica del odómetro: si el kilometraje supera los 25,000 km, cambiar el estado del vehículo a 'En servicio'
-                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
-                {
-                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
-                    if (vehicleResponse.Code != 200)
-                    {
-                        return new OperationResponse<LogInspectionDto>(500, $"Error updating vehicle status: {vehicleResponse.Message}");
-                    }
-                }
+                // Aquí puedes realizar otras operaciones adicionales, como actualizar el odómetro o cambiar estados
             }
 
             return new OperationResponse<LogInspectionDto>(response.Code, response.Message, logInspectionDto);

@@ -36,4 +36,5 @@ public partial class LogInspection
     public virtual ICollection<LogInspectionPart> LogInspectionParts { get; set; } = new List<LogInspectionPart>();
 
     public virtual ICollection<LogProcess> LogProcesses { get; set; } = new List<LogProcess>();
+
 }

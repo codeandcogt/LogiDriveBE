@@ -62,7 +62,30 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<MaintenancePart>(500, $"Error in BAO while updating maintenance part: {ex.Message}");
             }
         }
+        public async Task<OperationResponse<bool>> SendToMaintenanceAsync(int idPartVehicle)
+        {
+            try
+            {
+                // Lógica para enviar la parte a mantenimiento
+                var maintenancePart = new MaintenancePart
+                {
+                    IdPartVehicle = idPartVehicle,
+                    // Puedes agregar más propiedades aquí según sea necesario
+                };
 
+                var response = await CreateMaintenancePartAsync(maintenancePart); // Usar el método existente
+                if (response.Code == 200)
+                {
+                    return new OperationResponse<bool>(200, "Part sent to maintenance successfully", true);
+                }
+
+                return new OperationResponse<bool>(500, "Error sending part to maintenance", false);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error: {ex.Message}", false);
+            }
+        }
         public async Task<OperationResponse<bool>> DeleteMaintenancePartAsync(int id)
         {
             try

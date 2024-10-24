@@ -1,7 +1,6 @@
 ﻿using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.LogiDriveContext;
 using LogiDriveBE.DAL.Models;
-using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

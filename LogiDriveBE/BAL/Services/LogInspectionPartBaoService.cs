@@ -36,10 +36,12 @@ namespace LogiDriveBE.BAL.Services
             // Map entity back to DTO and return
             var dto = new LogInspectionPartDto
             {
+                IdLogInspectionPart = result.Data.IdLogInspectionPart, // Se agrega el ID de la inspección de parte
                 IdPartVehicle = result.Data.IdPartVehicle,
                 Comment = result.Data.Comment,
                 Status = result.Data.Status,
-                Image = result.Data.Image
+                Image = result.Data.Image,
+                DateInspection = result.Data.DateInspection // Se incluye la fecha de inspección
             };
 
             return new OperationResponse<LogInspectionPartDto>(result.Code, result.Message, dto);
@@ -53,10 +55,12 @@ namespace LogiDriveBE.BAL.Services
             {
                 var dto = new LogInspectionPartDto
                 {
+                    IdLogInspectionPart = result.Data.IdLogInspectionPart,
                     IdPartVehicle = result.Data.IdPartVehicle,
                     Comment = result.Data.Comment,
                     Status = result.Data.Status,
-                    Image = result.Data.Image
+                    Image = result.Data.Image,
+                    DateInspection = result.Data.DateInspection
                 };
 
                 return new OperationResponse<LogInspectionPartDto>(result.Code, result.Message, dto);
@@ -73,10 +77,12 @@ namespace LogiDriveBE.BAL.Services
             {
                 var dtoList = result.Data.Select(part => new LogInspectionPartDto
                 {
+                    IdLogInspectionPart = part.IdLogInspectionPart,
                     IdPartVehicle = part.IdPartVehicle,
                     Comment = part.Comment,
                     Status = part.Status,
-                    Image = part.Image
+                    Image = part.Image,
+                    DateInspection = part.DateInspection
                 }).ToList();
 
                 return new OperationResponse<IEnumerable<LogInspectionPartDto>>(result.Code, result.Message, dtoList);
@@ -90,10 +96,12 @@ namespace LogiDriveBE.BAL.Services
         {
             var logInspectionPart = new LogInspectionPart
             {
+                IdLogInspectionPart = id, // Se agrega el ID en la actualización
                 IdPartVehicle = logInspectionPartDto.IdPartVehicle,
                 Comment = logInspectionPartDto.Comment,
                 Status = logInspectionPartDto.Status,
-                Image = logInspectionPartDto.Image
+                Image = logInspectionPartDto.Image,
+                DateInspection = logInspectionPartDto.DateInspection
             };
 
             var result = await _logInspectionPartDao.UpdateLogInspectionPartAsync(logInspectionPart);
@@ -102,10 +110,12 @@ namespace LogiDriveBE.BAL.Services
             {
                 var dto = new LogInspectionPartDto
                 {
+                    IdLogInspectionPart = result.Data.IdLogInspectionPart,
                     IdPartVehicle = result.Data.IdPartVehicle,
                     Comment = result.Data.Comment,
                     Status = result.Data.Status,
-                    Image = result.Data.Image
+                    Image = result.Data.Image,
+                    DateInspection = result.Data.DateInspection
                 };
 
                 return new OperationResponse<LogInspectionPartDto>(result.Code, result.Message, dto);
@@ -120,3 +130,4 @@ namespace LogiDriveBE.BAL.Services
         }
     }
 }
+
