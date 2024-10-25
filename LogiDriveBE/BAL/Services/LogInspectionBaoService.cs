@@ -148,6 +148,7 @@ namespace LogiDriveBE.BAL.Services
         }
 
         // Mapeo de DTO a entidad LogInspection
+        // En el método MapToLogInspection
         private LogInspection MapToLogInspection(LogInspectionDto dto)
         {
             return new LogInspection
@@ -163,6 +164,8 @@ namespace LogiDriveBE.BAL.Services
                 Image = dto.Image,
                 LogInspectionParts = dto.PartsInspected?.Select(p => new LogInspectionPart
                 {
+                    // Establecer el IdLogInspectionPart como 0 para indicar que es nuevo
+                    IdLogInspectionPart = 0,
                     IdPartVehicle = p.IdPartVehicle,
                     Comment = p.Comment,
                     Status = p.Status,
@@ -171,6 +174,7 @@ namespace LogiDriveBE.BAL.Services
                 }).ToList()
             };
         }
+
 
         // Mapeo de LogProcess a LogProcessDto
         private LogProcessDto MapToLogProcessDto(LogProcess logProcess)
