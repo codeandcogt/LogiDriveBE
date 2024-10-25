@@ -80,15 +80,35 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                _context.Entry(collaborator).State = EntityState.Modified;
+                // Intentar obtener el objeto Collaborator desde la base de datos por su Id
+                var existingCollaborator = await _context.Collaborators
+                    .FirstOrDefaultAsync(c => c.IdCollaborator == collaborator.IdCollaborator);
+
+                // Verificar si no se encontró el Collaborator
+                if (existingCollaborator == null)
+                {
+                    return new OperationResponse<Collaborator>(404, "Collaborator not found");
+                }
+
+                // Actualizar las propiedades necesarias
+                _context.Entry(existingCollaborator).CurrentValues.SetValues(collaborator);
+
+                // Guardar los cambios
                 await _context.SaveChangesAsync();
+
                 return new OperationResponse<Collaborator>(200, "Collaborator updated successfully", collaborator);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return new OperationResponse<Collaborator>(409, "The data was modified by another user, please try again");
             }
             catch (Exception ex)
             {
                 return new OperationResponse<Collaborator>(500, $"Error updating collaborator: {ex.Message}");
             }
         }
+
+
 
         public async Task<OperationResponse<bool>> DeleteCollaboratorAsync(int id)
         {

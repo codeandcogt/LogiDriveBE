@@ -10,7 +10,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+
     public class AppUserController : ControllerBase
     {
         private readonly IAppUserBao _appUserBao;
@@ -79,16 +79,14 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _appUserBao.DeleteAppUserAsync(id);
             return StatusCode(response.Code, response);
         }
-
         [HttpPut("updateUserCollaborator/{id}")]
-        public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUserWithCollaborator(int id, [FromBody] AppUserCollaboratorDto dto)
+        public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUserWithCollaborator(int id, [FromBody] UpdateAppUserDto dto)
         {
             var appUser = new AppUser
             {
-                IdAppUser = id, 
+                IdAppUser = id,
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = dto.Password,
                 Status = true
             };
 
@@ -106,6 +104,8 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _appUserBao.UpdateAppUserWithCollaboratorAsync(appUser, collaborator, dto.IdRole);
             return StatusCode(response.Code, response);
         }
+
+
 
         [HttpDelete("deleteUserCollaborator/{userId}")]
         public async Task<ActionResult<OperationResponse<bool>>> DeleteUserAndCollaboratorStatus(int userId)

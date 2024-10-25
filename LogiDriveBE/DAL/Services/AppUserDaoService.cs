@@ -94,13 +94,32 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
-        
+
 
         public async Task<OperationResponse<AppUser>> UpdateAppUserAsync(AppUser appUser)
         {
             try
             {
+                // Cargar el usuario existente para mantener la contraseña actual si no se está modificando
+                var existingUser = await _context.AppUsers
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(u => u.IdAppUser == appUser.IdAppUser);
+
+                if (existingUser == null)
+                {
+                    return new OperationResponse<AppUser>(404, "User not found");
+                }
+
+                // Si la contraseña no se ha proporcionado, mantener la existente
+                if (string.IsNullOrEmpty(appUser.Password))
+                {
+                    appUser.Password = existingUser.Password;
+                }
+
+                // Actualizar las propiedades que se pueden modificar
                 _context.Entry(appUser).State = EntityState.Modified;
+                _context.Entry(appUser).Property(u => u.Password).IsModified = false; // Evitar que se actualice la contraseña
+
                 await _context.SaveChangesAsync();
                 return new OperationResponse<AppUser>(200, "AppUser updated successfully", appUser);
             }
@@ -109,6 +128,7 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<AppUser>(500, $"Error updating AppUser: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResponse<bool>> DeleteAppUserAsync(int id)
         {
