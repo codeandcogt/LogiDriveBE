@@ -104,7 +104,17 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<AppUser>(500, "Failed to update user");
             }
 
+            // Buscar el colaborador relacionado al usuario
+            var existingCollaboratorResponse = await _collaboratorDao.GetCollaboratorByUserIdAsync(appUser.IdAppUser);
+            if (existingCollaboratorResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(404, "Collaborator not found for the given user");
+            }
+
+            var existingCollaborator = existingCollaboratorResponse.Data;
+
             // Actualizar la información del colaborador, si está asociada al usuario
+            collaborator.IdCollaborator = existingCollaborator.IdCollaborator;
             collaborator.IdUser = userResponse.Data.IdAppUser;
             var collaboratorResponse = await _collaboratorDao.UpdateCollaboratorAsync(collaborator);
 
@@ -115,6 +125,9 @@ namespace LogiDriveBE.BAL.Services
 
             return new OperationResponse<AppUser>(200, "User and collaborator updated successfully", userResponse.Data);
         }
+
+
+
 
         public async Task<OperationResponse<bool>> DeleteUserAndCollaboratorStatusAsync(int userId)
         {
@@ -169,6 +182,63 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _appUserDao.UpdatePasswordAsync(id, newPassword);
         }
+
+        public async Task<OperationResponse<AppUser>> UpdateAppUserWithCollaboratorAsync(UpdateAppUserDto dto)
+        {
+            // Verificar si el rol es válido
+            var roleResponse = await _roleDao.GetRoleByIdAsync(dto.IdRole);
+            if (roleResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(400, "Invalid Role ID");
+            }
+
+            // Obtener el usuario desde la base de datos
+            var userResponse = await _appUserDao.GetAppUserByIdAsync(dto.IdAppUser);
+            if (userResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(404, "User not found");
+            }
+
+            var appUser = userResponse.Data;
+
+            // Actualizar el rol y los datos básicos del usuario (sin contraseña)
+            appUser.IdRole = dto.IdRole;
+            appUser.Name = dto.Name;
+            appUser.Email = dto.Email;
+
+            // Intentar actualizar el usuario
+            var updateUserResponse = await _appUserDao.UpdateAppUserAsync(appUser);
+            if (updateUserResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(500, "Failed to update user");
+            }
+
+            // Buscar el colaborador relacionado al usuario
+            var existingCollaboratorResponse = await _collaboratorDao.GetCollaboratorByUserIdAsync(appUser.IdAppUser);
+            if (existingCollaboratorResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(404, "Collaborator not found for the given user");
+            }
+
+            var existingCollaborator = existingCollaboratorResponse.Data;
+
+            // Actualizar la información del colaborador
+            existingCollaborator.Name = dto.CollaboratorName;
+            existingCollaborator.LastName = dto.CollaboratorLastName;
+            existingCollaborator.Position = dto.Position;
+            existingCollaborator.Phone = dto.Phone;
+            existingCollaborator.IdArea = dto.IdArea;
+
+            var collaboratorResponse = await _collaboratorDao.UpdateCollaboratorAsync(existingCollaborator);
+            if (collaboratorResponse.Code != 200)
+            {
+                return new OperationResponse<AppUser>(500, "Failed to update collaborator");
+            }
+
+            return new OperationResponse<AppUser>(200, "User and collaborator updated successfully", appUser);
+        }
+
+
 
 
     }
