@@ -12,7 +12,9 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<LogInspection>> GetLogInspectionByIdAsync(int id);
         Task<OperationResponse<IEnumerable<LogInspection>>> GetAllLogInspectionsAsync();
         Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id);
-        Task<OperationResponse<LogInspection>> UpdateLogInspectionAsync(int id, LogInspection logInspection); // Cambiar aquí
+        Task<OperationResponse<LogInspection>> UpdateLogInspectionAsync(int id, LogInspection logInspection); // Cambiar aquí                                                                                                              // Definir el método en la interfaz ILogInspectionDao
+        Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAsync(int vehicleAssignmentId, string inspectionType);
+
     }
 
 }

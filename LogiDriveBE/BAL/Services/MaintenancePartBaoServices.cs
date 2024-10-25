@@ -97,5 +97,10 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<bool>(500, $"Error in BAO while deleting maintenance part: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId)
+        {
+            return await _maintenancePartDao.SendPartToMaintenanceAsync(partId);
+        }
     }
 }

@@ -13,14 +13,18 @@ namespace LogiDriveBE.BAL.Services
     {
         private readonly ILogInspectionDao _logInspectionDao;
         private readonly ILogProcessDao _logProcessDao;
+        private readonly IVehicleBao _vehicleBao;
+        private readonly IMaintenancePartBao _maintenancePartBao;
 
-        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, ILogProcessDao logProcessDao)
+        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, ILogProcessDao logProcessDao, IVehicleBao vehicleBao, IMaintenancePartBao maintenancePartBao)
         {
             _logInspectionDao = logInspectionDao;
             _logProcessDao = logProcessDao;
+            _vehicleBao = vehicleBao;
+            _maintenancePartBao = maintenancePartBao;
         }
 
-       
+
         public async Task<OperationResponse<LogInspectionDto>> GetLogInspectionByIdAsync(int id)
         {
             var inspectionResponse = await _logInspectionDao.GetLogInspectionByIdAsync(id);
@@ -180,5 +184,72 @@ namespace LogiDriveBE.BAL.Services
                 IdLogInspection = logProcess.IdLogInspection
             };
         }
+
+        public async Task<OperationResponse<LogInspectionDto>> ProcessInspectionAsync(LogInspectionDto logInspectionDto)
+        {
+            try
+            {
+                // Verificar si la inspección es de recepción y que haya una de entrega previa
+                if (logInspectionDto.TypeInspection == "Recepción")
+                {
+                    var deliveryInspection = await _logInspectionDao.GetLogInspectionByVehicleAssignmentAsync(logInspectionDto.IdVehicleAssignment, "Entrega");
+                    if (deliveryInspection == null || deliveryInspection.Code != 200)
+                    {
+                        return new OperationResponse<LogInspectionDto>(400, "No se puede crear una inspección de recepción sin una de entrega previa.");
+                    }
+                }
+
+                // Crear la inspección y las partes relacionadas
+                var inspectionResponse = await CreateLogInspectionAsync(logInspectionDto);
+                if (inspectionResponse.Code != 200)
+                {
+                    return inspectionResponse;
+                }
+
+                // Manejo de partes defectuosas
+                foreach (var part in logInspectionDto.PartsInspected)
+                {
+                    if (part.Status == false) // Asumimos que 'false' indica parte defectuosa
+                    {
+                        // Cambiar el estado de la parte y enviarla a mantenimiento
+                        await _maintenancePartBao.SendPartToMaintenanceAsync(part.IdPartVehicle);
+
+                        // Cambiar el estado del vehículo a "En servicio"
+                        var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                        if (vehicleResponse.Code != 200)
+                        {
+                            return new OperationResponse<LogInspectionDto>(500, $"Error actualizando el estado del vehículo: {vehicleResponse.Message}");
+                        }
+                    }
+                }
+
+                // Lógica del odómetro
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+                {
+                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                    if (vehicleResponse.Code != 200)
+                    {
+                        return new OperationResponse<LogInspectionDto>(500, $"Error actualizando el estado del vehículo: {vehicleResponse.Message}");
+                    }
+                }
+
+                // Crear el LogProcess correspondiente
+                var logProcessDto = new LogProcessDto
+                {
+                    Action = "Inspección de vehículo",
+                    IdCollaborator = logInspectionDto.IdCollaborator,
+                    IdVehicleAssignment = logInspectionDto.IdVehicleAssignment,
+                    IdLogInspection = inspectionResponse.Data.IdLogInspection
+                };
+                await _logProcessDao.CreateLogProcessAsync(logProcessDto);
+
+                return new OperationResponse<LogInspectionDto>(200, "Inspección procesada exitosamente", inspectionResponse.Data);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<LogInspectionDto>(500, $"Error procesando la inspección: {ex.Message}");
+            }
+        }
+
     }
 }

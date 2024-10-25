@@ -75,5 +75,19 @@ namespace LogiDriveBE.DAL.Services
             await _context.SaveChangesAsync();
             return new OperationResponse<bool>(200, "Inspección eliminada exitosamente", true);
         }
+
+        public async Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAsync(int vehicleAssignmentId, string inspectionType)
+        {
+            var logInspection = await _context.LogInspections
+                .FirstOrDefaultAsync(i => i.IdVehicleAssignment == vehicleAssignmentId && i.TypeInspection == inspectionType);
+
+            if (logInspection == null)
+            {
+                return new OperationResponse<LogInspection>(404, "No se encontró una inspección de tipo entrega para este vehículo.");
+            }
+
+            return new OperationResponse<LogInspection>(200, "Inspección encontrada.", logInspection);
+        }
+
     }
 }

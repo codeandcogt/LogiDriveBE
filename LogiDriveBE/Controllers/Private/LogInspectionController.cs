@@ -83,5 +83,13 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _logInspectionBao.DeleteLogInspectionAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpPost("process")]
+        public async Task<ActionResult<OperationResponse<LogInspectionDto>>> ProcessInspection([FromBody] LogInspectionDto logInspectionDto)
+        {
+            var response = await _logInspectionBao.ProcessInspectionAsync(logInspectionDto);
+            return StatusCode(response.Code, response);
+        }
+
     }
 }

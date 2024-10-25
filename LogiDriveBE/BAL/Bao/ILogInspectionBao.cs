@@ -12,5 +12,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<IEnumerable<LogInspectionDto>>> GetAllLogInspectionsAsync();
         Task<OperationResponse<LogInspectionDto>> UpdateLogInspectionAsync(int id, LogInspectionDto logInspectionDto);
         Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id);
+        Task<OperationResponse<LogInspectionDto>> ProcessInspectionAsync(LogInspectionDto logInspectionDto);
     }
 }

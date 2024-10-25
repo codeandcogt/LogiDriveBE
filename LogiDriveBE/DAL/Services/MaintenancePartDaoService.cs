@@ -111,5 +111,23 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting maintenance part: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId)
+        {
+            var part = await _context.PartVehicles.FindAsync(partId);
+            if (part == null)
+            {
+                return new OperationResponse<bool>(404, "Parte no encontrada.");
+            }
+
+            // Lógica para enviar la parte a mantenimiento
+            part.StatusPart = "En mantenimiento"; // Cambiar el estado según la lógica de la aplicación
+            _context.Entry(part).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return new OperationResponse<bool>(200, "Parte enviada a mantenimiento exitosamente.", true);
+        }
+
+
     }
 }
