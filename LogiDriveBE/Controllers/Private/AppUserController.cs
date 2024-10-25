@@ -115,7 +115,7 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpGet("userCollaborator")]
-        public async Task<ActionResult<OperationResponse<IEnumerable<AppUserCollaboratorDto>>>> GetAllAppUserCollaborators()
+        public async Task<ActionResult<OperationResponse<IEnumerable<GetAppUserCollaboratorDto>>>> GetAllAppUserCollaborators()
         {
             var response = await _appUserBao.GetAllAppUserCollaboratorAsync();
             return StatusCode(response.Code, response);

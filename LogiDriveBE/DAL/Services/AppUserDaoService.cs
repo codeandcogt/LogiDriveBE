@@ -152,15 +152,17 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
-        public async Task<IEnumerable<AppUserCollaboratorDto>> GetAllAppUserCollaboratorAsync()
+        public async Task<IEnumerable<GetAppUserCollaboratorDto>> GetAllAppUserCollaboratorAsync()
         {
             try
             {
                 var query = await (from user in _context.AppUsers
                                    join collaborator in _context.Collaborators
                                    on user.IdAppUser equals collaborator.IdUser
+                                   join area in _context.Areas
+                                   on collaborator.IdArea equals area.IdArea // Unión con la tabla Area
                                    where user.Status == true && collaborator.Status == true
-                                   select new AppUserCollaboratorDto
+                                   select new GetAppUserCollaboratorDto
                                    {
                                        AppUserId = user.IdAppUser,
                                        Name = user.Name,
@@ -171,7 +173,8 @@ namespace LogiDriveBE.DAL.Services
                                        Position = collaborator.Position,
                                        Phone = collaborator.Phone,
                                        IdRole = user.IdRole,
-                                       IdArea = collaborator.IdArea
+                                       IdArea = collaborator.IdArea,
+                                       AreaName = area.Name // Asignar el nombre del área
                                    }).ToListAsync();
 
                 return query;
@@ -180,9 +183,10 @@ namespace LogiDriveBE.DAL.Services
             {
                 // Manejar cualquier excepción que ocurra durante la consulta
                 Console.WriteLine($"Error: {ex.Message}");
-                return Enumerable.Empty<AppUserCollaboratorDto>(); // Retorna una lista vacía en caso de error
+                return Enumerable.Empty<GetAppUserCollaboratorDto>(); // Retorna una lista vacía en caso de error
             }
         }
+
 
         public async Task<OperationResponse<bool>> UpdatePasswordAsync(int id, string newPassword)
         {
