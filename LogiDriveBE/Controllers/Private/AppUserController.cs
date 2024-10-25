@@ -80,7 +80,7 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
-        [HttpPut("updateUserCollaborator{id}")]
+        [HttpPut("updateUserCollaborator/{id}")]
         public async Task<ActionResult<OperationResponse<AppUser>>> UpdateAppUserWithCollaborator(int id, [FromBody] AppUserCollaboratorDto dto)
         {
             var appUser = new AppUser
