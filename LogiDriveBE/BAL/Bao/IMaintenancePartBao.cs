@@ -14,5 +14,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<bool>> DeleteMaintenancePartAsync(int id);
         Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId);
         Task<OperationResponse<bool>> DeleteMaintenancePartStatusAsync(int id);
+        Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId);
     }
 }
