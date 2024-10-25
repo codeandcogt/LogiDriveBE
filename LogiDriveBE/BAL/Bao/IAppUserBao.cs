@@ -14,7 +14,7 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<AppUser>> UpdateAppUserAsync(AppUser appUser);
         Task<OperationResponse<bool>> DeleteAppUserAsync(int id);
         Task<OperationResponse<bool>> DeleteUserAndCollaboratorStatusAsync(int userId);
-        Task<OperationResponse<IEnumerable<AppUserCollaboratorDto>>> GetAllAppUserCollaboratorAsync();
+        Task<OperationResponse<IEnumerable<GetAppUserCollaboratorDto>>> GetAllAppUserCollaboratorAsync();
         Task<OperationResponse<bool>> UpdatePasswordAsync(int id, string newPassword);
     }
 }
