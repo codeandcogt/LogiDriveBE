@@ -164,8 +164,6 @@ namespace LogiDriveBE.BAL.Services
                 Image = dto.Image,
                 LogInspectionParts = dto.PartsInspected?.Select(p => new LogInspectionPart
                 {
-                    // Establecer el IdLogInspectionPart como 0 para indicar que es nuevo
-                    IdLogInspectionPart = 0,
                     IdPartVehicle = p.IdPartVehicle,
                     Comment = p.Comment,
                     Status = p.Status,
