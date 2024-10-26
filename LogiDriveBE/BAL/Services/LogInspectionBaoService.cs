@@ -2,6 +2,7 @@
 using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
+using LogiDriveBE.SAL.Sao;
 using LogiDriveBE.UTILS;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,15 @@ namespace LogiDriveBE.BAL.Services
         private readonly ILogProcessDao _logProcessDao;
         private readonly IVehicleBao _vehicleBao;
         private readonly IMaintenancePartBao _maintenancePartBao;
+        private readonly IS3Service _s3Service;
 
-        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, ILogProcessDao logProcessDao, IVehicleBao vehicleBao, IMaintenancePartBao maintenancePartBao)
+        public LogInspectionBaoService(ILogInspectionDao logInspectionDao, ILogProcessDao logProcessDao, IVehicleBao vehicleBao, IMaintenancePartBao maintenancePartBao, IS3Service s3Service)
         {
             _logInspectionDao = logInspectionDao;
             _logProcessDao = logProcessDao;
             _vehicleBao = vehicleBao;
             _maintenancePartBao = maintenancePartBao;
+            _s3Service = s3Service;
         }
 
 
@@ -49,7 +52,25 @@ namespace LogiDriveBE.BAL.Services
                         "Se requiere información del LogProcess con una reserva válida");
                 }
 
-                // 2. Crear primero el LogProcess
+                // 2. Subir imagen principal si existe
+                if (logInspectionDto.ImageFile != null)
+                {
+                    logInspectionDto.Image = await _s3Service.UploadImageAsync(logInspectionDto.ImageFile, "inspections");
+                }
+
+                // 3. Subir imágenes de las partes si existen
+                if (logInspectionDto.PartsInspected != null)
+                {
+                    foreach (var part in logInspectionDto.PartsInspected)
+                    {
+                        if (part.ImageFile != null)
+                        {
+                            part.Image = await _s3Service.UploadImageAsync(part.ImageFile, "inspection-parts");
+                        }
+                    }
+                }
+
+                // 4. Crear el LogProcess
                 var logProcessDto = new LogProcessDto
                 {
                     IdLogReservation = logInspectionDto.LogProcess.IdLogReservation,
@@ -65,7 +86,7 @@ namespace LogiDriveBE.BAL.Services
                         $"Error creando LogProcess: {processResponse.Message}");
                 }
 
-                // 3. Crear la inspección
+                // 5. Crear la inspección
                 var logInspection = new LogInspection
                 {
                     IdCollaborator = logInspectionDto.IdCollaborator,
@@ -95,7 +116,7 @@ namespace LogiDriveBE.BAL.Services
                         inspectionResponse.Message);
                 }
 
-                // 4. Procesar las partes de la inspección
+                // 6. Procesar las partes de la inspección
                 if (logInspectionDto.PartsInspected != null && logInspectionDto.PartsInspected.Any())
                 {
                     var parts = logInspectionDto.PartsInspected.Select(p => new LogInspectionPart
@@ -113,11 +134,10 @@ namespace LogiDriveBE.BAL.Services
 
                     if (partsResponse.Code != 200)
                     {
-                        // Log error but continue
                         Console.WriteLine($"Warning: Error al actualizar partes: {partsResponse.Message}");
-        }
+                    }
 
-                    // 5. Procesar partes defectuosas
+                    // 7. Procesar partes defectuosas
                     foreach (var part in logInspectionDto.PartsInspected.Where(p => !p.Status))
                     {
                         await _maintenancePartBao.SendPartToMaintenanceAsync(part.IdPartVehicle);
@@ -125,13 +145,13 @@ namespace LogiDriveBE.BAL.Services
                     }
                 }
 
-                // 6. Verificar el odómetro
+                // 8. Verificar el odómetro
                 if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
                 {
                     await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
                 }
 
-                // 7. Actualizar el LogProcess con el IdLogInspection
+                // 9. Actualizar el LogProcess
                 processResponse.Data.IdLogInspection = inspectionResponse.Data.IdLogInspection;
                 await _logProcessDao.UpdateLogProcessAsync(processResponse.Data);
 
@@ -141,7 +161,7 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<LogInspectionDto>(200, "Inspección creada exitosamente", resultDto);
             }
             catch (Exception ex)
-        {
+            {
                 return new OperationResponse<LogInspectionDto>(500,
                     $"Error creando la inspección: {ex.Message} - Inner: {ex.InnerException?.Message}");
             }
@@ -164,18 +184,89 @@ namespace LogiDriveBE.BAL.Services
 
         public async Task<OperationResponse<LogInspectionDto>> UpdateLogInspectionAsync(int id, LogInspectionDto logInspectionDto)
         {
-            var logInspection = MapToLogInspection(logInspectionDto);
-            logInspection.IdLogInspection = id;
-
-            var updateResponse = await _logInspectionDao.UpdateLogInspectionAsync(id, logInspection);
-
-            if (updateResponse.Code != 200)
+            try
             {
-                return new OperationResponse<LogInspectionDto>(updateResponse.Code, updateResponse.Message);
-            }
+                // 1. Obtener la inspección existente
+                var existingInspectionResponse = await _logInspectionDao.GetLogInspectionByIdAsync(id);
+                if (existingInspectionResponse.Code != 200)
+                {
+                    return new OperationResponse<LogInspectionDto>(404, "Inspección no encontrada");
+                }
 
-            var updatedLogInspectionDto = MapToLogInspectionDto(updateResponse.Data);
-            return new OperationResponse<LogInspectionDto>(200, "Inspección actualizada exitosamente", updatedLogInspectionDto);
+                // 2. Manejar imagen principal
+                if (logInspectionDto.ImageFile != null)
+                {
+                    // Eliminar imagen anterior si existe
+                    if (!string.IsNullOrEmpty(existingInspectionResponse.Data.Image))
+                    {
+                        await _s3Service.DeleteImageAsync(existingInspectionResponse.Data.Image);
+                    }
+                    // Subir nueva imagen
+                    logInspectionDto.Image = await _s3Service.UploadImageAsync(logInspectionDto.ImageFile, "inspections");
+                }
+                else
+                {
+                    // Mantener la imagen existente si no se proporciona una nueva
+                    logInspectionDto.Image = existingInspectionResponse.Data.Image;
+                }
+
+                // 3. Manejar imágenes de las partes
+                if (logInspectionDto.PartsInspected != null)
+                {
+                    foreach (var part in logInspectionDto.PartsInspected)
+                    {
+                        if (part.ImageFile != null)
+                        {
+                            // Buscar la parte existente
+                            var existingPart = existingInspectionResponse.Data.LogInspectionParts?
+                                .FirstOrDefault(p => p.IdPartVehicle == part.IdPartVehicle);
+
+                            // Eliminar imagen anterior si existe
+                            if (existingPart != null && !string.IsNullOrEmpty(existingPart.Image))
+                            {
+                                await _s3Service.DeleteImageAsync(existingPart.Image);
+                            }
+
+                            // Subir nueva imagen
+                            part.Image = await _s3Service.UploadImageAsync(part.ImageFile, "inspection-parts");
+                        }
+                        else if (existingInspectionResponse.Data.LogInspectionParts != null)
+                        {
+                            // Mantener la imagen existente si no se proporciona una nueva
+                            var existingPart = existingInspectionResponse.Data.LogInspectionParts
+                                .FirstOrDefault(p => p.IdPartVehicle == part.IdPartVehicle);
+                            if (existingPart != null)
+                            {
+                                part.Image = existingPart.Image;
+                            }
+                        }
+                    }
+                }
+
+                // 4. Actualizar la inspección
+                var logInspection = MapToLogInspection(logInspectionDto);
+                logInspection.IdLogInspection = id;
+
+                var updateResponse = await _logInspectionDao.UpdateLogInspectionAsync(id, logInspection);
+                if (updateResponse.Code != 200)
+                {
+                    return new OperationResponse<LogInspectionDto>(updateResponse.Code, updateResponse.Message);
+                }
+
+                // 5. Verificar el odómetro
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+                {
+                    await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                }
+
+                var updatedLogInspectionDto = MapToLogInspectionDto(updateResponse.Data);
+                return new OperationResponse<LogInspectionDto>(200, "Inspección actualizada exitosamente", updatedLogInspectionDto);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<LogInspectionDto>(500,
+                    $"Error actualizando la inspección: {ex.Message} - Inner: {ex.InnerException?.Message}");
+            }
         }
 
         public async Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id)
