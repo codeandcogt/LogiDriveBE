@@ -10,7 +10,13 @@ using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Services;
 using LogiDriveBE.BAL.Services;
 using LogiDriveBE.BAL.Bao;
-using System.Text.Json.Serialization; // Asegúrate de que este using apunte al namespace correcto de tu DbContext
+using System.Text.Json.Serialization;
+using LogiDriveBE.SAL.Sao;
+using LogiDriveBE.SAL.Services;
+using Amazon;
+using Amazon.S3;
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.Runtime; // Asegúrate de que este using apunte al namespace correcto de tu DbContext
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +41,17 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("SuperAdminOrAdmin", policy => policy.RequireRole("SuperAdmin", "Admin"));
 });
+
+builder.Services.AddAWSService<IAmazonS3>(new AWSOptions
+{
+    Credentials = new BasicAWSCredentials(
+        builder.Configuration["AWS:AccessKey"],
+        builder.Configuration["AWS:SecretKey"]
+    ),
+    Region = RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"])
+});
+
+builder.Services.AddScoped<IS3Service, S3Service>();
 
 // Register services
 builder.Services.AddScoped<IAuthAao, AuthAao>();

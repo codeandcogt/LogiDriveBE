@@ -9,7 +9,8 @@
         public string Odometer { get; set; }
         public string Fuel { get; set; }
         public string TypeInspection { get; set; } // Define si es entrega o recepción
-        public string Image { get; set; }
+        public IFormFile? ImageFile { get; set; }
+        public string? Image { get; set; }
         public bool Status { get; set; }
         public DateTime CreationDate { get; set; }
         public List<LogInspectionPartDto> PartsInspected { get; set; } = new List<LogInspectionPartDto>();

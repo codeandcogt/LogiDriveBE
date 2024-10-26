@@ -6,9 +6,10 @@
         public int IdPartVehicle { get; set; }
         public string Comment { get; set; } = null!;
         public bool Status { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public string? Image { get; set; }
 
-      
+
         public DateTime DateInspection { get; set; }
     }
 }

@@ -144,7 +144,7 @@ public partial class LogiDriveDbContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
             entity.Property(e => e.Image)
-                .HasMaxLength(50)
+                .HasMaxLength(500)
                 .IsUnicode(false);
             entity.Property(e => e.Odometer)
                 .HasMaxLength(20)
@@ -186,7 +186,7 @@ public partial class LogiDriveDbContext : DbContext
                 .HasDefaultValueSql("(sysdatetime())");
 
             entity.Property(e => e.Image)
-                .HasMaxLength(150)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             // Configuraciones de relaciones

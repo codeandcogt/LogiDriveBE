@@ -8,7 +8,6 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class LogReservationController : ControllerBase
     {
         private readonly ILogReservationBao _logReservationBao;
@@ -33,11 +32,12 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpGet]
-        public async Task<ActionResult<OperationResponse<IEnumerable<LogReservationDto>>>> GetAllLogReservations()
+        public async Task<ActionResult<OperationResponse<IEnumerable<GetLogReservationDto>>>> GetAllLogReservations()
         {
             var response = await _logReservationBao.GetAllLogReservationsAsync();
             return StatusCode(response.Code, response);
         }
+
 
         [HttpPut]
         public async Task<ActionResult<OperationResponse<LogReservationDto>>> UpdateLogReservation([FromBody] LogReservationDto logReservationDto)
