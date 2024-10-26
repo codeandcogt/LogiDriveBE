@@ -40,10 +40,11 @@ namespace LogiDriveBE.BAL.Services
             return await _logReservationDao.GetLogReservationByIdAsync(id);
         }
 
-        public async Task<OperationResponse<IEnumerable<LogReservationDto>>> GetAllLogReservationsAsync()
+        public async Task<OperationResponse<IEnumerable<GetLogReservationDto>>> GetAllLogReservationsAsync()
         {
             return await _logReservationDao.GetAllLogReservationsAsync();
         }
+
 
         public async Task<OperationResponse<LogReservationDto>> UpdateLogReservationAsync(LogReservationDto logReservationDto)
         {

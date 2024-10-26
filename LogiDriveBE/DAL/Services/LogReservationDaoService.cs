@@ -78,18 +78,21 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<LogReservationDto>(500, $"Error retrieving log reservation: {ex.Message}");
             }
         }
-
-        public async Task<OperationResponse<IEnumerable<LogReservationDto>>> GetAllLogReservationsAsync()
+        public async Task<OperationResponse<IEnumerable<GetLogReservationDto>>> GetAllLogReservationsAsync()
         {
             try
             {
                 var logReservations = await _context.LogReservations
-                                                    .Where(a => a.Status == true || a.Status == true)
+                                                    .Include(lr => lr.IdCollaboratorNavigation) // Incluir la navegación hacia el colaborador
+                                                    .Where(a => a.Status == true)
                                                     .ToListAsync();
-                var logReservationDtos = logReservations.Select(lr => new LogReservationDto
+
+                var logReservationDtos = logReservations.Select(lr => new GetLogReservationDto
                 {
                     IdLogReservation = lr.IdLogReservation,
                     IdCollaborator = lr.IdCollaborator,
+                    Name = lr.IdCollaboratorNavigation != null ? lr.IdCollaboratorNavigation.Name : string.Empty,
+                    LastName = lr.IdCollaboratorNavigation != null ? lr.IdCollaboratorNavigation.LastName : string.Empty,
                     Comment = lr.Comment,
                     IdTown = lr.IdTown,
                     NumberPeople = lr.NumberPeople,
@@ -100,13 +103,14 @@ namespace LogiDriveBE.DAL.Services
                     CreationDate = lr.CreationDate
                 });
 
-                return new OperationResponse<IEnumerable<LogReservationDto>>(200, "Log reservations retrieved successfully", logReservationDtos);
+                return new OperationResponse<IEnumerable<GetLogReservationDto>>(200, "Log reservations retrieved successfully", logReservationDtos);
             }
             catch (Exception ex)
             {
-                return new OperationResponse<IEnumerable<LogReservationDto>>(500, $"Error retrieving log reservations: {ex.Message}");
+                return new OperationResponse<IEnumerable<GetLogReservationDto>>(500, $"Error retrieving log reservations: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResponse<LogReservationDto>> UpdateLogReservationAsync(LogReservationDto logReservationDto)
         {
