@@ -161,7 +161,7 @@ namespace LogiDriveBE.DAL.Services
                                           .ToListAsync();
                 var townDtos = towns.Select(t => new TownDto
                 {
-                 
+                    IdTown = t.IdTown,
                     Name = t.Name,
                     IdDepartment = t.IdDepartment,
                     Status = t.Status
