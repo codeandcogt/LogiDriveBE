@@ -10,7 +10,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-
+    [Authorize]
     public class AppUserController : ControllerBase
     {
         private readonly IAppUserBao _appUserBao;

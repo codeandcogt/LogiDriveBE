@@ -60,5 +60,13 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _townBao.DeleteTownStatusAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpGet("byDepartment/{departmentId}")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<TownDto>>>> GetTownsByDepartmentId(int departmentId)
+        {
+            var response = await _townBao.GetTownsByDepartmentIdAsync(departmentId);
+            return StatusCode(response.Code, response);
+        }
+
     }
 }

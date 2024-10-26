@@ -43,5 +43,11 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _townDao.DeleteTownStatusAsync(id);
         }
+
+        public async Task<OperationResponse<IEnumerable<TownDto>>> GetTownsByDepartmentIdAsync(int departmentId)
+        {
+            return await _townDao.GetTownsByDepartmentIdAsync(departmentId);
+        }
+
     }
 }
