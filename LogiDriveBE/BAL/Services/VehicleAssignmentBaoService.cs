@@ -18,6 +18,10 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _vehicleAssignmentDao.CreateVehicleAssignmentAsync(vehicleAssignmentDto);
         }
+        public async Task<OperationResponse<IEnumerable<VehicleAssignmentDto>>> GetVehicleAssignmentsByUserIdAsync(int userId)
+        {
+            return await _vehicleAssignmentDao.GetVehicleAssignmentsByUserIdAsync(userId);
+        }
 
         public async Task<OperationResponse<VehicleAssignmentDto>> GetVehicleAssignmentByIdAsync(int id)
         {

@@ -66,6 +66,19 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _logTrackingBao.DeleteLogTrackingAsync(id);
             return StatusCode(response.Code, response);
         }
+        
+        [HttpGet("ActiveByUser/{userId}")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<LogTracking>>>> GetActiveTrackingByUserId(int userId)
+        {
+            var response = await _logTrackingBao.GetActiveTrackingByUserIdAsync(userId);
+            return StatusCode(response.Code, response);
+        }
+        [HttpGet("active/vehicleAssignment/{vehicleAssignmentId}")]
+        public async Task<ActionResult<OperationResponse<LogTracking>>> GetActiveLogTrackingByVehicleAssignment(int vehicleAssignmentId)
+        {
+            var response = await _logTrackingBao.GetActiveLogTrackingByVehicleAssignmentIdAsync(vehicleAssignmentId);
+            return StatusCode(response.Code, response);
+        }
 
         [HttpDelete("Status/{id}")]
         public async Task<ActionResult<OperationResponse<bool>>> DeleteLogTrackingStatus(int id)

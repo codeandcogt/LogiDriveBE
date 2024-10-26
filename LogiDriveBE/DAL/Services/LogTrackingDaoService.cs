@@ -15,6 +15,42 @@ namespace LogiDriveBE.DAL.Dao
             _context = context;
         }
 
+        public async Task<OperationResponse<IEnumerable<LogTracking>>> GetActiveTrackingByUserIdAsync(int userId)
+        {
+            var logTrips = await _context.LogTrips
+                .Include(lt => lt.IdTrackingNavigation)
+                .Include(lt => lt.IdVehicleAssignmentNavigation)
+                    .ThenInclude(va => va.IdLogReservationNavigation) // Navegar a LogReservation
+                    .ThenInclude(lr => lr.IdCollaboratorNavigation) // Navegar a Collaborator
+                .Where(lt => lt.IdVehicleAssignmentNavigation.IdLogReservationNavigation.IdCollaborator == userId && lt.Status == true)
+                .ToListAsync();
+
+            if (logTrips == null || !logTrips.Any())
+            {
+                return new OperationResponse<IEnumerable<LogTracking>>(404, "No active log tracking found for the user");
+            }
+
+            var logTrackings = logTrips.Select(lt => lt.IdTrackingNavigation).Where(tr => tr != null).ToList();
+
+            return new OperationResponse<IEnumerable<LogTracking>>(200, "Active log trackings retrieved successfully", logTrackings);
+        }
+
+
+
+        public async Task<OperationResponse<LogTracking>> GetActiveLogTrackingByVehicleAssignmentIdAsync(int vehicleAssignmentId)
+        {
+            var logTrip = await _context.LogTrips
+                .Include(lt => lt.IdTrackingNavigation)
+                .FirstOrDefaultAsync(lt => lt.IdVehicleAssignment == vehicleAssignmentId && lt.Status == true);
+
+            if (logTrip == null || logTrip.IdTrackingNavigation == null)
+            {
+                return new OperationResponse<LogTracking>(404, "Active log tracking not found");
+            }
+
+            return new OperationResponse<LogTracking>(200, "Active log tracking retrieved successfully", logTrip.IdTrackingNavigation);
+        }
+
         public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(LogTracking logTracking)
         {
             try
@@ -73,7 +109,6 @@ namespace LogiDriveBE.DAL.Dao
                     return new OperationResponse<bool>(404, "LogTracking not found");
                 }
 
-              
                 await _context.SaveChangesAsync();
                 return new OperationResponse<bool>(200, "LogTracking status updated to false", true);
             }

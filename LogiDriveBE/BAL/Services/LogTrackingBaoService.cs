@@ -14,6 +14,11 @@ namespace LogiDriveBE.BAL.Services
             _logTrackingDao = logTrackingDao;
         }
 
+        public async Task<OperationResponse<LogTracking>> GetActiveLogTrackingByVehicleAssignmentIdAsync(int vehicleAssignmentId)
+        {
+            return await _logTrackingDao.GetActiveLogTrackingByVehicleAssignmentIdAsync(vehicleAssignmentId);
+        }
+
         public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(LogTracking logTracking)
         {
             return await _logTrackingDao.CreateLogTrackingAsync(logTracking);
@@ -37,6 +42,11 @@ namespace LogiDriveBE.BAL.Services
         public async Task<OperationResponse<LogTracking>> GetLogTrackingByIdAsync(int id)
         {
             return await _logTrackingDao.GetLogTrackingByIdAsync(id);
+        }
+
+        public async Task<OperationResponse<IEnumerable<LogTracking>>> GetActiveTrackingByUserIdAsync(int userId)
+        {
+            return await _logTrackingDao.GetActiveTrackingByUserIdAsync(userId);
         }
 
         public async Task<OperationResponse<IEnumerable<LogTracking>>> GetAllLogTrackingsAsync()
