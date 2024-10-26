@@ -104,6 +104,7 @@ namespace LogiDriveBE.DAL.Services
                                                        .ToListAsync();
                 var vehicleAssignmentDtos = vehicleAssignments.Select(v => new VehicleAssignmentDto
                 {
+                    IdVehicleAssignment = v.IdVehicleAssignment,
                     Comment = v.Comment,
                     TripType = v.TripType,
                     StartDate = v.StartDate,

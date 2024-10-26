@@ -88,6 +88,7 @@ namespace LogiDriveBE.DAL.Services
                                                     .ToListAsync();
                 var logReservationDtos = logReservations.Select(lr => new LogReservationDto
                 {
+                    IdLogReservation = lr.IdLogReservation,
                     IdCollaborator = lr.IdCollaborator,
                     Comment = lr.Comment,
                     IdTown = lr.IdTown,
