@@ -12,5 +12,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<bool>> DeleteLogReservationAsync(int id);
         Task<OperationResponse<bool>> UpdateStatusReservationAsync(int id, UpdateStatusReservationDto updateStatusReservationDto);
         Task<OperationResponse<bool>> DeleteLogReservationStatusAsync(int id);
+        Task<OperationResponse<IEnumerable<LogReservationDto>>> GetLogReservationsByUserIdAsync(int userId);
     }
 }
