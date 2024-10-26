@@ -40,12 +40,19 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
-        [HttpPut]
-        public async Task<ActionResult<OperationResponse<TownDto>>> UpdateTown([FromBody] TownDto townDto)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<OperationResponse<TownDto>>> UpdateTown(int id, [FromBody] TownDto townDto)
         {
+            // Verificar que el ID proporcionado coincide con el ID del DTO
+            if (id != townDto.IdTown)
+            {
+                return BadRequest(new OperationResponse<TownDto>(400, "ID mismatch between URL and payload"));
+            }
+
             var response = await _townBao.UpdateTownAsync(townDto);
             return StatusCode(response.Code, response);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<OperationResponse<bool>>> DeleteTown(int id)

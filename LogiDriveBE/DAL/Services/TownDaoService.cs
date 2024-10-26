@@ -71,6 +71,7 @@ namespace LogiDriveBE.DAL.Services
                                           .ToListAsync();
                 var townDtos = towns.Select(t => new TownDto
                 {
+                    IdTown = t.IdTown,
                     Name = t.Name,
                     IdDepartment = t.IdDepartment,
                     Status = t.Status
@@ -88,12 +89,13 @@ namespace LogiDriveBE.DAL.Services
         {
             try
             {
-                var town = await _context.Towns.FindAsync(townDto.IdDepartment);
+                var town = await _context.Towns.FindAsync(townDto.IdTown);
                 if (town == null)
                 {
                     return new OperationResponse<TownDto>(404, "Town not found");
                 }
 
+                // Actualizar las propiedades de la entidad Town
                 town.Name = townDto.Name;
                 town.IdDepartment = townDto.IdDepartment;
                 town.Status = townDto.Status;
@@ -108,6 +110,7 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<TownDto>(500, $"Error updating town: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResponse<bool>> DeleteTownAsync(int id)
         {
