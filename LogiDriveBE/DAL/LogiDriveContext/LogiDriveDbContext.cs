@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogiDriveBE.DAL.LogiDriveContext;
@@ -55,6 +56,9 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<Vehicle> Vehicles { get; set; }
 
     public virtual DbSet<VehicleAssignment> VehicleAssignments { get; set; }
+
+    public virtual DbSet<VehicleAssignmentView> VehicleAssignmentViews { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -437,6 +441,13 @@ public partial class LogiDriveDbContext : DbContext
                 .HasForeignKey(d => d.IdVehicle)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_IdVehicleVehicleAssigment");
+
+        });
+
+        modelBuilder.Entity<VehicleAssignmentView>(entity =>
+        {
+            entity.HasNoKey(); // Indica que esta entidad no tiene clave primaria
+            entity.ToView("vw_VehicleAssignmentsByDate"); // Nombre de la vista en la base de datos
         });
 
         OnModelCreatingPartial(modelBuilder);

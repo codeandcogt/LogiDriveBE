@@ -9,7 +9,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+
     public class VehicleAssignmentController : ControllerBase
     {
         private readonly IVehicleAssignmentBao _vehicleAssignmentBao;
@@ -60,5 +60,13 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _vehicleAssignmentBao.DeleteVehicleAssignmentStatusAsync(id);
             return StatusCode(response.Code, response);
         }
+        [HttpPost("ByDateWithStatusUpdate")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<VehicleAssignmentView>>>> GetVehicleAssignmentsByDateWithStatusUpdate([FromBody] DateTime specificDate)
+        {
+            var response = await _vehicleAssignmentBao.GetVehicleAssignmentsByDateWithStatusUpdateAsync(specificDate);
+            return StatusCode(response.Code, response);
+        }
+
+
     }
 }
