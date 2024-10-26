@@ -14,8 +14,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId);
 
         Task<OperationResponse<bool>> DeleteLogMaintenancePartStatusAsync(int id);
-        Task<OperationResponse<bool>> SendToMaintenanceAsync(int idPartVehicle);
-        Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId);
 
 
     }
