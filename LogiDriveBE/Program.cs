@@ -62,10 +62,6 @@ builder.Services.AddScoped<ILogInspectionPartDao, LogInspectionPartDaoService>()
 
 builder.Services.AddScoped<ILogTrackingDao, LogTrackingDao>();
 builder.Services.AddScoped<ILogTripDao, LogTripDao>();
-builder.Services.AddScoped<ILogInspectionDao, LogInspectionDaoService>();
-builder.Services.AddScoped<ILogInspectionPartDao, LogInspectionPartDaoService>();
-
-
 
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
@@ -83,14 +79,11 @@ builder.Services.AddScoped<IServiceBao,  ServiceBaoService>();
 builder.Services.AddScoped<IVehicleBao, VehicleBaoService>();
 builder.Services.AddScoped<IPartVehicleBao, PartVehicleBaoService>();
 builder.Services.AddScoped<IPreliminaryInspectionSheetBao, PreliminaryInspectionSheetBaoService>();
-builder.Services.AddScoped<ILogInspectionBao, LogInspectionBaoService>();
-builder.Services.AddScoped<ILogInspectionPartBao, LogInspectionPartBaoService>();
 
 builder.Services.AddScoped<ILogTrackingBao, LogTrackingBaoService>();
 builder.Services.AddScoped<ILogTripBao, LogTripBaoService>();
 builder.Services.AddScoped<ILogInspectionBao, LogInspectionBaoService>();
 builder.Services.AddScoped<ILogInspectionPartBao, LogInspectionPartBaoService>();
-
 
 // Add services to the container.
 builder.Services.AddControllers();

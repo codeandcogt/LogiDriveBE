@@ -15,6 +15,5 @@ namespace LogiDriveBE.DAL.Dao
 
         Task<OperationResponse<bool>> DeleteLogMaintenancePartStatusAsync(int id);
 
-
     }
 }

@@ -106,7 +106,6 @@ namespace LogiDriveBE.BAL.Services
         public async Task<OperationResponse<bool>> DeleteMaintenancePartStatusAsync(int id)
         {
             return await _maintenancePartDao.DeleteLogMaintenancePartStatusAsync(id);
-        
         }
     }
 }
