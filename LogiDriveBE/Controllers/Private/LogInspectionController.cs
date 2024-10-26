@@ -44,6 +44,11 @@ namespace LogiDriveBE.Controllers.Private
         [HttpPost]
         public async Task<ActionResult<OperationResponse<LogInspectionDto>>> CreateLogInspection([FromBody] LogInspectionDto logInspectionDto)
         {
+            if (logInspectionDto == null)
+            {
+                return BadRequest("Los datos de la inspección son requeridos");
+            }
+
             var response = await _logInspectionBao.CreateLogInspectionAsync(logInspectionDto);
             return StatusCode(response.Code, response);
         }
