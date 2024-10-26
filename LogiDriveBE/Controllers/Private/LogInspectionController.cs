@@ -20,26 +20,35 @@ namespace LogiDriveBE.Controllers.Private
             _vehicleBao = vehicleBao;
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult<OperationResponse<LogInspectionDto>>> CreateLogInspection([FromBody] LogInspectionDto logInspectionDto)
+        //{
+        //    var response = await _logInspectionBao.CreateLogInspectionAsync(logInspectionDto);
+
+        //    if (response.Code == 200)
+        //    {
+        //        // Lógica del odómetro: si el kilometraje supera los 25,000 km, cambiar el estado del vehículo a 'En servicio'
+        //        if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+        //        {
+        //            var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+        //            if (vehicleResponse.Code != 200)
+        //            {
+        //                return StatusCode(500, $"Error updating vehicle status: {vehicleResponse.Message}");
+        //            }
+        //        }
+        //    }
+
+        //    return StatusCode(response.Code, response);
+        //}
+
         [HttpPost]
         public async Task<ActionResult<OperationResponse<LogInspectionDto>>> CreateLogInspection([FromBody] LogInspectionDto logInspectionDto)
         {
             var response = await _logInspectionBao.CreateLogInspectionAsync(logInspectionDto);
-
-            if (response.Code == 200)
-            {
-                // Lógica del odómetro: si el kilometraje supera los 25,000 km, cambiar el estado del vehículo a 'En servicio'
-                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
-                {
-                    var vehicleResponse = await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
-                    if (vehicleResponse.Code != 200)
-                    {
-                        return StatusCode(500, $"Error updating vehicle status: {vehicleResponse.Message}");
-                    }
-                }
-            }
-
             return StatusCode(response.Code, response);
         }
+
+
 
         [HttpPut("{id}")]
         public async Task<ActionResult<OperationResponse<LogInspectionDto>>> UpdateLogInspection(int id, [FromBody] LogInspectionDto logInspectionDto)

@@ -42,44 +42,108 @@ namespace LogiDriveBE.BAL.Services
         {
             try
             {
-                // Mapear de DTO a entidad
-                var logInspection = MapToLogInspection(logInspectionDto);
-                var inspectionResponse = await _logInspectionDao.CreateLogInspectionAsync(logInspection);
+                // 1. Validaciones iniciales
+                if (logInspectionDto.LogProcess == null || logInspectionDto.LogProcess.IdLogReservation <= 0)
+                {
+                    return new OperationResponse<LogInspectionDto>(400,
+                        "Se requiere información del LogProcess con una reserva válida");
+                }
 
+                // 2. Crear primero el LogProcess
+                var logProcessDto = new LogProcessDto
+                {
+                    IdLogReservation = logInspectionDto.LogProcess.IdLogReservation,
+                    Action = logInspectionDto.LogProcess.Action ?? $"Creación de Inspección - {logInspectionDto.TypeInspection}",
+                    IdCollaborator = logInspectionDto.IdCollaborator,
+                    IdVehicleAssignment = logInspectionDto.IdVehicleAssignment,
+                };
+
+                var processResponse = await _logProcessDao.CreateLogProcessAsync(logProcessDto);
+                if (processResponse.Code != 200)
+                {
+                    return new OperationResponse<LogInspectionDto>(processResponse.Code,
+                        $"Error creando LogProcess: {processResponse.Message}");
+                }
+
+                // 3. Crear la inspección
+                var logInspection = new LogInspection
+                {
+                    IdCollaborator = logInspectionDto.IdCollaborator,
+                    IdVehicleAssignment = logInspectionDto.IdVehicleAssignment,
+                    Comment = logInspectionDto.Comment,
+                    Odometer = logInspectionDto.Odometer,
+                    Fuel = logInspectionDto.Fuel,
+                    TypeInspection = logInspectionDto.TypeInspection,
+                    Status = logInspectionDto.Status,
+                    CreationDate = DateTime.Now,
+                    Image = logInspectionDto.Image,
+                    IdLogProcess = processResponse.Data.IdLogProcess,
+                    LogInspectionParts = logInspectionDto.PartsInspected?.Select(p => new LogInspectionPart
+                    {
+                        IdPartVehicle = p.IdPartVehicle,
+                        Comment = p.Comment,
+                        Status = p.Status,
+                        Image = p.Image,
+                        DateInspection = DateTime.Now
+                    }).ToList()
+                };
+
+                var inspectionResponse = await _logInspectionDao.CreateLogInspectionAsync(logInspection);
                 if (inspectionResponse.Code != 200)
                 {
-                    return new OperationResponse<LogInspectionDto>(inspectionResponse.Code, inspectionResponse.Message);
+                    return new OperationResponse<LogInspectionDto>(inspectionResponse.Code,
+                        inspectionResponse.Message);
                 }
 
-                // Si LogProcess es null, lo creamos automáticamente
-                if (logInspectionDto.LogProcess == null)
+                // 4. Procesar las partes de la inspección
+                if (logInspectionDto.PartsInspected != null && logInspectionDto.PartsInspected.Any())
                 {
-                    var logProcess = new LogProcess
+                    var parts = logInspectionDto.PartsInspected.Select(p => new LogInspectionPart
                     {
-                        Action = "Creación de Inspección",
-                        IdCollaborator = logInspectionDto.IdCollaborator,
-                        IdVehicleAssignment = logInspectionDto.IdVehicleAssignment,
-                        IdLogInspection = inspectionResponse.Data.IdLogInspection
-                    };
+                        IdLogInspection = inspectionResponse.Data.IdLogInspection,
+                        IdPartVehicle = p.IdPartVehicle,
+                        Comment = p.Comment,
+                        Status = p.Status,
+                        Image = p.Image,
+                        DateInspection = DateTime.Now
+                    }).ToList();
 
-                    var processResponse = await _logProcessDao.CreateLogProcessAsync(MapToLogProcessDto(logProcess));
+                    var partsResponse = await _logInspectionDao.UpdateLogInspectionPartsAsync(
+                        inspectionResponse.Data.IdLogInspection, parts);
 
-                    if (processResponse.Code != 200)
+                    if (partsResponse.Code != 200)
                     {
-                        return new OperationResponse<LogInspectionDto>(processResponse.Code, processResponse.Message);
+                        // Log error but continue
+                        Console.WriteLine($"Warning: Error al actualizar partes: {partsResponse.Message}");
                     }
 
-                    logInspectionDto.LogProcess = MapToLogProcessDto(logProcess);
+                    // 5. Procesar partes defectuosas
+                    foreach (var part in logInspectionDto.PartsInspected.Where(p => !p.Status))
+                    {
+                        await _maintenancePartBao.SendPartToMaintenanceAsync(part.IdPartVehicle);
+                        await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                    }
                 }
 
-                // Mapear de entidad a DTO para la respuesta
-                var createdLogInspectionDto = MapToLogInspectionDto(inspectionResponse.Data);
+                // 6. Verificar el odómetro
+                if (int.TryParse(logInspectionDto.Odometer, out int currentOdometer) && currentOdometer >= 25000)
+                {
+                    await _vehicleBao.UpdateVehicleStatusAsync(logInspectionDto.IdVehicleAssignment, "En servicio");
+                }
 
-                return new OperationResponse<LogInspectionDto>(200, "LogInspection y LogProcess creados exitosamente", createdLogInspectionDto);
+                // 7. Actualizar el LogProcess con el IdLogInspection
+                processResponse.Data.IdLogInspection = inspectionResponse.Data.IdLogInspection;
+                await _logProcessDao.UpdateLogProcessAsync(processResponse.Data);
+
+                var resultDto = MapToLogInspectionDto(inspectionResponse.Data);
+                resultDto.LogProcess = processResponse.Data;
+
+                return new OperationResponse<LogInspectionDto>(200, "Inspección creada exitosamente", resultDto);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return new OperationResponse<LogInspectionDto>(500, $"Error creando la inspección: {ex.Message}");
+                return new OperationResponse<LogInspectionDto>(500,
+                    $"Error creando la inspección: {ex.Message} - Inner: {ex.InnerException?.Message}");
             }
         }
 
@@ -149,9 +213,11 @@ namespace LogiDriveBE.BAL.Services
 
         // Mapeo de DTO a entidad LogInspection
         // En el método MapToLogInspection
+        // Mapeo de DTO a entidad LogInspection
         private LogInspection MapToLogInspection(LogInspectionDto dto)
         {
-            return new LogInspection
+            // Primero declaramos e inicializamos logInspection con las propiedades básicas
+            var logInspection = new LogInspection
             {
                 IdCollaborator = dto.IdCollaborator,
                 IdVehicleAssignment = dto.IdVehicleAssignment,
@@ -161,17 +227,23 @@ namespace LogiDriveBE.BAL.Services
                 TypeInspection = dto.TypeInspection,
                 Status = dto.Status,
                 CreationDate = dto.CreationDate,
-                Image = dto.Image,
-                LogInspectionParts = dto.PartsInspected?.Select(p => new LogInspectionPart
-                {
-                    IdPartVehicle = p.IdPartVehicle,
-                    Comment = p.Comment,
-                    Status = p.Status,
-                    Image = p.Image,
-                    DateInspection = p.DateInspection
-                }).ToList()
+                Image = dto.Image
             };
+
+            // Ahora asignamos las partes inspeccionadas y establecemos el IdLogInspection de cada parte
+            logInspection.LogInspectionParts = dto.PartsInspected?.Select(p => new LogInspectionPart
+            {
+                IdPartVehicle = p.IdPartVehicle,
+                Comment = p.Comment,
+                Status = p.Status,
+                Image = p.Image,
+                DateInspection = p.DateInspection,
+                IdLogInspection = logInspection.IdLogInspection // Asignamos el Id de la inspección
+            }).ToList();
+
+            return logInspection;
         }
+
 
 
         // Mapeo de LogProcess a LogProcessDto
@@ -184,6 +256,32 @@ namespace LogiDriveBE.BAL.Services
                 IdCollaborator = logProcess.IdCollaborator,
                 IdVehicleAssignment = logProcess.IdVehicleAssignment,
                 IdLogInspection = logProcess.IdLogInspection
+            };
+        }
+
+        private LogInspectionDto MapToLogInspectionDtos(LogInspection entity)
+        {
+            return new LogInspectionDto
+            {
+                IdLogInspection = entity.IdLogInspection,
+                IdCollaborator = entity.IdCollaborator,
+                IdVehicleAssignment = entity.IdVehicleAssignment ?? 0,
+                Comment = entity.Comment,
+                Odometer = entity.Odometer,
+                Fuel = entity.Fuel,
+                TypeInspection = entity.TypeInspection,
+                Status = entity.Status,
+                CreationDate = entity.CreationDate,
+                Image = entity.Image,
+                PartsInspected = entity.LogInspectionParts?.Select(p => new LogInspectionPartDto
+                {
+                    IdPartVehicle = p.IdPartVehicle,
+                    Comment = p.Comment,
+                    Status = p.Status,
+                    Image = p.Image,
+                    DateInspection = p.DateInspection
+                }).ToList(),
+                LogProcess = new LogProcessDto()
             };
         }
 
@@ -252,6 +350,8 @@ namespace LogiDriveBE.BAL.Services
                 return new OperationResponse<LogInspectionDto>(500, $"Error procesando la inspección: {ex.Message}");
             }
         }
+
+
 
     }
 }

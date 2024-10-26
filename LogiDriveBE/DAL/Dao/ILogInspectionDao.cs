@@ -14,6 +14,7 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<bool>> DeleteLogInspectionAsync(int id);
         Task<OperationResponse<LogInspection>> UpdateLogInspectionAsync(int id, LogInspection logInspection); // Cambiar aquí                                                                                                              // Definir el método en la interfaz ILogInspectionDao
         Task<OperationResponse<LogInspection>> GetLogInspectionByVehicleAssignmentAsync(int vehicleAssignmentId, string inspectionType);
+        Task<OperationResponse<bool>> UpdateLogInspectionPartsAsync(int idLogInspection, List<LogInspectionPart> parts);
 
     }
 
