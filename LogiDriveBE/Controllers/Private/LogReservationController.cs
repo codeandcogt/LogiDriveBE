@@ -8,7 +8,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+
     public class LogReservationController : ControllerBase
     {
         private readonly ILogReservationBao _logReservationBao;
@@ -66,5 +66,13 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _logReservationBao.DeleteLogReservationStatusAsync(id);
             return StatusCode(response.Code, response);
         }
+
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<LogReservationDto>>>> GetLogReservationsByUserId(int userId)
+        {
+            var response = await _logReservationBao.GetLogReservationsByUserIdAsync(userId);
+            return StatusCode(response.Code, response);
+        }
+
     }
 }

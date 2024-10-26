@@ -92,5 +92,11 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _logReservationDao.DeleteLogReservationStatusAsync(id);
         }
+
+        public async Task<OperationResponse<IEnumerable<LogReservationDto>>> GetLogReservationsByUserIdAsync(int userId)
+        {
+            return await _logReservationDao.GetLogReservationsByUserIdAsync(userId);
+        }
+
     }
 }

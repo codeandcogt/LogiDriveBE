@@ -202,6 +202,38 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting Reservation: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<IEnumerable<LogReservationDto>>> GetLogReservationsByUserIdAsync(int userId)
+        {
+            try
+            {
+                var logReservations = await _context.LogReservations
+                                                    .Include(lr => lr.IdCollaboratorNavigation)
+                                                    .Where(lr => lr.IdCollaboratorNavigation.IdUser == userId && lr.Status == true)
+                                                    .ToListAsync();
+
+                var logReservationDtos = logReservations.Select(lr => new LogReservationDto
+                {
+                    IdLogReservation = lr.IdLogReservation,
+                    IdCollaborator = lr.IdCollaborator,
+                    Comment = lr.Comment,
+                    IdTown = lr.IdTown,
+                    NumberPeople = lr.NumberPeople,
+                    StatusReservation = lr.StatusReservation,
+                    Justify = lr.Justify,
+                    Addres = lr.Addres,
+                    Status = lr.Status,
+                    CreationDate = lr.CreationDate
+                });
+
+                return new OperationResponse<IEnumerable<LogReservationDto>>(200, "Log reservations retrieved successfully", logReservationDtos);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<IEnumerable<LogReservationDto>>(500, $"Error retrieving log reservations by user ID: {ex.Message}");
+            }
+        }
+
     }
 }
 
