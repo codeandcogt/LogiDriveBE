@@ -74,7 +74,25 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<MaintenancePart>(500, $"Error updating maintenance part: {ex.Message}");
             }
         }
+        public async Task<OperationResponse<bool>> SendToMaintenanceAsync(int idPartVehicle)
+        {
+            try
+            {
+                var maintenancePart = new MaintenancePart
+                {
+                    IdPartVehicle = idPartVehicle,
+                   
+                };
 
+                _context.MaintenanceParts.Add(maintenancePart);
+                await _context.SaveChangesAsync();
+                return new OperationResponse<bool>(200, "Part sent to maintenance successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error sending part to maintenance: {ex.Message}", false);
+            }
+        }
         public async Task<OperationResponse<bool>> DeleteMaintenancePartAsync(int id)
         {
             try
@@ -92,6 +110,22 @@ namespace LogiDriveBE.DAL.Services
             {
                 return new OperationResponse<bool>(500, $"Error deleting maintenance part: {ex.Message}");
             }
+        }
+
+        public async Task<OperationResponse<bool>> SendPartToMaintenanceAsync(int partId)
+        {
+            var part = await _context.PartVehicles.FindAsync(partId);
+            if (part == null)
+            {
+                return new OperationResponse<bool>(404, "Parte no encontrada.");
+            }
+
+            // Lógica para enviar la parte a mantenimiento
+            part.StatusPart = "En mantenimiento"; // Cambiar el estado según la lógica de la aplicación
+            _context.Entry(part).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return new OperationResponse<bool>(200, "Parte enviada a mantenimiento exitosamente.", true);
         }
 
         public async Task<OperationResponse<bool>> DeleteLogMaintenancePartStatusAsync(int id)

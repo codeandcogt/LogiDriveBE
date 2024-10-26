@@ -74,6 +74,28 @@ namespace LogiDriveBE.DAL.Dao
             }
         }
 
+        public async Task<OperationResponse<bool>> UpdateVehicleStatusAsync(int id, string status)
+        {
+            try
+            {
+                var vehicle = await _context.Vehicles.FindAsync(id);
+                if (vehicle == null)
+                {
+                    return new OperationResponse<bool>(404, "Vehicle not found");
+                }
+
+                vehicle.StatusVehicle = status;
+                _context.Entry(vehicle).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return new OperationResponse<bool>(200, "Vehicle status updated successfully", true);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<bool>(500, $"Error updating vehicle status: {ex.Message}");
+            }
+        }
+
         public async Task<OperationResponse<bool>> DeleteVehicleAsync(int id)
         {
             try

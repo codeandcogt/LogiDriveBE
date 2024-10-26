@@ -170,17 +170,26 @@ public partial class LogiDriveDbContext : DbContext
 
         modelBuilder.Entity<LogInspectionPart>(entity =>
         {
-            entity.HasKey(e => e.IdLogInspectionPart).HasName("PK__LogInspe__0CB8DEA48D6A4C83");
+            entity.HasKey(e => e.IdLogInspectionPart).HasName("PK_LogInspectionPart");
 
             entity.ToTable("LogInspectionPart");
 
-            entity.Property(e => e.IdLogInspectionPart).ValueGeneratedNever();
-            entity.Property(e => e.Comment).HasMaxLength(255);
-            entity.Property(e => e.DateInspection).HasDefaultValueSql("(sysdatetime())");
+            // Configuración de la columna IdLogInspectionPart como autoincremental
+            entity.Property(e => e.IdLogInspectionPart)
+                .ValueGeneratedOnAdd(); // Indica que el valor se generará automáticamente
+
+            // Otras configuraciones de columnas
+            entity.Property(e => e.Comment)
+                .HasMaxLength(255);
+
+            entity.Property(e => e.DateInspection)
+                .HasDefaultValueSql("(sysdatetime())");
+
             entity.Property(e => e.Image)
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
+            // Configuraciones de relaciones
             entity.HasOne(d => d.IdLogInspectionNavigation).WithMany(p => p.LogInspectionParts)
                 .HasForeignKey(d => d.IdLogInspection)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -191,6 +200,7 @@ public partial class LogiDriveDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PartVehicleLogInspectionPart");
         });
+
 
         modelBuilder.Entity<LogProcess>(entity =>
         {

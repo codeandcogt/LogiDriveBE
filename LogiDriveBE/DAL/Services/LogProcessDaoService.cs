@@ -4,6 +4,10 @@ using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.DAL.Services
 {
@@ -22,20 +26,61 @@ namespace LogiDriveBE.DAL.Services
             {
                 var logProcess = new LogProcess
                 {
-                    IdLogReservation = logProcessDto.IdLogReservation,
                     Action = logProcessDto.Action,
                     IdCollaborator = logProcessDto.IdCollaborator,
                     IdVehicleAssignment = logProcessDto.IdVehicleAssignment,
-                    IdLogInspection = logProcessDto.IdLogInspection
+                    IdLogInspection = null  // Inicialmente establecemos como null
                 };
+
+                // Si viene IdLogReservation, lo asignamos
+                if (logProcessDto.IdLogReservation > 0)
+                {
+                    var reservation = await _context.LogReservations.FindAsync(logProcessDto.IdLogReservation);
+                    if (reservation == null)
+                    {
+                        return new OperationResponse<LogProcessDto>(400, "La reserva especificada no existe");
+                    }
+                    logProcess.IdLogReservation = logProcessDto.IdLogReservation;
+                }
+                else
+                {
+                    // Si no viene IdLogReservation, creamos uno temporal o asignamos un valor por defecto
+                    // Esto dependerá de tu lógica de negocio
+                    var defaultReservation = await _context.LogReservations.FirstOrDefaultAsync();
+                    if (defaultReservation == null)
+                    {
+                        return new OperationResponse<LogProcessDto>(500, "No existe una reserva por defecto en el sistema");
+                    }
+                    logProcess.IdLogReservation = defaultReservation.IdLogReservation;
+                }
 
                 _context.LogProcesses.Add(logProcess);
                 await _context.SaveChangesAsync();
-                return new OperationResponse<LogProcessDto>(200, "Log process created successfully", logProcessDto);
+
+                // Si tenemos un IdLogInspection, actualizamos el proceso después de crear
+                if (logProcessDto.IdLogInspection.HasValue && logProcessDto.IdLogInspection.Value > 0)
+                {
+                    logProcess.IdLogInspection = logProcessDto.IdLogInspection;
+                    _context.LogProcesses.Update(logProcess);
+                    await _context.SaveChangesAsync();
+                }
+
+                var resultDto = new LogProcessDto
+                {
+                    IdLogProcess = logProcess.IdLogProcess,
+                    IdLogReservation = logProcess.IdLogReservation,
+                    Action = logProcess.Action,
+                    IdCollaborator = logProcess.IdCollaborator,
+                    IdVehicleAssignment = logProcess.IdVehicleAssignment,
+                    IdLogInspection = logProcess.IdLogInspection
+                };
+
+                return new OperationResponse<LogProcessDto>(200, "Log process created successfully", resultDto);
             }
             catch (Exception ex)
             {
-                return new OperationResponse<LogProcessDto>(500, $"Error creating log process: {ex.Message}");
+                return new OperationResponse<LogProcessDto>(500, 
+                    $"Error creating log process: {ex.Message} - Inner: {ex.InnerException?.Message}");
             }
         }
 
@@ -78,7 +123,7 @@ namespace LogiDriveBE.DAL.Services
                     IdCollaborator = lp.IdCollaborator,
                     IdVehicleAssignment = lp.IdVehicleAssignment,
                     IdLogInspection = lp.IdLogInspection
-                });
+                }).ToList();
 
                 return new OperationResponse<IEnumerable<LogProcessDto>>(200, "Log processes retrieved successfully", logProcessDtos);
             }
