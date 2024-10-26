@@ -5,6 +5,7 @@ using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
@@ -67,6 +68,12 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
+        [HttpGet("ByUser/{userId}")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<VehicleAssignmentDto>>>> GetVehicleAssignmentsByUserId(int userId)
+        {
+            var response = await _vehicleAssignmentBao.GetVehicleAssignmentsByUserIdAsync(userId);
+            return StatusCode(response.Code, response);
+        }
 
     }
 }

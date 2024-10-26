@@ -16,6 +16,29 @@ namespace LogiDriveBE.DAL.Services
             _context = context;
         }
 
+        public async Task<OperationResponse<IEnumerable<VehicleAssignmentDto>>> GetVehicleAssignmentsByUserIdAsync(int userId)
+        {
+            var assignments = await _context.VehicleAssignments
+                .Include(va => va.IdLogReservationNavigation)  
+                .Where(va => va.IdLogReservationNavigation.IdCollaborator == userId)  // Filtrar por IdCollaborator (usuario)
+                .Select(va => new VehicleAssignmentDto
+                {
+                    IdVehicleAssignment = va.IdVehicleAssignment,
+                    Comment = va.Comment,
+                    TripType = va.TripType,
+                    StartDate = va.StartDate,
+                    EndDate = va.EndDate,
+                    IdVehicle = va.IdVehicle,
+                    IdLogReservation = va.IdLogReservation,
+                    Status = va.Status,
+                    CreationDate = va.CreationDate
+                })
+                .ToListAsync();
+
+            return new OperationResponse<IEnumerable<VehicleAssignmentDto>>(200, "Vehicle Assignments retrieved successfully", assignments);
+        }
+
+
         public async Task<OperationResponse<VehicleAssignmentDto>> CreateVehicleAssignmentAsync(VehicleAssignmentDto vehicleAssignmentDto)
         {
             try
