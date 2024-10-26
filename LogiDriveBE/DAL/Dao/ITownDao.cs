@@ -11,5 +11,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<TownDto>> UpdateTownAsync(TownDto townDto);
         Task<OperationResponse<bool>> DeleteTownAsync(int id);
         Task<OperationResponse<bool>> DeleteTownStatusAsync(int id);
+        Task<OperationResponse<IEnumerable<TownDto>>> GetTownsByDepartmentIdAsync(int departmentId);
     }
 }

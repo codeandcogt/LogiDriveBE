@@ -9,7 +9,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-
+    [Authorize]
     public class VehicleAssignmentController : ControllerBase
     {
         private readonly IVehicleAssignmentBao _vehicleAssignmentBao;

@@ -150,5 +150,28 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting town: {ex.Message}");
             }
         }
+        public async Task<OperationResponse<IEnumerable<TownDto>>> GetTownsByDepartmentIdAsync(int departmentId)
+        {
+            try
+            {
+                var towns = await _context.Towns
+                                          .Where(t => t.IdDepartment == departmentId && t.Status == true)
+                                          .ToListAsync();
+                var townDtos = towns.Select(t => new TownDto
+                {
+                 
+                    Name = t.Name,
+                    IdDepartment = t.IdDepartment,
+                    Status = t.Status
+                });
+
+                return new OperationResponse<IEnumerable<TownDto>>(200, "Towns retrieved successfully by department", townDtos);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<IEnumerable<TownDto>>(500, $"Error retrieving towns by department: {ex.Message}");
+            }
+        }
+
     }
 }
