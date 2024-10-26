@@ -43,5 +43,12 @@ namespace LogiDriveBE.BAL.Services
         {
             return await _vehicleAssignmentDao.DeleteVehicleAssigmentStatusAsync(id);
         }
+
+        public async Task<OperationResponse<IEnumerable<VehicleAssignmentView>>> GetVehicleAssignmentsByDateWithStatusUpdateAsync(DateTime specificDate)
+        {
+            return await _vehicleAssignmentDao.GetVehicleAssignmentsByDateWithStatusUpdateAsync(specificDate);
+        }
+
+
     }
 }

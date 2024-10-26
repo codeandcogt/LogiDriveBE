@@ -169,5 +169,46 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<bool>(500, $"Error deleting vehicleAssigment: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<IEnumerable<VehicleAssignmentView>>> GetVehicleAssignmentsByDateWithStatusUpdateAsync(DateTime specificDate)
+        {
+            try
+            {
+                // Obtener todas las asignaciones activas para la fecha específica desde la vista
+                var vehicleAssignmentsFromView = await _context.VehicleAssignmentViews
+                    .FromSqlRaw("SELECT * FROM vw_VehicleAssignmentsByDate WHERE CAST(DepartureTime AS DATE) = {0}", specificDate.Date)
+                    .ToListAsync();
+
+                // Verificar si han pasado dos horas desde DepartureTime y cambiar el estado en VehicleAssignments si es necesario
+                var currentTime = DateTime.UtcNow;
+                var vehicleAssignmentsToUpdate = await _context.VehicleAssignments
+                                                       .Where(a => a.Status == true && a.StartDate.Date == specificDate.Date)
+                                                       .ToListAsync();
+
+                foreach (var assignment in vehicleAssignmentsToUpdate)
+                {
+                    if ((currentTime - assignment.StartDate).TotalHours >= 2)
+                    {
+                        assignment.Status = false;
+                        _context.Entry(assignment).State = EntityState.Modified;
+                    }
+                }
+
+                // Guardar cambios
+                await _context.SaveChangesAsync();
+
+                // Retornar únicamente los datos de la vista
+                return new OperationResponse<IEnumerable<VehicleAssignmentView>>(200, "Vehicle Assignments retrieved and updated successfully", vehicleAssignmentsFromView);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<IEnumerable<VehicleAssignmentView>>(500, $"Error retrieving or updating vehicle assignments: {ex.Message}");
+            }
+        }
+
+
+
+
+
     }
 }
