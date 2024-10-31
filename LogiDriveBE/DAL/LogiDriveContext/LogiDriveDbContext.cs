@@ -62,6 +62,7 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<VehicleAssignmentWithCollaboratorView> VehicleAssignmentWithCollaborator { get; set; }
     public virtual DbSet<ProcessReservationReportDto> ProcessReservationReport { get; set; }
     public virtual DbSet<VehicleInspectionReportDto> AllInspections { get; set; }
+    public virtual DbSet<ProcessLogReportDto> ProcessLogs { get; set; }
 
 
 
@@ -485,6 +486,12 @@ public partial class LogiDriveDbContext : DbContext
         {
             entity.HasNoKey();
             entity.ToView("vw_AllInspections");
+        });
+
+        modelBuilder.Entity<ProcessLogReportDto>(entity => // Configuración para la nueva vista
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_ProcessLogs"); // Nombre de la vista de Process Logs en la base de datos
         });
 
     }

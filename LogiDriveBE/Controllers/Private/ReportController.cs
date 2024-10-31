@@ -15,17 +15,20 @@ namespace LogiDriveBE.Controllers.Private
         private readonly IVehicleAssignmentReportBao _vehicleAssignmentReportBao;
         private readonly IVehicleProcessReservationReportBao _vehicleProcessReservationReportBao;
         private readonly IVehicleInspectionReportBao _vehicleInspectionReportBao;
+        private readonly IProcessLogReportBao _processLogReportBao;
 
         public ReportController(
             IReportBao reportBao,
             IVehicleAssignmentReportBao vehicleAssignmentReportBao,
             IVehicleProcessReservationReportBao vehicleProcessReservationReportBao,
-            IVehicleInspectionReportBao vehicleInspectionReportBao)
+            IVehicleInspectionReportBao vehicleInspectionReportBao,
+            IProcessLogReportBao processLogReportBao)
         {
             _reportBao = reportBao;
             _vehicleAssignmentReportBao = vehicleAssignmentReportBao;
             _vehicleProcessReservationReportBao = vehicleProcessReservationReportBao;
             _vehicleInspectionReportBao = vehicleInspectionReportBao;
+            _processLogReportBao = processLogReportBao;
         }
 
         [HttpGet("generateReport")]
@@ -60,6 +63,11 @@ namespace LogiDriveBE.Controllers.Private
                     string inspectionPdfMimeType = GetMimeType(reportType);
                     return File(reportBytes, inspectionPdfMimeType, $"reporte_{reportType}.pdf");
 
+                case "processLogPdf":
+                    reportBytes = (await _processLogReportBao.GenerateProcessLogPdfReportAsync()).Data;
+                    string processLogPdfMimeType = GetMimeType(reportType);
+                    return File(reportBytes, processLogPdfMimeType, $"reporte_{reportType}.pdf");
+
                 case "collaboratorCsv":
                     var csvResponse = await _reportBao.GenerateReportAsync("csv");
                     if (csvResponse.Code == 200)
@@ -84,6 +92,11 @@ namespace LogiDriveBE.Controllers.Private
                     reportBytes = (await _vehicleInspectionReportBao.GenerateVehicleInspectionCsvReportAsync()).Data;
                     string inspectionCsvMimeType = GetMimeType(reportType);
                     return File(reportBytes, inspectionCsvMimeType, $"reporte_{reportType}.csv");
+
+                case "processLogCsv":
+                    reportBytes = (await _processLogReportBao.GenerateProcessLogCsvReportAsync()).Data;
+                    string processLogCsvMimeType = GetMimeType(reportType);
+                    return File(reportBytes, processLogCsvMimeType, $"reporte_{reportType}.csv");
 
                 case "collaboratorExcel":
                     var excelResponse = await _reportBao.GenerateReportAsync("xlsx");
@@ -110,6 +123,11 @@ namespace LogiDriveBE.Controllers.Private
                     string inspectionExcelMimeType = GetMimeType(reportType);
                     return File(reportBytes, inspectionExcelMimeType, $"reporte_{reportType}.xlsx");
 
+                case "processLogExcel":
+                    reportBytes = (await _processLogReportBao.GenerateProcessLogExcelReportAsync()).Data;
+                    string processLogExcelMimeType = GetMimeType(reportType);
+                    return File(reportBytes, processLogExcelMimeType, $"reporte_{reportType}.xlsx");
+
                 default:
                     return BadRequest("Tipo de reporte no válido.");
             }
@@ -124,16 +142,19 @@ namespace LogiDriveBE.Controllers.Private
                 "assignedVehiclesPdf" => "application/pdf",
                 "processReservationPdf" => "application/pdf",
                 "inspectionPdf" => "application/pdf",
+                "processLogPdf" => "application/pdf",
                 "csv" => "text/csv",
                 "collaboratorCsv" => "text/csv",
                 "assignedVehiclesCsv" => "text/csv",
                 "processReservationCsv" => "text/csv",
                 "inspectionCsv" => "text/csv",
+                "processLogCsv" => "text/csv",
                 "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "collaboratorExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "assignedVehiclesExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "processReservationExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "inspectionExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "processLogExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 _ => "application/octet-stream",
             };
         }
