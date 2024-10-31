@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,7 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<VehicleAssignmentView> VehicleAssignmentViews { get; set; }
     public virtual DbSet<VehicleAssignmentWithCollaboratorView> VehicleAssignmentWithCollaborator { get; set; }
     public virtual DbSet<ProcessReservationReportDto> ProcessReservationReport { get; set; }
+    public virtual DbSet<VehicleInspectionReportDto> AllInspections { get; set; }
 
 
 
@@ -477,6 +479,12 @@ public partial class LogiDriveDbContext : DbContext
         {
             entity.HasNoKey(); // No tiene clave primaria
             entity.ToView("vw_ProcessReservationReport"); // Nombre de la vista en la base de datos
+        });
+
+        modelBuilder.Entity<VehicleInspectionReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_AllInspections");
         });
 
     }
