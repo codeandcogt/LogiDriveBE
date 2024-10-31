@@ -58,6 +58,7 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<VehicleAssignment> VehicleAssignments { get; set; }
 
     public virtual DbSet<VehicleAssignmentView> VehicleAssignmentViews { get; set; }
+    public virtual DbSet<VehicleAssignmentWithCollaboratorView> VehicleAssignmentWithCollaborator { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -460,8 +461,17 @@ public partial class LogiDriveDbContext : DbContext
             entity.ToView("vw_VehicleAssignmentsByDate"); // Nombre de la vista en la base de datos
         });
 
+     
+
+        // Incorporando la vista VehicleAssignmentWithCollaborator
+        modelBuilder.Entity<VehicleAssignmentWithCollaboratorView>(entity =>
+        {
+            entity.HasNoKey(); // No tiene clave primaria
+            entity.ToView("vw_VehicleAssignmentWithCollaborator"); // Nombre de la vista en la base de datos
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 
+    
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

@@ -2,6 +2,7 @@
 using LogiDriveBE.UTILS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.Controllers.Private
 {
@@ -11,24 +12,40 @@ namespace LogiDriveBE.Controllers.Private
     public class ReportController : ControllerBase
     {
         private readonly IReportBao _reportBao;
+        private readonly IVehicleAssignmentReportBao _vehicleAssignmentReportBao;
 
-        public ReportController(IReportBao reportBao)
+        public ReportController(IReportBao reportBao, IVehicleAssignmentReportBao vehicleAssignmentReportBao)
         {
             _reportBao = reportBao;
+            _vehicleAssignmentReportBao = vehicleAssignmentReportBao;
         }
 
         [HttpGet("generateReport")]
         public async Task<IActionResult> GenerateReport([FromQuery] string reportType)
         {
-            var response = await _reportBao.GenerateReportAsync(reportType);
+            byte[] reportBytes;
 
-            if (response.Code == 200)
+            switch (reportType)
             {
-                var file = response.Data;
-                string mimeType = GetMimeType(reportType);
-                return File(file, mimeType, $"report.{reportType}");
+                case "collaboratorPdf":
+                    var response = await _reportBao.GenerateReportAsync("pdf");
+                    if (response.Code == 200)
+                    {
+                        reportBytes = response.Data;
+                        string mimeType = GetMimeType(reportType);
+                        return File(reportBytes, mimeType, $"report.{reportType}");
+                    }
+                    return StatusCode(response.Code, response);
+
+                case "assignedVehiclesPdf":
+                    reportBytes = (await _vehicleAssignmentReportBao.GenerateVehicleAssignmentPdfReportAsync()).Data;
+                    string assignedVehicleMimeType = GetMimeType(reportType);
+                    return File(reportBytes, assignedVehicleMimeType, $"reporte_{reportType}.pdf");
+
+                // Puedes añadir más tipos de reportes aquí según necesites.
+                default:
+                    return BadRequest("Tipo de reporte no válido.");
             }
-            return StatusCode(response.Code, response);
         }
 
         private string GetMimeType(string reportType)
@@ -36,6 +53,8 @@ namespace LogiDriveBE.Controllers.Private
             return reportType switch
             {
                 "pdf" => "application/pdf",
+                "collaboratorPdf" => "application/pdf",
+                "assignedVehiclesPdf" => "application/pdf",
                 "csv" => "text/csv",
                 "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 _ => "application/octet-stream",

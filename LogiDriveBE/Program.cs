@@ -76,6 +76,7 @@ builder.Services.AddScoped<IPartVehicleDao, PartVehicleDaoService>();
 builder.Services.AddScoped<IPreliminaryInspectionSheetDao, PreliminaryInspectionSheetDaoService>();
 builder.Services.AddScoped<ILogInspectionDao, LogInspectionDaoService>();
 builder.Services.AddScoped<ILogInspectionPartDao, LogInspectionPartDaoService>();
+builder.Services.AddScoped<IVehicleAssignmentReportDao, VehicleAssignmentReportDaoService>();
 
 builder.Services.AddScoped<ILogTrackingDao, LogTrackingDao>();
 builder.Services.AddScoped<ILogTripDao, LogTripDao>();
@@ -97,6 +98,9 @@ builder.Services.AddScoped<IMaintenancePartBao, MaintenancePartBaoService>();
 builder.Services.AddScoped<IServiceBao,  ServiceBaoService>();
 builder.Services.AddScoped<IVehicleBao, VehicleBaoService>();
 builder.Services.AddScoped<IPartVehicleBao, PartVehicleBaoService>();
+
+builder.Services.AddScoped<IVehicleAssignmentReportBao, VehicleAssignmentReportBaoService>();
+
 builder.Services.AddScoped<IPreliminaryInspectionSheetBao, PreliminaryInspectionSheetBaoService>();
 
 builder.Services.AddScoped<ILogTrackingBao, LogTrackingBaoService>();
