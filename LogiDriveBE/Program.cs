@@ -82,6 +82,7 @@ builder.Services.AddScoped<ILogTrackingDao, LogTrackingDao>();
 builder.Services.AddScoped<ILogTripDao, LogTripDao>();
 
 builder.Services.AddScoped<IReportDao, ReportDaoService>();
+builder.Services.AddScoped<IVehicleProcessReservationReportDao, VehicleProcessReservationReportDaoService>();
 
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
@@ -108,6 +109,7 @@ builder.Services.AddScoped<ILogTripBao, LogTripBaoService>();
 builder.Services.AddScoped<ILogInspectionBao, LogInspectionBaoService>();
 builder.Services.AddScoped<ILogInspectionPartBao, LogInspectionPartBaoService>();
 builder.Services.AddScoped<IReportBao, ReportBaoService>();
+builder.Services.AddScoped<IVehicleProcessReservationReportBao, VehicleProcessReservationReportBaoService>();
 // Add services to the container.
 builder.Services.AddControllers();
 //.AddJsonOptions(options =>

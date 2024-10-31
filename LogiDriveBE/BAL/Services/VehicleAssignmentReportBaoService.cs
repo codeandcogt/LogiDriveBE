@@ -16,8 +16,17 @@ namespace LogiDriveBE.BAL.Services
 
         public async Task<OperationResponse<byte[]>> GenerateVehicleAssignmentPdfReportAsync()
         {
-            var reportData = await _vehicleAssignmentReportDao.GenerateVehicleAssignmentPdfReportAsync();
-            return new OperationResponse<byte[]>(200, "Reporte generado exitosamente", reportData);
+            return await _vehicleAssignmentReportDao.GenerateVehicleAssignmentPdfReportAsync();
+        }
+
+        public async Task<OperationResponse<byte[]>> GenerateVehicleAssignmentCsvReportAsync()
+        {
+            return await _vehicleAssignmentReportDao.GenerateVehicleAssignmentCsvReportAsync();
+        }
+
+        public async Task<OperationResponse<byte[]>> GenerateVehicleAssignmentExcelReportAsync()
+        {
+            return await _vehicleAssignmentReportDao.GenerateVehicleAssignmentExcelReportAsync();
         }
 
         public async Task<List<VehicleAssignmentReportDto>> GetVehicleAssignmentReportAsync()

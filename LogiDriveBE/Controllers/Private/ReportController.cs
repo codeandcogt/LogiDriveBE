@@ -13,11 +13,16 @@ namespace LogiDriveBE.Controllers.Private
     {
         private readonly IReportBao _reportBao;
         private readonly IVehicleAssignmentReportBao _vehicleAssignmentReportBao;
+        private readonly IVehicleProcessReservationReportBao _vehicleProcessReservationReportBao;
 
-        public ReportController(IReportBao reportBao, IVehicleAssignmentReportBao vehicleAssignmentReportBao)
+        public ReportController(
+            IReportBao reportBao,
+            IVehicleAssignmentReportBao vehicleAssignmentReportBao,
+            IVehicleProcessReservationReportBao vehicleProcessReservationReportBao)
         {
             _reportBao = reportBao;
             _vehicleAssignmentReportBao = vehicleAssignmentReportBao;
+            _vehicleProcessReservationReportBao = vehicleProcessReservationReportBao;
         }
 
         [HttpGet("generateReport")]
@@ -33,7 +38,7 @@ namespace LogiDriveBE.Controllers.Private
                     {
                         reportBytes = response.Data;
                         string mimeType = GetMimeType(reportType);
-                        return File(reportBytes, mimeType, $"report.{reportType}");
+                        return File(reportBytes, mimeType, $"report_{reportType}.pdf");
                     }
                     return StatusCode(response.Code, response);
 
@@ -42,7 +47,52 @@ namespace LogiDriveBE.Controllers.Private
                     string assignedVehicleMimeType = GetMimeType(reportType);
                     return File(reportBytes, assignedVehicleMimeType, $"reporte_{reportType}.pdf");
 
-                // Puedes añadir más tipos de reportes aquí según necesites.
+                case "processReservationPdf":
+                    reportBytes = (await _vehicleProcessReservationReportBao.GenerateProcessReservationPdfReportAsync()).Data;
+                    string processReservationMimeType = GetMimeType(reportType);
+                    return File(reportBytes, processReservationMimeType, $"reporte_{reportType}.pdf");
+
+                case "collaboratorCsv":
+                    var csvResponse = await _reportBao.GenerateReportAsync("csv");
+                    if (csvResponse.Code == 200)
+                    {
+                        reportBytes = csvResponse.Data;
+                        string mimeType = GetMimeType(reportType);
+                        return File(reportBytes, mimeType, $"report_{reportType}.csv");
+                    }
+                    return StatusCode(csvResponse.Code, csvResponse);
+
+                case "assignedVehiclesCsv":
+                    reportBytes = (await _vehicleAssignmentReportBao.GenerateVehicleAssignmentCsvReportAsync()).Data;
+                    string assignedVehicleCsvMimeType = GetMimeType(reportType);
+                    return File(reportBytes, assignedVehicleCsvMimeType, $"reporte_{reportType}.csv");
+
+                case "processReservationCsv":
+                    reportBytes = (await _vehicleProcessReservationReportBao.GenerateProcessReservationCsvReportAsync()).Data;
+                    string processReservationCsvMimeType = GetMimeType(reportType);
+                    return File(reportBytes, processReservationCsvMimeType, $"reporte_{reportType}.csv");
+
+                case "collaboratorExcel":
+                    var excelResponse = await _reportBao.GenerateReportAsync("xlsx");
+                    if (excelResponse.Code == 200)
+                    {
+                        reportBytes = excelResponse.Data;
+                        string mimeType = GetMimeType(reportType);
+                        return File(reportBytes, mimeType, $"report_{reportType}.xlsx");
+                    }
+                    return StatusCode(excelResponse.Code, excelResponse);
+
+                case "assignedVehiclesExcel":
+                    reportBytes = (await _vehicleAssignmentReportBao.GenerateVehicleAssignmentExcelReportAsync()).Data;
+                    string assignedVehicleExcelMimeType = GetMimeType(reportType);
+                    return File(reportBytes, assignedVehicleExcelMimeType, $"reporte_{reportType}.xlsx");
+
+                case "processReservationExcel":
+                    reportBytes = (await _vehicleProcessReservationReportBao.GenerateProcessReservationExcelReportAsync()).Data;
+                    string processReservationExcelMimeType = GetMimeType(reportType);
+                    return File(reportBytes, processReservationExcelMimeType, $"reporte_{reportType}.xlsx");
+
+                // Agrega más tipos de reportes según lo que necesites
                 default:
                     return BadRequest("Tipo de reporte no válido.");
             }
@@ -55,8 +105,15 @@ namespace LogiDriveBE.Controllers.Private
                 "pdf" => "application/pdf",
                 "collaboratorPdf" => "application/pdf",
                 "assignedVehiclesPdf" => "application/pdf",
+                "processReservationPdf" => "application/pdf",
                 "csv" => "text/csv",
+                "collaboratorCsv" => "text/csv",
+                "assignedVehiclesCsv" => "text/csv",
+                "processReservationCsv" => "text/csv",
                 "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "collaboratorExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "assignedVehiclesExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "processReservationExcel" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 _ => "application/octet-stream",
             };
         }

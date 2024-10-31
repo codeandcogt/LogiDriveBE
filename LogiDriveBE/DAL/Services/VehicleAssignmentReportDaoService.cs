@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using OfficeOpenXml;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -6,8 +7,9 @@ using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
 using LogiDriveBE.DAL.LogiDriveContext;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace LogiDriveBE.DAL.Services
 {
@@ -20,26 +22,7 @@ namespace LogiDriveBE.DAL.Services
             _context = context;
         }
 
-        // Método para obtener los datos desde la vista
-        public async Task<List<VehicleAssignmentReportDto>> GetVehicleAssignmentReportAsync()
-        {
-            var result = await _context.VehicleAssignmentWithCollaborator // Aquí accedes a la vista como entidad
-                                       .Select(va => new VehicleAssignmentReportDto
-                                       {
-                                           IdVehicleAssignment = va.IdVehicleAssignment,
-                                           Comment = va.Comment,
-                                           TripType = va.TripType,
-                                           StartDate = va.StartDate,
-                                           EndDate = va.EndDate,
-                                           VehiclePlate = va.VehiclePlate,
-                                           CollaboratorName = va.CollaboratorName
-                                       }).ToListAsync();
-
-            return result;
-        }
-
-        // Método para generar el reporte PDF
-        public async Task<byte[]> GenerateVehicleAssignmentPdfReportAsync()
+        public async Task<OperationResponse<byte[]>> GenerateVehicleAssignmentPdfReportAsync()
         {
             var vehicleAssignments = await GetVehicleAssignmentReportAsync();
 
@@ -54,7 +37,7 @@ namespace LogiDriveBE.DAL.Services
                     .SetFontSize(20)
                     .SetBold());
 
-                Table table = new Table(6, true); // 6 columnas
+                Table table = new Table(6, true);
                 table.AddHeaderCell("ID Asignación");
                 table.AddHeaderCell("Comentario");
                 table.AddHeaderCell("Tipo de Viaje");
@@ -77,8 +60,72 @@ namespace LogiDriveBE.DAL.Services
                 document.Add(table);
                 document.Close();
 
-                return memoryStream.ToArray();
+                return new OperationResponse<byte[]>(200, "Reporte PDF generado exitosamente", memoryStream.ToArray());
             }
+        }
+
+        public async Task<OperationResponse<byte[]>> GenerateVehicleAssignmentCsvReportAsync()
+        {
+            var vehicleAssignments = await GetVehicleAssignmentReportAsync();
+            var csvContent = new StringBuilder();
+
+            csvContent.AppendLine("ID Asignación,Comentario,Tipo de Viaje,Fecha Inicio,Fecha Fin,Placa del Vehículo,Colaborador");
+
+            foreach (var assignment in vehicleAssignments)
+            {
+                csvContent.AppendLine($"{assignment.IdVehicleAssignment},{assignment.Comment},{assignment.TripType},{assignment.StartDate:dd/MM/yyyy},{assignment.EndDate:dd/MM/yyyy},{assignment.VehiclePlate},{assignment.CollaboratorName}");
+            }
+
+            return new OperationResponse<byte[]>(200, "Reporte CSV generado exitosamente", Encoding.UTF8.GetBytes(csvContent.ToString()));
+        }
+
+        public async Task<OperationResponse<byte[]>> GenerateVehicleAssignmentExcelReportAsync()
+        {
+            var vehicleAssignments = await GetVehicleAssignmentReportAsync();
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Asignaciones de Vehículos");
+                worksheet.Cells[1, 1].Value = "ID Asignación";
+                worksheet.Cells[1, 2].Value = "Comentario";
+                worksheet.Cells[1, 3].Value = "Tipo de Viaje";
+                worksheet.Cells[1, 4].Value = "Fecha Inicio";
+                worksheet.Cells[1, 5].Value = "Fecha Fin";
+                worksheet.Cells[1, 6].Value = "Placa del Vehículo";
+                worksheet.Cells[1, 7].Value = "Colaborador";
+
+                int row = 2;
+                foreach (var assignment in vehicleAssignments)
+                {
+                    worksheet.Cells[row, 1].Value = assignment.IdVehicleAssignment;
+                    worksheet.Cells[row, 2].Value = assignment.Comment;
+                    worksheet.Cells[row, 3].Value = assignment.TripType;
+                    worksheet.Cells[row, 4].Value = assignment.StartDate.ToString("dd/MM/yyyy");
+                    worksheet.Cells[row, 5].Value = assignment.EndDate.ToString("dd/MM/yyyy");
+                    worksheet.Cells[row, 6].Value = assignment.VehiclePlate;
+                    worksheet.Cells[row, 7].Value = assignment.CollaboratorName;
+                    row++;
+                }
+
+                return new OperationResponse<byte[]>(200, "Reporte Excel generado exitosamente", package.GetAsByteArray());
+            }
+        }
+
+        public async Task<List<VehicleAssignmentReportDto>> GetVehicleAssignmentReportAsync()
+        {
+            var result = await _context.VehicleAssignmentWithCollaborator
+                                       .Select(va => new VehicleAssignmentReportDto
+                                       {
+                                           IdVehicleAssignment = va.IdVehicleAssignment,
+                                           Comment = va.Comment,
+                                           TripType = va.TripType,
+                                           StartDate = va.StartDate,
+                                           EndDate = va.EndDate,
+                                           VehiclePlate = va.VehiclePlate,
+                                           CollaboratorName = va.CollaboratorName
+                                       }).ToListAsync();
+
+            return result;
         }
     }
 }
