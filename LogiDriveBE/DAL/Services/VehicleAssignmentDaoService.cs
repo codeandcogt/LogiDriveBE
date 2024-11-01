@@ -230,6 +230,43 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
+        public async Task<OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>> GetVehicleAssignmentsByUserIdWithDetailsAsync(int userId, int hoursThreshold)
+        {
+            try
+            {
+                var currentTime = DateTime.UtcNow;
+
+                var assignments = await _context.VehicleAssignments
+                    .Include(va => va.IdLogReservationNavigation)
+                    .Include(va => va.IdVehicleNavigation) // Incluye la navegación al vehículo
+                    .Where(va => va.IdLogReservationNavigation.IdCollaboratorNavigation.IdUser == userId && va.Status == true) // Filtrar por Status == true
+                    .Select(va => new VehicleAssignmentWithDetailsDto
+                    {
+                        IdVehicleAssignment = va.IdVehicleAssignment,
+                        Comment = va.Comment,
+                        TripType = va.TripType,
+                        StartDate = va.StartDate,
+                        EndDate = va.EndDate,
+                        Brand = va.IdVehicleNavigation.Brand,
+                        Plate = va.IdVehicleNavigation.Plate,
+                        IdVehicle = va.IdVehicle,
+                        IdLogReservation = va.IdLogReservation,
+                        Status = va.Status,
+                        CreationDate = va.CreationDate,
+                        RemainingHoursToStart = (va.StartDate - currentTime).TotalHours,
+                        IsWithinThreshold = (va.StartDate - currentTime).TotalHours >= hoursThreshold
+                    })
+                    .ToListAsync();
+
+                return new OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>(200, "Vehicle Assignments retrieved successfully", assignments);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>(500, $"Error retrieving vehicle assignments: {ex.Message}");
+            }
+        }
+
+
 
 
 

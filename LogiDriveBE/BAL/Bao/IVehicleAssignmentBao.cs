@@ -13,6 +13,6 @@ namespace LogiDriveBE.BAL.Bao
         Task<OperationResponse<bool>> DeleteVehicleAssignmentStatusAsync(int id);
         Task<OperationResponse<IEnumerable<VehicleAssignmentDto>>> GetVehicleAssignmentsByUserIdAsync(int userId);
         Task<OperationResponse<IEnumerable<VehicleAssignmentView>>> GetVehicleAssignmentsByDateWithStatusUpdateAsync(DateTime specificDate);
-
+        Task<OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>> GetVehicleAssignmentsByUserIdWithDetailsAsync(int userId, int hoursThreshold);
     }
 }

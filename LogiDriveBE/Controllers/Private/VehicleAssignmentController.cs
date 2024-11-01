@@ -10,7 +10,7 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+
     public class VehicleAssignmentController : ControllerBase
     {
         private readonly IVehicleAssignmentBao _vehicleAssignmentBao;
@@ -72,6 +72,13 @@ namespace LogiDriveBE.Controllers.Private
         public async Task<ActionResult<OperationResponse<IEnumerable<VehicleAssignmentDto>>>> GetVehicleAssignmentsByUserId(int userId)
         {
             var response = await _vehicleAssignmentBao.GetVehicleAssignmentsByUserIdAsync(userId);
+            return StatusCode(response.Code, response);
+        }
+
+        [HttpGet("ByUserWithDetails/{userId}/{hoursThreshold}")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>>> GetVehicleAssignmentsByUserIdWithDetails(int userId, int hoursThreshold)
+        {
+            var response = await _vehicleAssignmentBao.GetVehicleAssignmentsByUserIdWithDetailsAsync(userId, hoursThreshold);
             return StatusCode(response.Code, response);
         }
 
