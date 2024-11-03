@@ -67,6 +67,8 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<UserRolePermissionReportDto> UserRolePermissions { get; set; }
     public virtual DbSet<ActivityByCollaboratorReportDto> ActivityByCollaboratorReport { get; set; }
 
+    public virtual DbSet<LogTripReportDto> LogTripReport { get; set; }
+
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -491,7 +493,7 @@ public partial class LogiDriveDbContext : DbContext
             entity.ToView("vw_AllInspections");
         });
 
-        modelBuilder.Entity<ProcessLogReportDto>(entity => // Configuración para la nueva vista
+        modelBuilder.Entity<ProcessLogReportDto>(entity => 
         {
             entity.HasNoKey();
             entity.ToView("vw_ProcessLogs"); 
@@ -506,6 +508,11 @@ public partial class LogiDriveDbContext : DbContext
         {
             entity.HasNoKey();
             entity.ToView("vw_ActivityByCollaborator");
+        });
+        modelBuilder.Entity<LogTripReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_LogTripReport");
         });
 
     }

@@ -86,6 +86,9 @@ namespace LogiDriveBE.DAL.Services
 
         public async Task<byte[]> GenerateActivityByCollaboratorExcelReportAsync()
         {
+            // Configuración de la licencia de EPPlus
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             var reportData = await GetActivityByCollaboratorReportAsync();
             using (var package = new ExcelPackage())
             {

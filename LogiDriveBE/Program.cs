@@ -3,6 +3,7 @@ using LogiDriveBE.DAL;
 using LogiDriveBE.DAL.LogiDriveContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using OfficeOpenXml;
 using System.Text;
 using LogiDriveBE.AUTH.Aao;
 using LogiDriveBE.AUTH.Services;
@@ -35,6 +36,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
         };
     });
+
+
 
 builder.Services.AddAuthorization(options =>
 {
@@ -85,7 +88,7 @@ builder.Services.AddScoped<IReportDao, ReportDaoService>();
 builder.Services.AddScoped<IVehicleProcessReservationReportDao, VehicleProcessReservationReportDaoService>();
 builder.Services.AddScoped<IUserRolePermissionReportDao, UserRolePermissionReportDaoService>();
 builder.Services.AddScoped<IActivityByCollaboratorReportDao, ActivityByCollaboratorReportDaoService>();
-
+builder.Services.AddScoped<ILogTripReportDao, LogTripReportDaoService>();
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
 builder.Services.AddScoped<ICollaboratorBao, CollaboratorBaoService>();
@@ -103,7 +106,7 @@ builder.Services.AddScoped<IVehicleBao, VehicleBaoService>();
 builder.Services.AddScoped<IPartVehicleBao, PartVehicleBaoService>();
 builder.Services.AddScoped<IVehicleInspectionReportBao, VehicleInspectionReportBaoService>();
 builder.Services.AddScoped<IProcessLogReportBao, ProcessLogReportBaoService>();
-
+builder.Services.AddScoped<ILogTripReportBao, LogTripReportBaoService>();
 builder.Services.AddScoped<IVehicleAssignmentReportBao, VehicleAssignmentReportBaoService>();
 
 builder.Services.AddScoped<IPreliminaryInspectionSheetBao, PreliminaryInspectionSheetBaoService>();
@@ -142,7 +145,7 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod();
         });
 });
-
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
