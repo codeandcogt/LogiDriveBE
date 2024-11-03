@@ -90,6 +90,7 @@ builder.Services.AddScoped<IUserRolePermissionReportDao, UserRolePermissionRepor
 builder.Services.AddScoped<IActivityByCollaboratorReportDao, ActivityByCollaboratorReportDaoService>();
 builder.Services.AddScoped<ILogTripReportDao, LogTripReportDaoService>();
 builder.Services.AddScoped<IVehicleAvailabilityReportDao, VehicleAvailabilityReportDaoService>();
+builder.Services.AddScoped<IMaintenanceReportDao, MaintenanceReportDaoService>();
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
 builder.Services.AddScoped<ICollaboratorBao, CollaboratorBaoService>();
@@ -119,6 +120,7 @@ builder.Services.AddScoped<ILogInspectionPartBao, LogInspectionPartBaoService>()
 builder.Services.AddScoped<IReportBao, ReportBaoService>();
 builder.Services.AddScoped<IUserRolePermissionReportBao, UserRolePermissionReportBaoService>();
 builder.Services.AddScoped<IVehicleProcessReservationReportBao, VehicleProcessReservationReportBaoService>();
+builder.Services.AddScoped<IMaintenanceReportBao, MaintenanceReportBaoService>();
 // Add services to the container.
 builder.Services.AddControllers();
 //.AddJsonOptions(options =>

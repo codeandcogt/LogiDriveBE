@@ -1,13 +1,13 @@
-﻿using System;
-
-namespace LogiDriveBE.DAL.Models.DTO
+﻿namespace LogiDriveBE.DAL.Models.DTO
 {
     public class MaintenanceReportDto
     {
-        public string VehicleBrand { get; set; }
-        public string VehiclePlate { get; set; }
-        public DateTime? MaintenanceDate { get; set; }
+        public int IdVehicle { get; set; }
         public string MaintenanceType { get; set; }
-        public string VehicleStatus { get; set; }
+        public string NextServiceDate { get; set; }
+        public string ServiceComment { get; set; }
+        public string TypeServiceName { get; set; }
+        public DateTime? PartMaintenanceDate { get; set; }
+        public string PartMaintenanceComment { get; set; }
     }
 }

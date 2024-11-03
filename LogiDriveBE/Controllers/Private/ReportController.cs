@@ -20,6 +20,7 @@ namespace LogiDriveBE.Controllers.Private
         private readonly IActivityByCollaboratorReportBao _activityByCollaboratorReportBao;
         private readonly ILogTripReportBao _logTripReportBao;
         private readonly IVehicleAvailabilityReportBao _vehicleAvailabilityReportBao;
+        private readonly IMaintenanceReportBao _maintenanceReportBao;
 
         public ReportController(
             IReportBao reportBao,
@@ -30,7 +31,8 @@ namespace LogiDriveBE.Controllers.Private
             IUserRolePermissionReportBao userRolePermissionReportBao,
             IActivityByCollaboratorReportBao activityByCollaboratorReportBao,
             ILogTripReportBao logTripReportBao,
-            IVehicleAvailabilityReportBao vehicleAvailabilityReportBao)
+            IVehicleAvailabilityReportBao vehicleAvailabilityReportBao,
+            IMaintenanceReportBao maintenanceReportBao)
         {
             _reportBao = reportBao;
             _vehicleAssignmentReportBao = vehicleAssignmentReportBao;
@@ -41,6 +43,7 @@ namespace LogiDriveBE.Controllers.Private
             _activityByCollaboratorReportBao = activityByCollaboratorReportBao;
             _logTripReportBao = logTripReportBao;
             _vehicleAvailabilityReportBao = vehicleAvailabilityReportBao;
+            _maintenanceReportBao = maintenanceReportBao;
         }
 
         [HttpGet("generateReport")]
@@ -104,6 +107,25 @@ namespace LogiDriveBE.Controllers.Private
 
                 case "vehicleAvailabilityCsv":
                     reportBytes = (await _vehicleAvailabilityReportBao.GenerateVehicleAvailabilityCsvReportAsync()).Data;
+                    mimeType = "text/csv";
+                    fileExtension = "csv";
+                    break;
+
+                // Reporte de mantenimiento
+                case "maintenanceExcel":
+                    reportBytes = (await _maintenanceReportBao.GenerateMaintenanceExcelReportAsync()).Data;
+                    mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    fileExtension = "xlsx";
+                    break;
+
+                case "maintenancePdf":
+                    reportBytes = (await _maintenanceReportBao.GenerateMaintenancePdfReportAsync()).Data;
+                    mimeType = "application/pdf";
+                    fileExtension = "pdf";
+                    break;
+
+                case "maintenanceCsv":
+                    reportBytes = (await _maintenanceReportBao.GenerateMaintenanceCsvReportAsync()).Data;
                     mimeType = "text/csv";
                     fileExtension = "csv";
                     break;
