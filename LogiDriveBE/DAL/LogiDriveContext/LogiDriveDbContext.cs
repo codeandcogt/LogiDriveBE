@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
 using LogiDriveBE.DAL.Models.DTO;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +59,18 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<VehicleAssignment> VehicleAssignments { get; set; }
 
     public virtual DbSet<VehicleAssignmentView> VehicleAssignmentViews { get; set; }
+    public virtual DbSet<VehicleAssignmentWithCollaboratorView> VehicleAssignmentWithCollaborator { get; set; }
+    public virtual DbSet<ProcessReservationReportDto> ProcessReservationReport { get; set; }
+    public virtual DbSet<VehicleInspectionReportDto> AllInspections { get; set; }
+    public virtual DbSet<ProcessLogReportDto> ProcessLogs { get; set; }
+
+    public virtual DbSet<UserRolePermissionReportDto> UserRolePermissions { get; set; }
+    public virtual DbSet<ActivityByCollaboratorReportDto> ActivityByCollaboratorReport { get; set; }
+
+    public virtual DbSet<LogTripReportDto> LogTripReport { get; set; }
+    public virtual DbSet<VehicleAvailabilityReportDto> VehicleAvailabilityReport { get; set; }
+    public virtual DbSet<MaintenanceReportDto> MaintenanceReport { get; set; }
+
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -460,8 +473,62 @@ public partial class LogiDriveDbContext : DbContext
             entity.ToView("vw_VehicleAssignmentsByDate"); // Nombre de la vista en la base de datos
         });
 
+     
+
+        // Incorporando la vista VehicleAssignmentWithCollaborator
+        modelBuilder.Entity<VehicleAssignmentWithCollaboratorView>(entity =>
+        {
+            entity.HasNoKey(); // No tiene clave primaria
+            entity.ToView("vw_VehicleAssignmentWithCollaborator"); // Nombre de la vista en la base de datos
+        });
         OnModelCreatingPartial(modelBuilder);
+        // Incorporando la vista ProcessReservationReport
+        modelBuilder.Entity<ProcessReservationReportDto>(entity =>
+        {
+            entity.HasNoKey(); // No tiene clave primaria
+            entity.ToView("vw_ProcessReservationReport"); // Nombre de la vista en la base de datos
+        });
+
+        modelBuilder.Entity<VehicleInspectionReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_AllInspections");
+        });
+
+        modelBuilder.Entity<ProcessLogReportDto>(entity => 
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_ProcessLogs"); 
+        });
+
+        modelBuilder.Entity<UserRolePermissionReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_UserRolesPermissions");
+        });
+        modelBuilder.Entity<ActivityByCollaboratorReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_ActivityByCollaborator");
+        });
+        modelBuilder.Entity<LogTripReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_LogTripReport");
+        });
+        modelBuilder.Entity<VehicleAvailabilityReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_VehicleAvailabilityReport");
+        });
+        modelBuilder.Entity<MaintenanceReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_MaintenanceReport");
+        });
+
     }
+
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
