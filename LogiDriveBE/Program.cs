@@ -89,6 +89,7 @@ builder.Services.AddScoped<IVehicleProcessReservationReportDao, VehicleProcessRe
 builder.Services.AddScoped<IUserRolePermissionReportDao, UserRolePermissionReportDaoService>();
 builder.Services.AddScoped<IActivityByCollaboratorReportDao, ActivityByCollaboratorReportDaoService>();
 builder.Services.AddScoped<ILogTripReportDao, LogTripReportDaoService>();
+builder.Services.AddScoped<IVehicleAvailabilityReportDao, VehicleAvailabilityReportDaoService>();
 // Register BAL services
 builder.Services.AddScoped<IAreaBao, AreaBaoService>();
 builder.Services.AddScoped<ICollaboratorBao, CollaboratorBaoService>();
@@ -108,7 +109,7 @@ builder.Services.AddScoped<IVehicleInspectionReportBao, VehicleInspectionReportB
 builder.Services.AddScoped<IProcessLogReportBao, ProcessLogReportBaoService>();
 builder.Services.AddScoped<ILogTripReportBao, LogTripReportBaoService>();
 builder.Services.AddScoped<IVehicleAssignmentReportBao, VehicleAssignmentReportBaoService>();
-
+builder.Services.AddScoped<IVehicleAvailabilityReportBao, VehicleAvailabilityReportBaoService>();
 builder.Services.AddScoped<IPreliminaryInspectionSheetBao, PreliminaryInspectionSheetBaoService>();
 builder.Services.AddScoped<IActivityByCollaboratorReportBao, ActivityByCollaboratorReportBaoService>();
 builder.Services.AddScoped<ILogTrackingBao, LogTrackingBaoService>();

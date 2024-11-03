@@ -19,6 +19,7 @@ namespace LogiDriveBE.Controllers.Private
         private readonly IUserRolePermissionReportBao _userRolePermissionReportBao;
         private readonly IActivityByCollaboratorReportBao _activityByCollaboratorReportBao;
         private readonly ILogTripReportBao _logTripReportBao;
+        private readonly IVehicleAvailabilityReportBao _vehicleAvailabilityReportBao;
 
         public ReportController(
             IReportBao reportBao,
@@ -28,7 +29,8 @@ namespace LogiDriveBE.Controllers.Private
             IProcessLogReportBao processLogReportBao,
             IUserRolePermissionReportBao userRolePermissionReportBao,
             IActivityByCollaboratorReportBao activityByCollaboratorReportBao,
-            ILogTripReportBao logTripReportBao)
+            ILogTripReportBao logTripReportBao,
+            IVehicleAvailabilityReportBao vehicleAvailabilityReportBao)
         {
             _reportBao = reportBao;
             _vehicleAssignmentReportBao = vehicleAssignmentReportBao;
@@ -38,6 +40,7 @@ namespace LogiDriveBE.Controllers.Private
             _userRolePermissionReportBao = userRolePermissionReportBao;
             _activityByCollaboratorReportBao = activityByCollaboratorReportBao;
             _logTripReportBao = logTripReportBao;
+            _vehicleAvailabilityReportBao = vehicleAvailabilityReportBao;
         }
 
         [HttpGet("generateReport")]
@@ -82,6 +85,25 @@ namespace LogiDriveBE.Controllers.Private
 
                 case "logTripCsv":
                     reportBytes = (await _logTripReportBao.GenerateLogTripCsvReportAsync()).Data;
+                    mimeType = "text/csv";
+                    fileExtension = "csv";
+                    break;
+
+                // Reportes de disponibilidad de vehículos
+                case "vehicleAvailabilityExcel":
+                    reportBytes = (await _vehicleAvailabilityReportBao.GenerateVehicleAvailabilityExcelReportAsync()).Data;
+                    mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    fileExtension = "xlsx";
+                    break;
+
+                case "vehicleAvailabilityPdf":
+                    reportBytes = (await _vehicleAvailabilityReportBao.GenerateVehicleAvailabilityPdfReportAsync()).Data;
+                    mimeType = "application/pdf";
+                    fileExtension = "pdf";
+                    break;
+
+                case "vehicleAvailabilityCsv":
+                    reportBytes = (await _vehicleAvailabilityReportBao.GenerateVehicleAvailabilityCsvReportAsync()).Data;
                     mimeType = "text/csv";
                     fileExtension = "csv";
                     break;

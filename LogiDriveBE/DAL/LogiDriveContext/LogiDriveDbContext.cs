@@ -68,6 +68,7 @@ public partial class LogiDriveDbContext : DbContext
     public virtual DbSet<ActivityByCollaboratorReportDto> ActivityByCollaboratorReport { get; set; }
 
     public virtual DbSet<LogTripReportDto> LogTripReport { get; set; }
+    public virtual DbSet<VehicleAvailabilityReportDto> VehicleAvailabilityReport { get; set; }
 
 
 
@@ -513,6 +514,11 @@ public partial class LogiDriveDbContext : DbContext
         {
             entity.HasNoKey();
             entity.ToView("vw_LogTripReport");
+        });
+        modelBuilder.Entity<VehicleAvailabilityReportDto>(entity =>
+        {
+            entity.HasNoKey();
+            entity.ToView("vw_VehicleAvailabilityReport");
         });
 
     }
