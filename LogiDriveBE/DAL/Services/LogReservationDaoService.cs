@@ -25,9 +25,18 @@ namespace LogiDriveBE.DAL.Services
                     logReservationDto.NumberPeople = 1;
                 }
 
+                // Buscamos el IdCollaborator utilizando el IdAppUser recibido en logReservationDto.IdCollaborator
+                var collaborator = await _context.Collaborators
+                    .FirstOrDefaultAsync(c => c.IdUser == logReservationDto.IdCollaborator);
+
+                if (collaborator == null)
+                {
+                    return new OperationResponse<LogReservationDto>(404, "Collaborator not found");
+                }
+
                 var logReservation = new LogReservation
                 {
-                    IdCollaborator = logReservationDto.IdCollaborator,
+                    IdCollaborator = collaborator.IdCollaborator, // Asigna el IdCollaborator encontrado
                     Comment = logReservationDto.Comment,
                     IdTown = logReservationDto.IdTown,
                     NumberPeople = logReservationDto.NumberPeople,
@@ -47,6 +56,7 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<LogReservationDto>(500, $"Error creating log reservation: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResponse<LogReservationDto>> GetLogReservationByIdAsync(int id)
         {

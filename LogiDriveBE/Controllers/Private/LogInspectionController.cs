@@ -41,7 +41,7 @@ namespace LogiDriveBE.Controllers.Private
         //    return StatusCode(response.Code, response);
         //}
         [HttpPost]
-        public async Task<ActionResult<OperationResponse<LogInspectionDto>>> CreateLogInspection([FromForm] LogInspectionDto logInspectionDto)
+        public async Task<ActionResult<OperationResponse<LogInspectionDto>>> CreateLogInspection([FromBody] LogInspectionDto logInspectionDto)
         {
             if (logInspectionDto == null)
                 return BadRequest("Los datos de la inspección son requeridos");
