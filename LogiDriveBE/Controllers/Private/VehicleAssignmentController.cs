@@ -82,8 +82,8 @@ namespace LogiDriveBE.Controllers.Private
             return StatusCode(response.Code, response);
         }
 
-        [HttpPatch("StatusTrip/{id}")]
-        public async Task<ActionResult<OperationResponse<VehicleAssignmentWithDetailsDto>>> UpdateVehicleAssignmentStatusTrip(int id, [FromBody] bool statusTrip)
+        [HttpPatch("StatusTrip/{id}/{statusTrip}")]
+        public async Task<ActionResult<OperationResponse<VehicleAssignmentWithDetailsDto>>> UpdateVehicleAssignmentStatusTrip(int id, bool statusTrip)
         {
             var response = await _vehicleAssignmentBao.UpdateVehicleAssignmentStatusTripAsync(id, statusTrip);
             return StatusCode(response.Code, response);
