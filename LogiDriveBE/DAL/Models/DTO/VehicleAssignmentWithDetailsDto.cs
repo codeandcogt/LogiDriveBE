@@ -12,6 +12,8 @@
         public int IdVehicle { get; set; }
         public int IdLogReservation { get; set; }
         public bool Status { get; set; }
+        public bool StatusTrip { get; set; }
+        public int DayQuantity { get; set; }
         public DateTime CreationDate { get; set; }
         public double RemainingHoursToStart { get; set; }
         public bool IsWithinThreshold { get; set; }

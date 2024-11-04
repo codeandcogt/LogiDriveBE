@@ -464,6 +464,13 @@ public partial class LogiDriveDbContext : DbContext
             entity.Property(e => e.CreationDate).HasDefaultValueSql("(sysdatetime())");
             entity.Property(e => e.TripType).HasMaxLength(50);
 
+            // Configuración de las nuevas propiedades
+            entity.Property(e => e.StatusTrip)
+                  .HasDefaultValue(false); // Valor predeterminado 0 en SQL Server (equivalente a false en C#)
+
+            entity.Property(e => e.DayQuantity)
+                  .HasDefaultValue(0); // Valor predeterminado 0
+
             entity.HasOne(d => d.IdLogReservationNavigation).WithMany(p => p.VehicleAssignments)
                 .HasForeignKey(d => d.IdLogReservation)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -473,8 +480,8 @@ public partial class LogiDriveDbContext : DbContext
                 .HasForeignKey(d => d.IdVehicle)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_IdVehicleVehicleAssigment");
-
         });
+
 
         modelBuilder.Entity<VehicleAssignmentView>(entity =>
         {

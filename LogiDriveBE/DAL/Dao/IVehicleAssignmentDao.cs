@@ -14,5 +14,6 @@ namespace LogiDriveBE.DAL.Dao
         Task<OperationResponse<bool>> DeleteVehicleAssigmentStatusAsync(int id);
         Task<OperationResponse<IEnumerable<VehicleAssignmentView>>> GetVehicleAssignmentsByDateWithStatusUpdateAsync(DateTime specificDate);
         Task<OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>> GetVehicleAssignmentsByUserIdWithDetailsAsync(int userId, int hoursThreshold);
+        Task<OperationResponse<VehicleAssignmentWithDetailsDto>> UpdateVehicleAssignmentStatusTripAsync(int id, bool statusTrip);
     }
 }

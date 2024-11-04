@@ -11,5 +11,7 @@
         public int IdLogReservation { get; set; }
         public bool Status { get; set; }
         public DateTime CreationDate { get; set; }
+        public bool StatusTrip { get; set; }
+        public int DayQuantity { get; set; }
     }
 }

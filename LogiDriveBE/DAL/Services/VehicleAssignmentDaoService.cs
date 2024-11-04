@@ -31,7 +31,9 @@ namespace LogiDriveBE.DAL.Services
                     IdVehicle = va.IdVehicle,
                     IdLogReservation = va.IdLogReservation,
                     Status = va.Status,
-                    CreationDate = va.CreationDate
+                    CreationDate = va.CreationDate,
+                    StatusTrip = va.StatusTrip,
+                    DayQuantity = va.DayQuantity
                 })
                 .ToListAsync();
 
@@ -52,7 +54,9 @@ namespace LogiDriveBE.DAL.Services
                     IdVehicle = vehicleAssignmentDto.IdVehicle,
                     IdLogReservation = vehicleAssignmentDto.IdLogReservation,
                     Status = vehicleAssignmentDto.Status,
-                    CreationDate = vehicleAssignmentDto.CreationDate
+                    CreationDate = vehicleAssignmentDto.CreationDate,
+                    StatusTrip = vehicleAssignmentDto.StatusTrip,
+                    DayQuantity = vehicleAssignmentDto.DayQuantity
                 };
 
                 _context.VehicleAssignments.Add(vehicleAssignment);
@@ -84,7 +88,9 @@ namespace LogiDriveBE.DAL.Services
                     IdVehicle = vehicleAssignment.IdVehicle,
                     IdLogReservation = vehicleAssignment.IdLogReservation,
                     Status = vehicleAssignment.Status,
-                    CreationDate = vehicleAssignment.CreationDate
+                    CreationDate = vehicleAssignment.CreationDate,
+                    StatusTrip = vehicleAssignment.StatusTrip,
+                    DayQuantity = vehicleAssignment.DayQuantity
                 };
 
                 return new OperationResponse<VehicleAssignmentDto>(200, "Vehicle Assignment retrieved successfully", vehicleAssignmentDto);
@@ -112,7 +118,9 @@ namespace LogiDriveBE.DAL.Services
                     IdVehicle = v.IdVehicle,
                     IdLogReservation = v.IdLogReservation,
                     Status = v.Status,
-                    CreationDate = v.CreationDate
+                    CreationDate = v.CreationDate,
+                    StatusTrip = v.StatusTrip,
+                    DayQuantity = v.DayQuantity
                 });
 
                 return new OperationResponse<IEnumerable<VehicleAssignmentDto>>(200, "Vehicle Assignments retrieved successfully", vehicleAssignmentDtos);
@@ -140,6 +148,7 @@ namespace LogiDriveBE.DAL.Services
                 vehicleAssignment.IdVehicle = vehicleAssignmentDto.IdVehicle;
                 vehicleAssignment.IdLogReservation = vehicleAssignmentDto.IdLogReservation;
                 vehicleAssignment.Status = vehicleAssignmentDto.Status;
+                vehicleAssignment.StatusTrip = vehicleAssignmentDto.StatusTrip;
 
                 _context.Entry(vehicleAssignment).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
@@ -254,7 +263,9 @@ namespace LogiDriveBE.DAL.Services
                         Status = va.Status,
                         CreationDate = va.CreationDate,
                         RemainingHoursToStart = (va.StartDate - currentTime).TotalHours,
-                        IsWithinThreshold = (va.StartDate - currentTime).TotalHours >= hoursThreshold
+                        IsWithinThreshold = (va.StartDate - currentTime).TotalHours >= hoursThreshold,
+                        StatusTrip = va.StatusTrip,
+                        DayQuantity = va.DayQuantity
                     })
                     .ToListAsync();
 
@@ -265,6 +276,56 @@ namespace LogiDriveBE.DAL.Services
                 return new OperationResponse<IEnumerable<VehicleAssignmentWithDetailsDto>>(500, $"Error retrieving vehicle assignments: {ex.Message}");
             }
         }
+
+        public async Task<OperationResponse<VehicleAssignmentWithDetailsDto>> UpdateVehicleAssignmentStatusTripAsync(int id, bool statusTrip)
+        {
+            try
+            {
+                var vehicleAssignment = await _context.VehicleAssignments.FindAsync(id);
+                if (vehicleAssignment == null)
+                {
+                    return new OperationResponse<VehicleAssignmentWithDetailsDto>(404, "Vehicle Assignment not found");
+                }
+
+                vehicleAssignment.StatusTrip = statusTrip;
+
+                if (statusTrip == false)
+                {
+                    if (vehicleAssignment.DayQuantity > 0)
+                    {
+                        vehicleAssignment.DayQuantity -= 1;
+
+                        // Guardar cambios después de modificar DayQuantity
+                        _context.Entry(vehicleAssignment).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // Retornar mensaje solo si DayQuantity se ha reducido a 0 en esta operación
+                        if (vehicleAssignment.DayQuantity == 0)
+                        {
+                            return new OperationResponse<VehicleAssignmentWithDetailsDto>(200, "Vehicle Assignment status trip updated successfully. Day quantity reached zero", null);
+                        }
+                    }
+                    else
+                    {
+                        // Retornar mensaje si DayQuantity ya es 0 y no se puede reducir más
+                        return new OperationResponse<VehicleAssignmentWithDetailsDto>(200, "Vehicle Assignment status trip updated successfully. Day quantity is already at zero", null);
+                    }
+                }
+                else
+                {
+                    // Guardar cambios si statusTrip es true
+                    _context.Entry(vehicleAssignment).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
+
+                return new OperationResponse<VehicleAssignmentWithDetailsDto>(200, "Vehicle Assignment status trip updated successfully", null);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<VehicleAssignmentWithDetailsDto>(500, $"Error updating vehicle assignment status trip: {ex.Message}");
+            }
+        }
+
 
 
 

@@ -58,6 +58,11 @@ namespace LogiDriveBE.BAL.Services
             return await _vehicleAssignmentDao.GetVehicleAssignmentsByUserIdWithDetailsAsync(userId, hoursThreshold);
         }
 
+        public async Task<OperationResponse<VehicleAssignmentWithDetailsDto>> UpdateVehicleAssignmentStatusTripAsync(int id, bool statusTrip)
+        {
+            return await _vehicleAssignmentDao.UpdateVehicleAssignmentStatusTripAsync(id, statusTrip);
+        }
+
 
     }
 }
