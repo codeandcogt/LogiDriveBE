@@ -1,6 +1,7 @@
 ﻿using LogiDriveBE.BAL.Bao;
 using LogiDriveBE.DAL.Dao;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 
 namespace LogiDriveBE.BAL.Services
@@ -19,9 +20,9 @@ namespace LogiDriveBE.BAL.Services
             return await _logTrackingDao.GetActiveLogTrackingByVehicleAssignmentIdAsync(vehicleAssignmentId);
         }
 
-        public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(LogTracking logTracking)
+        public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(TrakingDto trackingDto)
         {
-            return await _logTrackingDao.CreateLogTrackingAsync(logTracking);
+            return await _logTrackingDao.CreateLogTrackingAsync(trackingDto);
         }
 
         public async Task<OperationResponse<LogTracking>> UpdateLogTrackingAsync(LogTracking logTracking)

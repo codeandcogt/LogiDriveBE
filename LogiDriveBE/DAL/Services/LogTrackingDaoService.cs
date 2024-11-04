@@ -1,6 +1,7 @@
 ﻿
 using LogiDriveBE.DAL.LogiDriveContext;
 using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,12 +52,22 @@ namespace LogiDriveBE.DAL.Dao
             return new OperationResponse<LogTracking>(200, "Active log tracking retrieved successfully", logTrip.IdTrackingNavigation);
         }
 
-        public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(LogTracking logTracking)
+        public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(TrakingDto trackingDto)
         {
             try
             {
+                // Convertir el DTO en una instancia de LogTracking
+                var logTracking = new LogTracking
+                {
+                    Latitude = trackingDto.Latitude,
+                    Longitude = trackingDto.Longitude,
+                    Status = trackingDto.Status,
+                    IdLogTrip = trackingDto.IdLogTrip
+                };
+
                 await _context.LogTrackings.AddAsync(logTracking);
                 await _context.SaveChangesAsync();
+
                 return new OperationResponse<LogTracking>(200, "LogTracking created successfully", logTracking);
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using LogiDriveBE.DAL.Models;
+using LogiDriveBE.DAL.Models.DTO;
 using LogiDriveBE.UTILS;
 
 namespace LogiDriveBE.DAL.Dao

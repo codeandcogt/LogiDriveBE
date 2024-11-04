@@ -274,6 +274,15 @@ public partial class LogiDriveDbContext : DbContext
 
             entity.Property(e => e.Latitude).HasColumnType("decimal(15, 11)");
             entity.Property(e => e.Longitude).HasColumnType("decimal(16, 11)");
+
+            // Nueva columna Status
+            entity.Property(e => e.Status).HasDefaultValue(true);
+
+            // Nueva relación con LogTrip
+            entity.HasOne(e => e.LogTrip)
+                .WithMany() // Elimina WithMany(p => p.LogTrips)
+                .HasForeignKey(e => e.IdLogTrip)
+                .HasConstraintName("FK_LogTracking_LogTrip");
         });
 
         modelBuilder.Entity<LogTrip>(entity =>
@@ -285,7 +294,7 @@ public partial class LogiDriveDbContext : DbContext
             entity.Property(e => e.ActivityType).HasMaxLength(50);
             entity.Property(e => e.DateHour).HasDefaultValueSql("(sysdatetime())");
 
-            entity.HasOne(d => d.IdTrackingNavigation).WithMany(p => p.LogTrips)
+            entity.HasOne(d => d.IdTrackingNavigation).WithMany()
                 .HasForeignKey(d => d.IdTracking)
                 .HasConstraintName("FK_IdTrackingLogTrip");
 

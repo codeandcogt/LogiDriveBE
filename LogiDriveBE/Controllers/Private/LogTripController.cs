@@ -9,7 +9,6 @@ namespace LogiDriveBE.Controllers.Private
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class LogTripController : ControllerBase
     {
         private readonly ILogTripBao _logTripBao;
@@ -28,12 +27,13 @@ namespace LogiDriveBE.Controllers.Private
                 ActivityType = logTripDto.ActivityType,
                 IdTracking = logTripDto.IdTracking,
                 IdVehicleAssignment = logTripDto.IdVehicleAssignment,
-                Status = true 
+                Status = true
             };
 
-            var response = await _logTripBao.CreateLogTripAsync(logTrip);
+            var response = await _logTripBao.CreateLogTripWithActivityAsync(logTrip);
             return StatusCode(response.Code, response);
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OperationResponse<LogTrip>>> GetLogTrip(int id)

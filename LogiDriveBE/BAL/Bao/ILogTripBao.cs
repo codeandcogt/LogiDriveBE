@@ -5,7 +5,7 @@ namespace LogiDriveBE.BAL.Bao
 {
     public interface ILogTripBao
     {
-        Task<OperationResponse<LogTrip>> CreateLogTripAsync(LogTrip logTrip);
+        Task<OperationResponse<LogTrip>> CreateLogTripWithActivityAsync(LogTrip logTrip);
         Task<OperationResponse<LogTrip>> UpdateLogTripAsync(LogTrip logTrip);
         Task<OperationResponse<bool>> DeleteLogTripAsync(int id);
         Task<OperationResponse<bool>> DeleteLogTripStatusAsync(int id);

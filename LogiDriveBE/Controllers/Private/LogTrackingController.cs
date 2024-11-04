@@ -20,15 +20,10 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpPost]
-        public async Task<ActionResult<OperationResponse<LogTracking>>> CreateLogTracking([FromBody] LogTrackingDto logTrackingDto)
+        public async Task<ActionResult<OperationResponse<LogTracking>>> CreateLogTracking([FromBody] TrakingDto logTrackingDto)
         {
-            var logTracking = new LogTracking
-            {
-                Latitude = logTrackingDto.Latitude,
-                Longitude = logTrackingDto.Longitude
-            };
 
-            var response = await _logTrackingBao.CreateLogTrackingAsync(logTracking);
+            var response = await _logTrackingBao.CreateLogTrackingAsync(logTrackingDto);
             return StatusCode(response.Code, response);
         }
 

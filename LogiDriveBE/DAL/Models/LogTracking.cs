@@ -6,10 +6,11 @@ namespace LogiDriveBE.DAL.Models;
 public partial class LogTracking
 {
     public int IdTracking { get; set; }
-
     public decimal? Latitude { get; set; }
-
     public decimal? Longitude { get; set; }
+    public bool Status { get; set; } = true; // Nueva propiedad con valor predeterminado
+    public int? IdLogTrip { get; set; } // Nueva propiedad opcional para la relación con LogTrip
 
-    public virtual ICollection<LogTrip> LogTrips { get; set; } = new List<LogTrip>();
+    // Navegación hacia LogTrip
+    public virtual LogTrip? LogTrip { get; set; }
 }
