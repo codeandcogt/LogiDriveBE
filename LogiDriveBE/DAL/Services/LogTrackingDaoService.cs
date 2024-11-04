@@ -132,6 +132,7 @@ namespace LogiDriveBE.DAL.Dao
         public async Task<OperationResponse<LogTracking>> GetLogTrackingByIdAsync(int id)
         {
             var logTracking = await _context.LogTrackings.FindAsync(id);
+                                        
             if (logTracking == null)
             {
                 return new OperationResponse<LogTracking>(404, "LogTracking not found");
@@ -142,7 +143,9 @@ namespace LogiDriveBE.DAL.Dao
 
         public async Task<OperationResponse<IEnumerable<LogTracking>>> GetAllLogTrackingsAsync()
         {
-            var logTrackings = await _context.LogTrackings.ToListAsync();
+            var logTrackings = await _context.LogTrackings
+                .Where(a => a.Status == true || a.Status == true)
+                .ToListAsync();
             return new OperationResponse<IEnumerable<LogTracking>>(200, "LogTrackings retrieved successfully", logTrackings);
         }
     }
