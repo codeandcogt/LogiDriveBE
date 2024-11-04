@@ -37,19 +37,19 @@ namespace LogiDriveBE.DAL.Dao
         }
 
 
-
         public async Task<OperationResponse<LogTracking>> GetActiveLogTrackingByVehicleAssignmentIdAsync(int vehicleAssignmentId)
         {
-            var logTrip = await _context.LogTrips
-                .Include(lt => lt.IdTrackingNavigation)
-                .FirstOrDefaultAsync(lt => lt.IdVehicleAssignment == vehicleAssignmentId && lt.Status == true);
+            // Busca directamente en LogTracking usando la relación con LogTrip y el estado activo (Status = true)
+            var activeLogTracking = await _context.LogTrackings
+                .Include(lt => lt.LogTrip)
+                .FirstOrDefaultAsync(lt => lt.LogTrip.IdVehicleAssignment == vehicleAssignmentId && lt.Status == true);
 
-            if (logTrip == null || logTrip.IdTrackingNavigation == null)
+            if (activeLogTracking == null)
             {
                 return new OperationResponse<LogTracking>(404, "Active log tracking not found");
             }
 
-            return new OperationResponse<LogTracking>(200, "Active log tracking retrieved successfully", logTrip.IdTrackingNavigation);
+            return new OperationResponse<LogTracking>(200, "Active log tracking retrieved successfully", activeLogTracking);
         }
 
         public async Task<OperationResponse<LogTracking>> CreateLogTrackingAsync(TrakingDto trackingDto)

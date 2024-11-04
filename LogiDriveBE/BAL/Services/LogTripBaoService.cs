@@ -73,10 +73,15 @@ namespace LogiDriveBE.BAL.Services
                         return new OperationResponse<LogTrip>(500, "Error updating LogTracking to closed status", null);
                     }
                 }
+                else
+                {
+                    return new OperationResponse<LogTrip>(404, "No active log tracking found for closing", null);
+                }
             }
 
             return logTripResponse;
         }
+
 
 
 
