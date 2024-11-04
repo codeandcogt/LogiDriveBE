@@ -333,6 +333,51 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
+        // VehicleAssignmentDaoService.cs
+
+        public async Task<OperationResponse<IEnumerable<VehiclePartDto>>> GetPartsByVehicleAssignmentIdAsync(int vehicleAssignmentId)
+        {
+            try
+            {
+                // Obtener la asignación de vehículo
+                var vehicleAssignment = await _context.VehicleAssignments
+                    .Include(va => va.IdVehicleNavigation)
+                    .FirstOrDefaultAsync(va => va.IdVehicleAssignment == vehicleAssignmentId);
+
+                if (vehicleAssignment == null)
+                {
+                    return new OperationResponse<IEnumerable<VehiclePartDto>>(404, "Vehicle Assignment not found");
+                }
+
+                // Obtener el ID del vehículo asociado
+                var vehicleId = vehicleAssignment.IdVehicle;
+
+                // Obtener las partes asociadas al vehículo
+                var vehicleParts = await _context.PartVehicles
+                    .Where(pv => pv.IdVehicle == vehicleId)
+                    .ToListAsync();
+
+                // Mapear a DTOs
+                var vehiclePartDtos = vehicleParts.Select(part => new VehiclePartDto
+                {
+                    IdPartVehicle = part.IdPartVehicle,
+                    Name = part.Name,
+                    Description = part.Description,
+                    StatusPart = part.StatusPart,
+                    IdVehicle = part.IdVehicle,
+                    Status = part.Status
+                    // Agrega otras propiedades si es necesario
+                });
+
+                return new OperationResponse<IEnumerable<VehiclePartDto>>(200, "Vehicle parts retrieved successfully", vehiclePartDtos);
+            }
+            catch (Exception ex)
+            {
+                return new OperationResponse<IEnumerable<VehiclePartDto>>(500, $"Error retrieving vehicle parts: {ex.Message}");
+            }
+        }
+
+
 
 
 

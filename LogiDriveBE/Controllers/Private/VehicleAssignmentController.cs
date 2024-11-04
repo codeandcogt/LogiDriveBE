@@ -88,5 +88,15 @@ namespace LogiDriveBE.Controllers.Private
             var response = await _vehicleAssignmentBao.UpdateVehicleAssignmentStatusTripAsync(id, statusTrip);
             return StatusCode(response.Code, response);
         }
+
+        // VehicleAssignmentController.cs
+
+        [HttpGet("{id}/Parts")]
+        public async Task<ActionResult<OperationResponse<IEnumerable<VehiclePartDto>>>> GetPartsByVehicleAssignmentId(int id)
+        {
+            var response = await _vehicleAssignmentBao.GetPartsByVehicleAssignmentIdAsync(id);
+            return StatusCode(response.Code, response);
+        }
+
     }
 }
