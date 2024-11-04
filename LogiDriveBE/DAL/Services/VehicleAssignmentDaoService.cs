@@ -69,18 +69,22 @@ namespace LogiDriveBE.DAL.Services
             }
         }
 
-        public async Task<OperationResponse<VehicleAssignmentDto>> GetVehicleAssignmentByIdAsync(int id)
+        public async Task<OperationResponse<VehicleAssigmentWithBrandDto>> GetVehicleAssignmentByIdAsync(int id)
         {
             try
             {
-                var vehicleAssignment = await _context.VehicleAssignments.FindAsync(id);
+                var vehicleAssignment = await _context.VehicleAssignments
+                    .Include(va => va.IdVehicleNavigation) // Incluir la navegación de IdVehicleNavigation
+                    .FirstOrDefaultAsync(va => va.IdVehicleAssignment == id);
+
                 if (vehicleAssignment == null)
                 {
-                    return new OperationResponse<VehicleAssignmentDto>(404, "Vehicle Assignment not found");
+                    return new OperationResponse<VehicleAssigmentWithBrandDto>(404, "Vehicle Assignment not found");
                 }
 
-                var vehicleAssignmentDto = new VehicleAssignmentDto
+                var vehicleAssignmentDto = new VehicleAssigmentWithBrandDto
                 {
+                    IdVehicleAssignment = vehicleAssignment.IdVehicleAssignment,
                     Comment = vehicleAssignment.Comment,
                     TripType = vehicleAssignment.TripType,
                     StartDate = vehicleAssignment.StartDate,
@@ -90,16 +94,19 @@ namespace LogiDriveBE.DAL.Services
                     Status = vehicleAssignment.Status,
                     CreationDate = vehicleAssignment.CreationDate,
                     StatusTrip = vehicleAssignment.StatusTrip,
-                    DayQuantity = vehicleAssignment.DayQuantity
+                    DayQuantity = vehicleAssignment.DayQuantity,
+                    Brand = vehicleAssignment.IdVehicleNavigation?.Brand, // Asegúrate de que no sea null
+                    Plate = vehicleAssignment.IdVehicleNavigation.Plate
                 };
 
-                return new OperationResponse<VehicleAssignmentDto>(200, "Vehicle Assignment retrieved successfully", vehicleAssignmentDto);
+                return new OperationResponse<VehicleAssigmentWithBrandDto>(200, "Vehicle Assignment retrieved successfully", vehicleAssignmentDto);
             }
             catch (Exception ex)
             {
-                return new OperationResponse<VehicleAssignmentDto>(500, $"Error retrieving vehicle assignment: {ex.Message}");
+                return new OperationResponse<VehicleAssigmentWithBrandDto>(500, $"Error retrieving vehicle assignment: {ex.Message}");
             }
         }
+
 
         public async Task<OperationResponse<IEnumerable<VehicleAssignmentDto>>> GetAllVehicleAssignmentsAsync()
         {

@@ -28,7 +28,7 @@ namespace LogiDriveBE.Controllers.Private
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OperationResponse<VehicleAssignmentDto>>> GetVehicleAssignmentById(int id)
+        public async Task<ActionResult<OperationResponse<VehicleAssigmentWithBrandDto>>> GetVehicleAssignmentById(int id)
         {
             var response = await _vehicleAssignmentBao.GetVehicleAssignmentByIdAsync(id);
             return StatusCode(response.Code, response);
